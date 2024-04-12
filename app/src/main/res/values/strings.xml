@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Una_Test</string>
+    <string name="title">Una_Test</string>
+    <string name="test1"><![CDATA[RecycleView & ListView]]></string>
+    <string name="test_1_listview">ListView</string>
+</resources>
