@@ -35,20 +35,20 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         ArrayAdapter<Integer> listAdapter = new ArrayAdapter<>(this, R.layout.test_1_view_item, mData);
         lvShow.setAdapter(listAdapter);
 
-        RecyclerView rvShow = findViewById(R.id.recycle_view);
+        RecyclerView rvShow = findViewById(R.id.recycler_view);
         rvShow.setLayoutManager(new LinearLayoutManager(this));
-        rvShow.setAdapter(new recycleViewAdapter(mData));
+        rvShow.setAdapter(new RecyclerViewAdapter(mData));
 
-        RecycleSpace decoration = new RecycleSpace((int) RecycleSpace.convertDpToPixel(15, this));
+        RecyclerSpace decoration = new RecyclerSpace((int) RecyclerSpace.convertDpToPixel(15, this));
         rvShow.addItemDecoration(decoration);
     }
 
 }
 
-class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.ViewHolder> {
+class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private final ArrayList<Integer> mData;
 
-    public recycleViewAdapter(ArrayList<Integer> data) {
+    public RecyclerViewAdapter(ArrayList<Integer> data) {
         this.mData = data;
     }
 
@@ -83,10 +83,10 @@ class recycleViewAdapter extends RecyclerView.Adapter<recycleViewAdapter.ViewHol
 
 }
 
-class RecycleSpace extends RecyclerView.ItemDecoration {
+class RecyclerSpace extends RecyclerView.ItemDecoration {
     private final int mSpace;
 
-    public RecycleSpace(int space) {
+    public RecyclerSpace(int space) {
         this.mSpace = space;
     }
 

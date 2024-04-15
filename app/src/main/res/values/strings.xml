@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Una_Test</string>
     <string name="title">Una_Test</string>
-    <string name="test1"><![CDATA[RecycleView & ListView]]></string>
+    <string name="test1"><![CDATA[RecyclerView & ListView]]></string>
     <string name="test_1_list_view">List View</string>
-    <string name="test_1_recycle_view">Recycle View</string>
+    <string name="test_1_recycler_view">Recycler View</string>
 </resources>
