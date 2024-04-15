@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView txtTest1 = findViewById(R.id.test_1);
         txtTest1.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ListViewAndRecycleViewActivity.class);
+            Intent intent = new Intent(MainActivity.this
+                    , ListViewAndRecycleViewActivity.class);
             startActivity(intent);
         });
 
