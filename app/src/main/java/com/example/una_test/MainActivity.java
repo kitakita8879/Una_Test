@@ -2,7 +2,6 @@ package com.example.una_test;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,12 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView txtTest1 = findViewById(R.id.test_1);
-        txtTest1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListViewAndRecycleViewActivity.class);
-                startActivity(intent);
-            }
+        txtTest1.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ListViewAndRecycleViewActivity.class);
+            startActivity(intent);
         });
 
     }
