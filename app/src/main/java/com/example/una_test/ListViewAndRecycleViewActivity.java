@@ -39,7 +39,8 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         rvShow.setLayoutManager(new LinearLayoutManager(this));
         rvShow.setAdapter(new RecyclerViewAdapter(mData));
 
-        RecyclerSpace decoration = new RecyclerSpace((int) RecyclerSpace.convertDpToPixel(15, this));
+        RecyclerSpace decoration = new RecyclerSpace(RecyclerSpace
+                .convertDpToPixel(15, this));
         rvShow.addItemDecoration(decoration);
     }
 
@@ -111,11 +112,11 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewH
         }
     }
 
-    // TODO: 2024/4/15 LayoutInflater 相關用法
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_1_view_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.test_1_view_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -146,9 +147,11 @@ class RecyclerSpace extends RecyclerView.ItemDecoration {
         outRect.bottom = mSpace;
     }
 
-    // TODO: 2024/4/15 dp px 互轉用法 
-    public static float convertDpToPixel(int dp, Context context) {
-        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    public static int convertDpToPixel(int dp, Context context) {
+        int pixel;
+        pixel = dp * (context.getResources().getDisplayMetrics().densityDpi
+                / DisplayMetrics.DENSITY_DEFAULT);
+        return pixel;
     }
 
 }
