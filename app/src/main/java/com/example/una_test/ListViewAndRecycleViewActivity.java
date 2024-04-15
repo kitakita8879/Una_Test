@@ -33,6 +33,7 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         //ListView
         ListView lvShow = findViewById(R.id.list_view);
         lvShow.setAdapter(new ListViewAdapter(mData));
+        lvShow.addFooterView(new View(this));
 
         //RecyclerView
         RecyclerView rvShow = findViewById(R.id.recycler_view);
@@ -148,10 +149,10 @@ class RecyclerSpace extends RecyclerView.ItemDecoration {
     }
 
     public static int convertDpToPixel(int dp, Context context) {
-        int pixel;
-        pixel = dp * (context.getResources().getDisplayMetrics().densityDpi
+        float pixel;
+        pixel = dp * ((float) context.getResources().getDisplayMetrics().densityDpi
                 / DisplayMetrics.DENSITY_DEFAULT);
-        return pixel;
+        return (int) pixel;
     }
 
 }

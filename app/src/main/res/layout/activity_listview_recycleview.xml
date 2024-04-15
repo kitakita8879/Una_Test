@@ -26,6 +26,7 @@
         android:layout_marginTop="15dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="15dp"
+        android:footerDividersEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/guild_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
