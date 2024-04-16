@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/test_2_main_bg">
+
+    <ImageView
+        android:id="@+id/img_charger"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/img_charger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_charger_main" />
+
+    <TextView
+        android:id="@+id/txt_charger_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/img_charger"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/img_charger"
+        app:layout_constraintStart_toEndOf="@id/img_charger"
+        app:layout_constraintTop_toTopOf="@id/img_charger" />
+
+    <ImageView
+        android:id="@+id/img_account"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="14dp"
+        android:contentDescription="@string/img_account"
+        android:foregroundGravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@id/img_charger"
+        app:layout_constraintEnd_toStartOf="@id/home_bg"
+        app:layout_constraintTop_toTopOf="@id/img_charger"
+        app:srcCompat="@drawable/account_circle" />
+
+    <View
+        android:id="@+id/home_bg"
+        android:layout_width="46dp"
+        android:layout_height="44dp"
+        android:background="@drawable/test_2_home_icon_bg"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/img_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_home" />
+
+    <ImageView
+        android:id="@+id/img_home"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/img_home"
+        android:foregroundGravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@id/img_charger"
+        app:layout_constraintEnd_toEndOf="@id/home_bg"
+        app:layout_constraintStart_toStartOf="@id/home_bg"
+        app:layout_constraintTop_toTopOf="@id/img_charger"
+        app:srcCompat="@drawable/home" />
+
+    <ImageView
+        android:id="@+id/img_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_bg"
+        app:srcCompat="@drawable/car_animate" />
+
+    <View
+        android:id="@+id/state_bg"
+        android:layout_width="310dp"
+        android:layout_height="48dp"
+        android:background="@drawable/test_2_state_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_header" />
+
+    <View
+        android:id="@+id/light_icon"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="17dp"
+        android:background="@drawable/test_2_light_icon"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/state_bg"
+        app:layout_constraintStart_toStartOf="@id/state_bg"
+        app:layout_constraintTop_toTopOf="@id/state_bg" />
+
+    <TextView
+        android:id="@+id/txt_charging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/txt_charging"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/state_bg"
+        app:layout_constraintStart_toEndOf="@id/light_icon"
+        app:layout_constraintTop_toTopOf="@id/state_bg" />
+
+    <TextView
+        android:id="@+id/txt_duration_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/txt_duration_time"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/state_bg"
+        app:layout_constraintEnd_toStartOf="@id/pause_bg"
+        app:layout_constraintStart_toEndOf="@id/txt_charging"
+        app:layout_constraintTop_toTopOf="@id/state_bg" />
+
+    <View
+        android:id="@+id/pause_bg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/test_2_pause_bg"
+        app:layout_constraintBottom_toBottomOf="@id/state_bg"
+        app:layout_constraintEnd_toEndOf="@id/state_bg"
+        app:layout_constraintTop_toTopOf="@id/state_bg" />
+
+    <ImageView
+        android:id="@+id/img_pause"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/img_pause"
+        app:layout_constraintBottom_toBottomOf="@id/pause_bg"
+        app:layout_constraintEnd_toEndOf="@id/pause_bg"
+        app:layout_constraintStart_toStartOf="@id/pause_bg"
+        app:layout_constraintTop_toTopOf="@id/pause_bg"
+        app:srcCompat="@drawable/pause" />
+
+    <TextView
+        android:id="@+id/txt_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/txt_duration"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/txt_duration_time"
+        app:layout_constraintStart_toStartOf="@id/txt_duration_time"
+        app:layout_constraintTop_toBottomOf="@id/state_bg" />
+
+    <TextView
+        android:id="@+id/txt_kWh_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/txt_kWh_value"
+        android:textSize="70sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@id/state_bg"
+        app:layout_constraintTop_toBottomOf="@id/state_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
