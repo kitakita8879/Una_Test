@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/test_2_main_bg">
@@ -67,7 +68,10 @@
         android:id="@+id/img_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/img_header"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@id/state_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_bg"
@@ -77,7 +81,9 @@
         android:id="@+id/state_bg"
         android:layout_width="310dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/test_2_state_bg"
+        app:layout_constraintBottom_toTopOf="@id/txt_kWh_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_header" />
@@ -152,15 +158,286 @@
         app:layout_constraintStart_toStartOf="@id/txt_duration_time"
         app:layout_constraintTop_toBottomOf="@id/state_bg" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txt_kWh_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:gravity="center_vertical"
         android:text="@string/txt_kWh_value"
-        android:textSize="70sp"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@id/state_bg"
-        app:layout_constraintTop_toBottomOf="@id/state_bg" />
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/gl_1"
+        app:layout_constraintEnd_toStartOf="@+id/txt_kWh"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gl_1" />
+
+    <TextView
+        android:id="@+id/txt_kWh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="@string/txt_kwh"
+        android:textColor="#0094D6"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_kWh_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/txt_kWh_value" />
+
+    <TextView
+        android:id="@+id/txt_voltage_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_voltage_value"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/txt_voltage_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/gl_2"
+        app:layout_constraintTop_toTopOf="@id/divider_1" />
+
+    <TextView
+        android:id="@+id/txt_voltage_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/txt_voltage_unit"
+        android:textColor="#0094D6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+        app:layout_constraintEnd_toEndOf="@id/divider_1"
+        app:layout_constraintStart_toEndOf="@id/txt_voltage_value" />
+
+    <TextView
+        android:id="@+id/txt_voltage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/txt_voltage"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider_1"
+        app:layout_constraintEnd_toEndOf="@id/txt_voltage_unit"
+        app:layout_constraintStart_toStartOf="@id/txt_voltage_value"
+        app:layout_constraintTop_toBottomOf="@id/txt_voltage_value" />
+
+    <View
+        android:id="@+id/divider_1"
+        android:layout_width="1dp"
+        android:layout_height="58dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/charging_current_bg"
+        app:layout_constraintEnd_toStartOf="@+id/divider_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/gl_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_kWh_value" />
+
+    <TextView
+        android:id="@+id/txt_current_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_current_value"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+        app:layout_constraintEnd_toStartOf="@id/txt_current_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/divider_1"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
+        tools:layout_editor_absoluteX="140dp" />
+
+    <TextView
+        android:id="@+id/txt_current_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/txt_current_unit"
+        android:textColor="#0094D6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
+        app:layout_constraintEnd_toStartOf="@id/divider_2"
+        app:layout_constraintStart_toEndOf="@id/txt_current_value"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit" />
+
+    <TextView
+        android:id="@+id/txt_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_current"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/txt_current_unit"
+        app:layout_constraintStart_toStartOf="@id/txt_current_value"
+        app:layout_constraintTop_toBottomOf="@id/txt_current_value"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage"/>
+
+
+    <View
+        android:id="@+id/divider_2"
+        android:layout_width="1dp"
+        android:layout_height="58dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/divider_1"
+        app:layout_constraintEnd_toStartOf="@id/gl_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/divider_1"
+        app:layout_constraintTop_toTopOf="@id/divider_1" />
+
+    <TextView
+        android:id="@+id/txt_power_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_power_value"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+        app:layout_constraintEnd_toStartOf="@id/txt_power_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/divider_2"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
+        tools:layout_editor_absoluteX="254dp" />
+
+    <TextView
+        android:id="@+id/txt_power_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/txt_power_unit"
+        android:textColor="#0094D6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
+        app:layout_constraintEnd_toEndOf="@id/gl_3"
+        app:layout_constraintStart_toEndOf="@id/txt_power_value"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit" />
+
+    <TextView
+        android:id="@+id/txt_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_power"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/txt_power_unit"
+        app:layout_constraintStart_toStartOf="@id/txt_power_value"
+        app:layout_constraintTop_toBottomOf="@id/txt_power_value"
+        app:layout_constraintTop_toTopOf="@id/txt_voltage"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voltage"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <View
+        android:id="@+id/charging_current_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/test_2_btm_style"
+        app:layout_constraintBottom_toTopOf="@+id/mode_select_bg"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@id/gl_2"
+        app:layout_constraintTop_toBottomOf="@+id/divider_1"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <TextView
+        android:id="@+id/txt_charging_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_current_value"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/charging_current_bg"
+        app:layout_constraintTop_toTopOf="@id/charging_current_bg"
+        app:layout_constraintEnd_toEndOf="@id/charging_current_bg"
+        app:layout_constraintBottom_toTopOf="@id/txt_charging_current"/>
+
+    <TextView
+        android:id="@+id/txt_charging_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="@string/txt_charging_current"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/txt_charging_value"
+        app:layout_constraintStart_toStartOf="@id/charging_current_bg"
+        app:layout_constraintEnd_toEndOf="@id/charging_current_bg"
+        app:layout_constraintBottom_toBottomOf="@id/charging_current_bg"/>
+
+    <TextView
+        android:id="@+id/txt_charging_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/txt_current_unit"
+        android:textColor="#0094D6"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_charging_value"
+        app:layout_constraintStart_toEndOf="@id/txt_charging_value" />
+
+    <View
+        android:id="@+id/lock_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/test_2_btm_style"
+        app:layout_constraintBottom_toBottomOf="@id/charging_current_bg"
+        app:layout_constraintEnd_toEndOf="@id/gl_3"
+        app:layout_constraintTop_toBottomOf="@id/txt_voltage"
+        app:layout_constraintTop_toTopOf="@id/charging_current_bg"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <View
+        android:id="@+id/mode_select_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/test_2_btm_style"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar_bg"
+        app:layout_constraintEnd_toEndOf="@id/gl_3"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/gl_2"
+        app:layout_constraintTop_toBottomOf="@+id/charging_current_bg" />
+
+    <View
+        android:id="@+id/bottom_bar_bg"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="#2C2C2C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
