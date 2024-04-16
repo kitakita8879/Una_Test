@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,11 +35,18 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         ListView lvShow = findViewById(R.id.list_view);
         lvShow.setAdapter(new ListViewAdapter(mData));
         lvShow.addFooterView(new View(this));
+        lvShow.setOnItemClickListener((parent, view, position, id) ->
+                Toast.makeText(ListViewAndRecycleViewActivity.this,
+                        "ListView " + mData.get(position), Toast.LENGTH_SHORT).show());
 
         //RecyclerView
         RecyclerView rvShow = findViewById(R.id.recycler_view);
         rvShow.setLayoutManager(new LinearLayoutManager(this));
-        rvShow.setAdapter(new RecyclerViewAdapter(mData));
+        RecyclerViewAdapter rvAdapter = new RecyclerViewAdapter(mData);
+        rvAdapter.setOnRecyclerItemClickListener((view, position) ->
+                Toast.makeText(ListViewAndRecycleViewActivity.this,
+                        "RecyclerView " + mData.get(position), Toast.LENGTH_SHORT).show());
+        rvShow.setAdapter(rvAdapter);
 
         RecyclerSpace decoration = new RecyclerSpace(RecyclerSpace
                 .convertDpToPixel(15, this));
@@ -96,13 +104,18 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
 
     private static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
         private final ArrayList<Integer> mData;
+        private OnRecyclerItemClickListener mClickListener;
 
         public RecyclerViewAdapter(ArrayList<Integer> data) {
             this.mData = data;
         }
 
+        public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener) {
+            this.mClickListener = listener;
+        }
+
         static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView txtRvItem;
+            final TextView txtRvItem;
 
             ViewHolder(View item) {
                 super(item);
@@ -122,6 +135,8 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             Integer data = mData.get(position);
             holder.txtRvItem.setText(String.valueOf(data));
+            holder.txtRvItem.setOnClickListener(v ->
+                    mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition()));
         }
 
         @Override
@@ -149,6 +164,10 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
                     / DisplayMetrics.DENSITY_DEFAULT);
             return (int) pixel;
         }
+    }
+
+    private interface OnRecyclerItemClickListener {
+        void onRecyclerItemClick(View view, int position);
     }
 }
 

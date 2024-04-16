@@ -19,6 +19,5 @@ public class MainActivity extends AppCompatActivity {
                     , ListViewAndRecycleViewActivity.class);
             startActivity(intent);
         });
-
     }
 }
