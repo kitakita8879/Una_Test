@@ -14,9 +14,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView txtTest1 = findViewById(R.id.test_1);
+        TextView txtTest2 = findViewById(R.id.test_2);
         txtTest1.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this
                     , ListViewAndRecycleViewActivity.class);
+            startActivity(intent);
+        });
+
+        txtTest2.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this
+                    , ChargingMainActivity.class);
             startActivity(intent);
         });
     }

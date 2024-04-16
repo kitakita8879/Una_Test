@@ -4,4 +4,26 @@
     <string name="test1"><![CDATA[RecyclerView & ListView]]></string>
     <string name="test_1_list_view">List View</string>
     <string name="test_1_recycler_view">Recycler View</string>
+    <string name="test2">Charging UI practise</string>
+    <string name="img_charger">charger icon</string>
+    <string name="img_account">account icon</string>
+    <string name="img_home">home icon</string>
+    <string name="img_header">Header image</string>
+    <string name="txt_charging">Charging</string>
+    <string name="txt_duration_time">00:05</string>
+    <string name="img_pause">pause icon</string>
+    <string name="txt_duration">Duration</string>
+    <string name="txt_kWh_value">0.960</string>
+    <string name="txt_kwh">kWh</string>
+    <string name="txt_voltage_value">240</string>
+    <string name="txt_voltage_unit">v</string>
+    <string name="txt_current_value">40</string>
+    <string name="txt_current_unit">A</string>
+    <string name="txt_power_value">9.60</string>
+    <string name="txt_power_unit">kw</string>
+    <string name="txt_voltage">Voltage (V)</string>
+    <string name="txt_current">Current</string>
+    <string name="txt_power">Power</string>
+    <string name="txt_charging_current">CHARGING CURRENT</string>
+    <string name="txt_gun_locked">GUN - LOCKED</string>
 </resources>
