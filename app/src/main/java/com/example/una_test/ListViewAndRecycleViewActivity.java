@@ -45,115 +45,111 @@ public class ListViewAndRecycleViewActivity extends AppCompatActivity {
         rvShow.addItemDecoration(decoration);
     }
 
-}
+    private static class ListViewAdapter extends BaseAdapter {
+        private final ArrayList<Integer> mData;
 
-class ListViewAdapter extends BaseAdapter {
-    private final ArrayList<Integer> mData;
+        public ListViewAdapter(ArrayList<Integer> data) {
+            this.mData = data;
+        }
 
-    public ListViewAdapter(ArrayList<Integer> data) {
-        this.mData = data;
-    }
+        static class ViewHolder {
+            TextView txtLvItem;
 
-    static class ViewHolder {
-        TextView txtLvItem;
+            ViewHolder(View item) {
+                txtLvItem = item.findViewById(R.id.list_view_item);
+            }
+        }
 
-        ViewHolder(View item) {
-            txtLvItem = item.findViewById(R.id.list_view_item);
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.test_1_view_item, parent, false);
+                holder = new ViewHolder(convertView);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            Integer data = mData.get(position);
+            holder.txtLvItem.setText(String.valueOf(data));
+
+            return convertView;
         }
     }
 
-    @Override
-    public int getCount() {
-        return mData.size();
-    }
+    private static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+        private final ArrayList<Integer> mData;
 
-    @Override
-    public Object getItem(int position) {
-        return mData.get(position);
-    }
+        public RecyclerViewAdapter(ArrayList<Integer> data) {
+            this.mData = data;
+        }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+        static class ViewHolder extends RecyclerView.ViewHolder {
+            TextView txtRvItem;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext())
+            ViewHolder(View item) {
+                super(item);
+                txtRvItem = item.findViewById(R.id.list_view_item);
+            }
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.test_1_view_item, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+            return new ViewHolder(itemView);
         }
 
-        Integer data = mData.get(position);
-        holder.txtLvItem.setText(String.valueOf(data));
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            Integer data = mData.get(position);
+            holder.txtRvItem.setText(String.valueOf(data));
+        }
 
-        return convertView;
-    }
-
-}
-
-class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private final ArrayList<Integer> mData;
-
-    public RecyclerViewAdapter(ArrayList<Integer> data) {
-        this.mData = data;
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtRvItem;
-
-        ViewHolder(View item) {
-            super(item);
-            txtRvItem = item.findViewById(R.id.list_view_item);
+        @Override
+        public int getItemCount() {
+            return mData.size();
         }
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.test_1_view_item, parent, false);
-        return new ViewHolder(itemView);
+    private static class RecyclerSpace extends RecyclerView.ItemDecoration {
+        private final int mSpace;
+
+        public RecyclerSpace(int space) {
+            this.mSpace = space;
+        }
+
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                   @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            outRect.bottom = mSpace;
+        }
+
+        public static int convertDpToPixel(int dp, Context context) {
+            float pixel;
+            pixel = dp * ((float) context.getResources().getDisplayMetrics().densityDpi
+                    / DisplayMetrics.DENSITY_DEFAULT);
+            return (int) pixel;
+        }
     }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Integer data = mData.get(position);
-        holder.txtRvItem.setText(String.valueOf(data));
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
-
-
 }
 
-class RecyclerSpace extends RecyclerView.ItemDecoration {
-    private final int mSpace;
-
-    public RecyclerSpace(int space) {
-        this.mSpace = space;
-    }
-
-    @Override
-    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
-                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-        outRect.bottom = mSpace;
-    }
-
-    public static int convertDpToPixel(int dp, Context context) {
-        float pixel;
-        pixel = dp * ((float) context.getResources().getDisplayMetrics().densityDpi
-                / DisplayMetrics.DENSITY_DEFAULT);
-        return (int) pixel;
-    }
-
-}
 
