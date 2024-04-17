@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/test_2_device_style">
+
+    <ImageView
+        android:id="@+id/img_device"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/img_device"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_charger" />
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:text="@string/txt_name"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txt_dev_id"
+        app:layout_constraintStart_toEndOf="@id/img_device"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/txt_dev_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_dev_id"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_version"
+        app:layout_constraintStart_toStartOf="@id/txt_name"
+        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+
+    <TextView
+        android:id="@+id/txt_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_version"
+        android:textColor="#757575"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_fw_update"
+        app:layout_constraintStart_toStartOf="@id/txt_dev_id"
+        app:layout_constraintTop_toBottomOf="@+id/txt_dev_id" />
+
+    <ImageView
+        android:id="@+id/img_error"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:contentDescription="@string/img_error"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/txt_fw_update"
+        app:layout_constraintEnd_toStartOf="@id/txt_fw_update"
+        app:layout_constraintStart_toStartOf="@id/txt_version"
+        app:layout_constraintTop_toTopOf="@id/txt_fw_update"
+        app:srcCompat="@drawable/error" />
+
+    <TextView
+        android:id="@+id/txt_fw_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_fw_not_need_update"
+        android:textColor="#757575"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_error"
+        app:layout_constraintTop_toBottomOf="@+id/txt_version" />
+
+    <ImageView
+        android:id="@+id/img_del"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/img_del"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/delete" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.una_test;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -11,10 +12,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
+import java.util.ArrayList;
+
 public class ChargingMainActivity extends AppCompatActivity {
     private boolean mIsLock = true;
     private final int colorBlue = Color.parseColor("#0094D6");
     private int mMode = 1;
+
+    private int mNameData = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,11 @@ public class ChargingMainActivity extends AppCompatActivity {
         Space mode2 = findViewById(R.id.space_mode_2);
         Space mode3 = findViewById(R.id.space_mode_3);
         View modeSpace = findViewById(R.id.view_mode_select_up_bg);
+
+        ImageView imgBarItemEV = findViewById(R.id.img_bar_item_ev);
+
+        TextView txtChargerName = findViewById(R.id.txt_charger_name);
+        txtChargerName.setText(String.format(getString(R.string.txt_name), mNameData));
 
         isLockOrNot.setOnClickListener(v -> {
             if (mIsLock) {
@@ -68,6 +78,12 @@ public class ChargingMainActivity extends AppCompatActivity {
         });
 
         modeSpace.setOnClickListener(v -> groupModeSelectBtn.setVisibility(View.INVISIBLE));
+
+        imgBarItemEV.setOnClickListener(v -> {
+            Intent intent = new Intent(ChargingMainActivity.this
+                    , ChargingDeviceManagementActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void modeSelect(int mode) {

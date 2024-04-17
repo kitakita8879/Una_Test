@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ListViewAndRecycleViewActivity" />
         <activity android:name=".ChargingMainActivity" />
+        <activity android:name=".ChargingDeviceManagementActivity" />
     </application>
 
 </manifest>

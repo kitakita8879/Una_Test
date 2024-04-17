@@ -39,4 +39,14 @@
     <string name="img_bar_item_ev">bar item ev charger image</string>
     <string name="img_bar_item_charge">bar item charge mode image</string>
     <string name="img_bar_item_note">bar item note image</string>
+    <string name="txt_device_title">Device List</string>
+    <string name="img_back">back icon\n</string>
+    <string name="img_device">device image</string>
+    <string name="txt_name">My Charger %d</string>
+    <string name="txt_dev_id">Device ID: %d</string>
+    <string name="txt_version">V 1.0.0</string>
+    <string name="txt_fw_not_need_update">Firmware is up to date</string>
+    <string name="txt_fw_need_update">Firmware update available</string>
+    <string name="img_del">delete image\n</string>
+    <string name="img_error">need fw update image\n</string>
 </resources>
