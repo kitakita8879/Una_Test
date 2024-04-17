@@ -26,4 +26,17 @@
     <string name="txt_power">Power</string>
     <string name="txt_charging_current">CHARGING CURRENT</string>
     <string name="txt_gun_locked">GUN - LOCKED</string>
+    <string name="img_locked">locked image\n</string>
+    <string name="txt_locked">GUN - LOCKED</string>
+    <string name="txt_unlock">GUN - UNLOCK</string>
+    <string name="img_unlock">unlock image\n</string>
+    <string name="img_realtime_charge">reall time charge</string>
+    <string name="txt_realtime_charge">REAL TIME CHARGING</string>
+    <string name="img_quantitative_charge">quantitative charge image</string>
+    <string name="txt_quantitative_charge">QUANTITATIVE CHARGING</string>
+    <string name="img_fixed_time_charge">fixed time charge image</string>
+    <string name="txt_fixed_time_charge">FIXED TIME CHARGING</string>
+    <string name="img_bar_item_ev">bar item ev charger image</string>
+    <string name="img_bar_item_charge">bar item charge mode image</string>
+    <string name="img_bar_item_note">bar item note image</string>
 </resources>
