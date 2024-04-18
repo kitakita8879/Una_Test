@@ -49,4 +49,10 @@
     <string name="txt_fw_need_update">Firmware update available</string>
     <string name="img_del">delete image\n</string>
     <string name="img_error">need fw update image\n</string>
+    <string name="txt_remove_title">Remove Device</string>
+    <string name="txt_disconnect_only">Disconnect Only</string>
+    <string name="txt_disconnect">Disconnect and wipe data</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_remove">Remove</string>
+    <string name="img_check">check image</string>
 </resources>
