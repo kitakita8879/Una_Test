@@ -1,11 +1,15 @@
 package com.example.una_test;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
@@ -36,17 +40,21 @@ public class ChargingMainActivity extends AppCompatActivity {
         Group groupUnlock = findViewById(R.id.group_unlock);
 
         View modeSelectBtn = findViewById(R.id.view_mode_select_bg);
-        Group groupModeSelectBtn = findViewById(R.id.group_mode);
-        Space mode1 = findViewById(R.id.space_mode_1);
-        Space mode2 = findViewById(R.id.space_mode_2);
-        Space mode3 = findViewById(R.id.space_mode_3);
-        View modeSpace = findViewById(R.id.view_mode_select_up_bg);
-        imgMode1 = findViewById(R.id.img_mode_1);
-        imgMode2 = findViewById(R.id.img_mode_2);
-        imgMode3 = findViewById(R.id.img_mode_3);
-        txtMode1 = findViewById(R.id.txt_mode_1);
-        txtMode2 = findViewById(R.id.txt_mode_2);
-        txtMode3 = findViewById(R.id.txt_mode_3);
+
+        Dialog mDialogMode = new Dialog(ChargingMainActivity.this, R.style.dialogMode);
+        View mViewDialog = View.inflate(ChargingMainActivity.this,
+                R.layout.test_2_mode_select_dialog, null);
+        mDialogMode.setContentView(mViewDialog);
+
+        Space mode1 = mViewDialog.findViewById(R.id.space_mode_1);
+        Space mode2 = mViewDialog.findViewById(R.id.space_mode_2);
+        Space mode3 = mViewDialog.findViewById(R.id.space_mode_3);
+        imgMode1 = mViewDialog.findViewById(R.id.img_mode_1);
+        imgMode2 = mViewDialog.findViewById(R.id.img_mode_2);
+        imgMode3 = mViewDialog.findViewById(R.id.img_mode_3);
+        txtMode1 = mViewDialog.findViewById(R.id.txt_mode_1);
+        txtMode2 = mViewDialog.findViewById(R.id.txt_mode_2);
+        txtMode3 = mViewDialog.findViewById(R.id.txt_mode_3);
         groupMode1 = findViewById(R.id.group_mode_realtime);
         groupMode2 = findViewById(R.id.group_mode_quantitative);
         groupMode3 = findViewById(R.id.group_mode_fixed_time);
@@ -70,28 +78,30 @@ public class ChargingMainActivity extends AppCompatActivity {
 
         modeSelectBtn.setOnClickListener(v -> {
             modeSelect(mMode);
-            groupModeSelectBtn.setVisibility(View.VISIBLE);
+            mDialogMode.show();
+            Objects.requireNonNull(mDialogMode.getWindow()).setGravity(Gravity.BOTTOM);
+            float height = 235 * ((float) ChargingMainActivity.this.getResources()
+                    .getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+            mDialogMode.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, (int) height);
         });
 
         mode1.setOnClickListener(v -> {
             mMode = 1;
             modeSelect(mMode);
-            groupModeSelectBtn.setVisibility(View.INVISIBLE);
+            mDialogMode.dismiss();
         });
 
         mode2.setOnClickListener(v -> {
             mMode = 2;
             modeSelect(mMode);
-            groupModeSelectBtn.setVisibility(View.INVISIBLE);
+            mDialogMode.dismiss();
         });
 
         mode3.setOnClickListener(v -> {
             mMode = 3;
             modeSelect(mMode);
-            groupModeSelectBtn.setVisibility(View.INVISIBLE);
+            mDialogMode.dismiss();
         });
-
-        modeSpace.setOnClickListener(v -> groupModeSelectBtn.setVisibility(View.INVISIBLE));
 
         ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
