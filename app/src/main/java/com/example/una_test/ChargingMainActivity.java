@@ -22,6 +22,9 @@ public class ChargingMainActivity extends AppCompatActivity {
     private final int colorBlue = Color.parseColor("#0094D6");
     private int mMode = 1;
     private int mNameData = 1;
+    private ImageView imgMode1, imgMode2, imgMode3;
+    private TextView txtMode1, txtMode2, txtMode3;
+    private Group groupMode1, groupMode2, groupMode3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,15 @@ public class ChargingMainActivity extends AppCompatActivity {
         Space mode2 = findViewById(R.id.space_mode_2);
         Space mode3 = findViewById(R.id.space_mode_3);
         View modeSpace = findViewById(R.id.view_mode_select_up_bg);
+        imgMode1 = findViewById(R.id.img_mode_1);
+        imgMode2 = findViewById(R.id.img_mode_2);
+        imgMode3 = findViewById(R.id.img_mode_3);
+        txtMode1 = findViewById(R.id.txt_mode_1);
+        txtMode2 = findViewById(R.id.txt_mode_2);
+        txtMode3 = findViewById(R.id.txt_mode_3);
+        groupMode1 = findViewById(R.id.group_mode_realtime);
+        groupMode2 = findViewById(R.id.group_mode_quantitative);
+        groupMode3 = findViewById(R.id.group_mode_fixed_time);
 
         ImageView imgBarItemEV = findViewById(R.id.img_bar_item_ev);
 
@@ -86,9 +98,9 @@ public class ChargingMainActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         mNameData = Objects.requireNonNull(result.getData())
-                                .getIntExtra("name", 0);
+                                .getIntExtra("name", 1);
                         txtChargerName.setText(String
-                                .format(getString(R.string.txt_name), mNameData + 1));
+                                .format(getString(R.string.txt_name), mNameData));
                     }
                 });
 
@@ -97,20 +109,9 @@ public class ChargingMainActivity extends AppCompatActivity {
                     , ChargingDeviceManagementActivity.class);
             resultLauncher.launch(intent);
         });
-
     }
 
     private void modeSelect(int mode) {
-        ImageView imgMode1 = findViewById(R.id.img_mode_1);
-        TextView txtMode1 = findViewById(R.id.txt_mode_1);
-        Group groupMode1 = findViewById(R.id.group_mode_realtime);
-        ImageView imgMode2 = findViewById(R.id.img_mode_2);
-        TextView txtMode2 = findViewById(R.id.txt_mode_2);
-        Group groupMode2 = findViewById(R.id.group_mode_quantitative);
-        ImageView imgMode3 = findViewById(R.id.img_mode_3);
-        TextView txtMode3 = findViewById(R.id.txt_mode_3);
-        Group groupMode3 = findViewById(R.id.group_mode_fixed_time);
-
         switch (mode) {
             case 1:
                 imgMode1.setColorFilter(colorBlue, PorterDuff.Mode.SRC_ATOP);
