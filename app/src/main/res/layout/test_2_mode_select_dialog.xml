@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="235dp"
-    android:background="@drawable/test_2_btm_style">
+    android:background="@drawable/test_2_mode_select_style">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_4"
