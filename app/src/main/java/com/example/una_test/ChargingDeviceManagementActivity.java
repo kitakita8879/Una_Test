@@ -56,10 +56,9 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
 
         RecyclerView rvShow = findViewById(R.id.recycler_view_test2);
         rvShow.setLayoutManager(new LinearLayoutManager(this));
-        ChargingDeviceManagementActivity.RecyclerViewAdapter rvAdapter = new
-                ChargingDeviceManagementActivity.RecyclerViewAdapter(mData);
+        RecyclerViewAdapter rvAdapter = new RecyclerViewAdapter(mData);
         rvAdapter.setOnRecyclerItemClickListener((view, position) -> {
-            CheckRemoveMode(true);
+            checkRemoveMode(true);
             txtRemove.setOnClickListener(v -> {
                 mData.remove(position);
                 rvAdapter.notifyItemRemoved(position);
@@ -74,11 +73,11 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         rvShow.addItemDecoration(decoration);
 
         txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
-        imgCheck1.setOnClickListener(v -> CheckRemoveMode(true));
-        imgCheck2.setOnClickListener(v -> CheckRemoveMode(false));
+        imgCheck1.setOnClickListener(v -> checkRemoveMode(true));
+        imgCheck2.setOnClickListener(v -> checkRemoveMode(false));
     }
 
-    private void CheckRemoveMode(boolean checkMode) {
+    private void checkRemoveMode(boolean checkMode) {
         if (checkMode) {
             imgCheck1.setBackgroundResource(R.drawable.check_circle);
             imgCheck2.setBackgroundResource(R.drawable.test_2_check_circle);

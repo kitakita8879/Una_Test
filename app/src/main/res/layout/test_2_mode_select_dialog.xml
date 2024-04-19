@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="235dp"
     android:background="@drawable/test_2_btm_style">
@@ -33,7 +34,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/img_mode_1"
         app:layout_constraintStart_toEndOf="@id/img_mode_1"
-        app:layout_constraintTop_toTopOf="@id/img_mode_1" />
+        app:layout_constraintTop_toTopOf="@id/img_mode_1"
+        tools:ignore="SpUsage" />
 
     <Space
         android:id="@+id/space_mode_1"
@@ -75,7 +77,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/img_mode_2"
         app:layout_constraintStart_toEndOf="@id/img_mode_2"
-        app:layout_constraintTop_toTopOf="@id/img_mode_2" />
+        app:layout_constraintTop_toTopOf="@id/img_mode_2"
+        tools:ignore="SpUsage" />
 
     <Space
         android:id="@+id/space_mode_2"
@@ -117,7 +120,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/img_mode_3"
         app:layout_constraintStart_toEndOf="@id/img_mode_3"
-        app:layout_constraintTop_toTopOf="@id/img_mode_3" />
+        app:layout_constraintTop_toTopOf="@id/img_mode_3"
+        tools:ignore="SpUsage" />
 
     <Space
         android:id="@+id/space_mode_3"

@@ -27,7 +27,8 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@id/img_charger"
         app:layout_constraintStart_toEndOf="@id/img_charger"
-        app:layout_constraintTop_toTopOf="@id/img_charger" />
+        app:layout_constraintTop_toTopOf="@id/img_charger"
+        tools:ignore="SpUsage" />
 
     <ImageView
         android:id="@+id/img_account"
@@ -99,7 +100,8 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
         app:layout_constraintStart_toEndOf="@id/view_light_icon"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_state_bg"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_duration_time"
@@ -112,7 +114,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
         app:layout_constraintEnd_toStartOf="@id/img_pause"
         app:layout_constraintStart_toEndOf="@id/txt_charging"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_state_bg"
+        tools:ignore="SpUsage" />
 
     <ImageView
         android:id="@+id/img_pause"
@@ -137,7 +140,8 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/txt_duration_time"
         app:layout_constraintStart_toStartOf="@id/txt_duration_time"
-        app:layout_constraintTop_toBottomOf="@id/view_state_bg" />
+        app:layout_constraintTop_toBottomOf="@id/view_state_bg"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_1"
@@ -161,7 +165,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/gl_1" />
+        app:layout_constraintTop_toTopOf="@id/gl_1"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_kWh"
@@ -176,7 +181,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/txt_kWh_value" />
+        app:layout_constraintStart_toEndOf="@+id/txt_kWh_value"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_voltage_value"
@@ -189,7 +195,8 @@
         app:layout_constraintEnd_toStartOf="@id/txt_voltage_unit"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/gl_2"
-        app:layout_constraintTop_toTopOf="@id/view_divider_1" />
+        app:layout_constraintTop_toTopOf="@id/view_divider_1"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_voltage_unit"
@@ -203,7 +210,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
         app:layout_constraintEnd_toEndOf="@id/view_divider_1"
-        app:layout_constraintStart_toEndOf="@id/txt_voltage_value" />
+        app:layout_constraintStart_toEndOf="@id/txt_voltage_value"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_voltage"
@@ -216,7 +224,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_divider_1"
         app:layout_constraintEnd_toEndOf="@id/txt_voltage_unit"
         app:layout_constraintStart_toStartOf="@id/txt_voltage_value"
-        app:layout_constraintTop_toBottomOf="@id/txt_voltage_value" />
+        app:layout_constraintTop_toBottomOf="@id/txt_voltage_value"
+        tools:ignore="SpUsage" />
 
     <View
         android:id="@+id/view_divider_1"
@@ -242,7 +251,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/view_divider_1"
         app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
-        tools:layout_editor_absoluteX="140dp" />
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_current_unit"
@@ -256,7 +265,8 @@
         app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
         app:layout_constraintEnd_toStartOf="@id/view_divider_2"
         app:layout_constraintStart_toEndOf="@id/txt_current_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit" />
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_current"
@@ -269,7 +279,8 @@
         app:layout_constraintEnd_toEndOf="@id/txt_current_unit"
         app:layout_constraintStart_toStartOf="@id/txt_current_value"
         app:layout_constraintTop_toBottomOf="@id/txt_current_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage" />
+        app:layout_constraintTop_toTopOf="@id/txt_voltage"
+        tools:ignore="SpUsage" />
 
     <View
         android:id="@+id/view_divider_2"
@@ -295,7 +306,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/view_divider_2"
         app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
-        tools:layout_editor_absoluteX="254dp" />
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_power_unit"
@@ -309,7 +320,8 @@
         app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
         app:layout_constraintEnd_toEndOf="@id/gl_3"
         app:layout_constraintStart_toEndOf="@id/txt_power_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit" />
+        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_power"
@@ -322,7 +334,8 @@
         app:layout_constraintEnd_toEndOf="@id/txt_power_unit"
         app:layout_constraintStart_toStartOf="@id/txt_power_value"
         app:layout_constraintTop_toBottomOf="@id/txt_power_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage" />
+        app:layout_constraintTop_toTopOf="@id/txt_voltage"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_2"
@@ -361,7 +374,8 @@
         app:layout_constraintEnd_toStartOf="@id/txt_charging_unit"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
-        app:layout_constraintTop_toTopOf="@id/view_charging_current_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_charging_current_bg"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_charging_current"
@@ -375,7 +389,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_charging_current_bg"
         app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
         app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
-        app:layout_constraintTop_toBottomOf="@id/txt_charging_value" />
+        app:layout_constraintTop_toBottomOf="@id/txt_charging_value"
+        tools:ignore="SpUsage" />
 
     <TextView
         android:id="@+id/txt_charging_unit"
@@ -388,7 +403,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/txt_charging_value"
         app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
-        app:layout_constraintStart_toEndOf="@id/txt_charging_value" />
+        app:layout_constraintStart_toEndOf="@id/txt_charging_value"
+        tools:ignore="SpUsage" />
 
     <View
         android:id="@+id/view_lock_bg"
@@ -421,7 +437,8 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
         app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@id/txt_charging_current" />
+        app:layout_constraintTop_toTopOf="@id/txt_charging_current"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_locked"
@@ -450,7 +467,8 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
         app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@id/txt_charging_current" />
+        app:layout_constraintTop_toTopOf="@id/txt_charging_current"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_unlock"
@@ -495,7 +513,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
         app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
         app:layout_constraintStart_toEndOf="@id/img_realtime_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_realtime"
@@ -528,7 +547,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
         app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
         app:layout_constraintStart_toEndOf="@id/img_quantitative_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_quantitative"
@@ -561,7 +581,8 @@
         app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
         app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
         app:layout_constraintStart_toEndOf="@id/img_fixed_time_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg" />
+        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+        tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_mode_fixed_time"
