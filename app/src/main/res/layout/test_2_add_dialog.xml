@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/test_2_del_bg">
+
+        <TextView
+            android:id="@+id/txt_add_title"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="bottom"
+            android:text="@string/txt_add_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <EditText
+            android:id="@+id/edit_num"
+            android:layout_width="220dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="37dp"
+            android:autofillHints="no"
+            android:background="@drawable/test_2_edit_text_style"
+            android:backgroundTint="#1E1E1E"
+            android:gravity="center"
+            android:hint="@string/txt_hint"
+            android:inputType="number"
+            android:maxLength="8"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#737373"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_add_title"
+            tools:ignore="SpUsage" />
+
+        <View
+            android:id="@+id/view_divider_5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            android:background="#575757"
+            app:layout_constraintBottom_toTopOf="@id/txt_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_num"
+            app:layout_constraintWidth_percent="0.95" />
+
+        <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/txt_cancel"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_divider_6"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_divider_5"
+            app:layout_constraintWidth_percent="0.5"
+            tools:ignore="SpUsage" />
+
+        <View
+            android:id="@+id/view_divider_6"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#575757"
+            app:layout_constraintEnd_toStartOf="@id/txt_add"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintStart_toEndOf="@id/txt_cancel"
+            app:layout_constraintTop_toTopOf="@id/view_divider_5" />
+
+        <TextView
+            android:id="@+id/txt_add"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/txt_add"
+            android:textColor="#0094D6"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_divider_6"
+            app:layout_constraintTop_toTopOf="@id/txt_cancel"
+            app:layout_constraintWidth_percent="0.5"
+            tools:ignore="SpUsage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

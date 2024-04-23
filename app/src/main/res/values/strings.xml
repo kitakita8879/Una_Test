@@ -30,7 +30,7 @@
     <string name="txt_locked">GUN - LOCKED</string>
     <string name="txt_unlock">GUN - UNLOCK</string>
     <string name="img_unlock">unlock image\n</string>
-    <string name="img_realtime_charge">reall time charge</string>
+    <string name="img_realtime_charge">real time charge</string>
     <string name="txt_realtime_charge">REAL TIME CHARGING</string>
     <string name="img_quantitative_charge">quantitative charge image</string>
     <string name="txt_quantitative_charge">QUANTITATIVE CHARGING</string>
