@@ -29,6 +29,8 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     public final ArrayList<Data> dataList = new ArrayList<>();
     private Test2RemoveDialogBinding mRemoveBinding;
     private Dialog mDialogRemove;
+    private RecyclerViewAdapter rvAdapter;
+    private final Boolean[] isRemoveData = {false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,6 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         dataList.add(new Data(1, 12345678, true));
         dataList.add(new Data(2, 87654321, false));
 
-        final Boolean[] isRemoveData = {false};
         binding.imgBack.setOnClickListener(v -> {
             if (isRemoveData[0]) {
                 Intent intent = new Intent();
@@ -49,26 +50,35 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             finish();
         });
 
+        binding.recyclerViewTest2.setLayoutManager(new LinearLayoutManager(this));
+        rvAdapter = new RecyclerViewAdapter(dataList);
+        rvAdapter.setOnRecyclerItemClickListener((view, position) -> this.showRemoveDialog(position));
+        binding.recyclerViewTest2.setAdapter(rvAdapter);
+
+        RecyclerSpace decoration = new RecyclerSpace(convertDpToPixel(30, this));
+        binding.recyclerViewTest2.addItemDecoration(decoration);
+
+        binding.viewAdd.setOnClickListener(v -> showAddDialog());
+    }
+
+    private void showRemoveDialog(int position) {
         mDialogRemove = new Dialog(this, R.style.dialogRemove);
         View viewDialog = View.inflate(this, R.layout.test_2_remove_dialog, null);
         mRemoveBinding = Test2RemoveDialogBinding.bind(viewDialog);
         mDialogRemove.setContentView(viewDialog);
 
-        binding.recyclerViewTest2.setLayoutManager(new LinearLayoutManager(this));
-        RecyclerViewAdapter rvAdapter = new RecyclerViewAdapter(dataList);
-        rvAdapter.setOnRecyclerItemClickListener((view, position) -> {
-            mRemoveBinding.imgCheck1.setSelected(true);
-            mRemoveBinding.txtRemove.setOnClickListener(v -> {
-                dataList.remove(position);
-                rvAdapter.notifyItemRemoved(position);
-                mDialogRemove.dismiss();
-                isRemoveData[0] = true;
-            });
-        });
-        binding.recyclerViewTest2.setAdapter(rvAdapter);
+        mDialogRemove.show();
+        Objects.requireNonNull(mDialogRemove.getWindow()).setLayout(
+                convertDpToPixel(300, ChargingDeviceManagementActivity.this),
+                WindowManager.LayoutParams.WRAP_CONTENT);
 
-        RecyclerSpace decoration = new RecyclerSpace(convertDpToPixel(30, this));
-        binding.recyclerViewTest2.addItemDecoration(decoration);
+        mRemoveBinding.imgCheck1.setSelected(true);
+        mRemoveBinding.txtRemove.setOnClickListener(v -> {
+            dataList.remove(position);
+            rvAdapter.notifyItemRemoved(position);
+            mDialogRemove.dismiss();
+            isRemoveData[0] = true;
+        });
 
         mRemoveBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
         mRemoveBinding.imgCheck1.setOnClickListener(v -> {
@@ -78,11 +88,6 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         mRemoveBinding.imgCheck2.setOnClickListener(v -> {
             mRemoveBinding.imgCheck2.setSelected(true);
             mRemoveBinding.imgCheck1.setSelected(false);
-        });
-
-        binding.viewAdd.setOnClickListener(v -> {
-            showAddDialog();
-            rvAdapter.notifyItemInserted(dataList.size());
         });
     }
 
@@ -99,6 +104,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
                 int name = Integer.parseInt(addDialogBinding.editNum.getText().toString());
                 int devId = name + 10000000;
                 dataList.add(new Data(name, devId, false));
+                rvAdapter.notifyItemInserted(dataList.size());
                 addDialog.dismiss();
             }
         });
@@ -152,13 +158,8 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
             holder.binding.setData(mDataList.get(position));
-            holder.binding.imgDel.setOnClickListener(v -> {
-                mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition());
-                mDialogRemove.show();
-                Objects.requireNonNull(mDialogRemove.getWindow()).setLayout(
-                        convertDpToPixel(300, ChargingDeviceManagementActivity.this),
-                        WindowManager.LayoutParams.WRAP_CONTENT);
-            });
+            holder.binding.imgDel.setOnClickListener(v ->
+                    mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition()));
             holder.binding.viewItem.setOnClickListener(v -> {
                 Intent intent = new Intent();
                 intent.putExtra("name", mDataList.get(holder.getAdapterPosition()).name);
