@@ -13,8 +13,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,7 @@ import java.util.Objects;
 
 public class ChargingDeviceManagementActivity extends AppCompatActivity {
     public final ArrayList<Data> dataList = new ArrayList<>();
-    private Test2RemoveDialogBinding removeBinding;
+    private Test2RemoveDialogBinding mRemoveBinding;
     private Dialog mDialogRemove;
 
     @Override
@@ -51,17 +49,16 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             finish();
         });
 
-        mDialogRemove = new Dialog(ChargingDeviceManagementActivity.this, R.style.dialogRemove);
-        View viewDialog = View.inflate(ChargingDeviceManagementActivity.this,
-                R.layout.test_2_remove_dialog, null);
-        removeBinding = Test2RemoveDialogBinding.bind(viewDialog);
+        mDialogRemove = new Dialog(this, R.style.dialogRemove);
+        View viewDialog = View.inflate(this, R.layout.test_2_remove_dialog, null);
+        mRemoveBinding = Test2RemoveDialogBinding.bind(viewDialog);
         mDialogRemove.setContentView(viewDialog);
 
         binding.recyclerViewTest2.setLayoutManager(new LinearLayoutManager(this));
         RecyclerViewAdapter rvAdapter = new RecyclerViewAdapter(dataList);
         rvAdapter.setOnRecyclerItemClickListener((view, position) -> {
-            checkRemoveMode(true);
-            removeBinding.txtRemove.setOnClickListener(v -> {
+            mRemoveBinding.imgCheck1.setSelected(true);
+            mRemoveBinding.txtRemove.setOnClickListener(v -> {
                 dataList.remove(position);
                 rvAdapter.notifyItemRemoved(position);
                 mDialogRemove.dismiss();
@@ -70,28 +67,33 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         });
         binding.recyclerViewTest2.setAdapter(rvAdapter);
 
-        ChargingDeviceManagementActivity.RecyclerSpace decoration = new
-                ChargingDeviceManagementActivity.RecyclerSpace(convertDpToPixel(30, this));
+        RecyclerSpace decoration = new RecyclerSpace(convertDpToPixel(30, this));
         binding.recyclerViewTest2.addItemDecoration(decoration);
 
-        removeBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
-        removeBinding.imgCheck1.setOnClickListener(v -> checkRemoveMode(true));
-        removeBinding.imgCheck2.setOnClickListener(v -> checkRemoveMode(false));
+        mRemoveBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
+        mRemoveBinding.imgCheck1.setOnClickListener(v -> {
+            mRemoveBinding.imgCheck1.setSelected(true);
+            mRemoveBinding.imgCheck2.setSelected(false);
+        });
+        mRemoveBinding.imgCheck2.setOnClickListener(v -> {
+            mRemoveBinding.imgCheck2.setSelected(true);
+            mRemoveBinding.imgCheck1.setSelected(false);
+        });
 
-        binding.viewAdd.setOnClickListener(v -> showAddDialog());
+        binding.viewAdd.setOnClickListener(v -> {
+            showAddDialog();
+            rvAdapter.notifyItemInserted(dataList.size());
+        });
     }
 
     private void showAddDialog() {
-        Dialog addDialog = new Dialog(ChargingDeviceManagementActivity.this,
-                R.style.dialogRemove);
-        View viewDialog = View.inflate(ChargingDeviceManagementActivity.this,
-                R.layout.test_2_add_dialog, null);
+        Dialog addDialog = new Dialog(this, R.style.dialogRemove);
+        View viewDialog = View.inflate(this, R.layout.test_2_add_dialog, null);
         Test2AddDialogBinding addDialogBinding = Test2AddDialogBinding.bind(viewDialog);
         addDialog.setContentView(viewDialog);
         addDialog.show();
         Objects.requireNonNull(addDialog.getWindow()).setLayout(
-                convertDpToPixel(300, ChargingDeviceManagementActivity.this),
-                WindowManager.LayoutParams.WRAP_CONTENT);
+                convertDpToPixel(300, this), WindowManager.LayoutParams.WRAP_CONTENT);
         addDialogBinding.txtAdd.setOnClickListener(v -> {
             if (!addDialogBinding.editNum.getText().toString().isEmpty()) {
                 int name = Integer.parseInt(addDialogBinding.editNum.getText().toString());
@@ -103,19 +105,8 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         addDialogBinding.txtCancel.setOnClickListener(v -> addDialog.dismiss());
     }
 
-    private void checkRemoveMode(boolean checkMode) {
-        if (checkMode) {
-            removeBinding.imgCheck1.setBackgroundResource(R.drawable.check_circle);
-            removeBinding.imgCheck2.setBackgroundResource(R.drawable.test_2_check_circle);
-        } else {
-            removeBinding.imgCheck1.setBackgroundResource(R.drawable.test_2_check_circle);
-            removeBinding.imgCheck2.setBackgroundResource(R.drawable.check_circle);
-        }
-    }
-
-    public static class Data extends BaseObservable {
+    public static class Data {
         public int name, devId;
-        @Bindable
         public boolean fwUpdate;
 
         Data(int name, int devId, boolean fwUpdate) {
@@ -124,19 +115,12 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             this.fwUpdate = fwUpdate;
         }
 
-        @Bindable
-        public boolean getFwUpdate() {
-            return this.fwUpdate;
-        }
-
         public void setFwUpdate(boolean fwUpdate) {
             this.fwUpdate = fwUpdate;
-            notifyPropertyChanged(BR.fwUpdate);
         }
     }
 
-    private class RecyclerViewAdapter extends RecyclerView.Adapter<ChargingDeviceManagementActivity
-            .RecyclerViewAdapter.ViewHolder> {
+    private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
         private final ArrayList<Data> mDataList;
         private OnRecyclerItemClickListener mClickListener;
 
@@ -166,8 +150,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(ChargingDeviceManagementActivity.RecyclerViewAdapter
-                                             .ViewHolder holder, int position) {
+        public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
             holder.binding.setData(mDataList.get(position));
             holder.binding.imgDel.setOnClickListener(v -> {
                 mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition());

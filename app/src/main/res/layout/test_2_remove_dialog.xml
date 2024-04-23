@@ -33,14 +33,15 @@
             android:id="@+id/img_check_1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/test_2_check_circle"
             android:contentDescription="@string/img_check"
-            android:paddingVertical="3dp"
+            android:background="@drawable/check_circle"
+            android:backgroundTint="@color/check_black_s_blue"
             app:layout_constraintBottom_toBottomOf="@id/txt_disconnect_only"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/txt_disconnect_only"
             app:layout_constraintStart_toStartOf="@id/gl_8"
-            app:layout_constraintTop_toTopOf="@id/txt_disconnect_only" />
+            app:layout_constraintTop_toTopOf="@id/txt_disconnect_only"
+            app:srcCompat="@drawable/radio_button_unchecked"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_10"
@@ -66,13 +67,14 @@
             android:id="@+id/img_check_2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/test_2_check_circle"
+            android:background="@drawable/check_circle"
+            android:backgroundTint="@color/check_black_s_blue"
             android:contentDescription="@string/img_check"
-            android:paddingVertical="3dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@id/img_check_1"
             app:layout_constraintStart_toStartOf="@id/img_check_1"
-            app:layout_constraintTop_toTopOf="@id/txt_disconnect" />
+            app:layout_constraintTop_toTopOf="@id/txt_disconnect"
+            app:srcCompat="@drawable/radio_button_unchecked"/>
 
         <TextView
             android:id="@+id/txt_disconnect"
