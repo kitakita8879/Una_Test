@@ -55,4 +55,9 @@
     <string name="txt_cancel">Cancel</string>
     <string name="txt_remove">Remove</string>
     <string name="img_check">check image</string>
+    <string name="img_add_item">add item image\n</string>
+    <string name="txt_add_device">Add Device</string>
+    <string name="txt_add_title">Add New Charger</string>
+    <string name="txt_add">Add</string>
+    <string name="txt_hint">Charger name</string>
 </resources>

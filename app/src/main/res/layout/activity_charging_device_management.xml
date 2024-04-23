@@ -1,64 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#1E1E1E">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txt_device_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/txt_device_title"
-        android:textColor="#FFFFFF"
-        android:textSize="27dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpUsage" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1E1E1E">
 
-    <ImageView
-        android:id="@+id/img_back"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="12dp"
-        android:contentDescription="@string/img_back"
-        app:layout_constraintBottom_toBottomOf="@id/txt_device_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txt_device_title"
-        app:srcCompat="@drawable/arrow_back_ios_new" />
+        <TextView
+            android:id="@+id/txt_device_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/txt_device_title"
+            android:textColor="#FFFFFF"
+            android:textSize="27dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.075" />
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@string/img_back"
+            app:layout_constraintBottom_toBottomOf="@id/txt_device_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_device_title"
+            app:srcCompat="@drawable/arrow_back_ios_new" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.925" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.075" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.13" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.925" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_test2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/gl_5"
-        app:layout_constraintStart_toStartOf="@id/gl_6"
-        app:layout_constraintTop_toBottomOf="@id/gl_7"
-        app:layout_constraintWidth_percent="0.85" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_test2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_add"
+            app:layout_constraintEnd_toEndOf="@id/gl_5"
+            app:layout_constraintStart_toStartOf="@id/gl_6"
+            app:layout_constraintTop_toBottomOf="@id/gl_7"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <View
+            android:id="@+id/view_add"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/test_2_add_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_6"
+            app:layout_constraintStart_toStartOf="@id/gl_5" />
+
+        <ImageView
+            android:id="@+id/img_add_item"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:contentDescription="@string/img_add_item"
+            app:layout_constraintBottom_toBottomOf="@id/view_add"
+            app:layout_constraintEnd_toStartOf="@id/txt_add_device"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/view_add"
+            app:layout_constraintTop_toTopOf="@id/view_add"
+            app:srcCompat="@drawable/add_circle" />
+
+        <TextView
+            android:id="@+id/txt_add_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/txt_add_device"
+            android:textColor="#0094D6"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/img_add_item"
+            app:layout_constraintEnd_toEndOf="@id/view_add"
+            app:layout_constraintStart_toEndOf="@id/img_add_item"
+            app:layout_constraintTop_toTopOf="@id/img_add_item"
+            tools:ignore="SpUsage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

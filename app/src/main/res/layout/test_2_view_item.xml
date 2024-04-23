@@ -1,94 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/view_item"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@drawable/test_2_device_style">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/img_device"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/img_device"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_charger" />
+    <data>
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:text="@string/txt_name"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_dev_id"
-        app:layout_constraintStart_toEndOf="@id/img_device"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:ignore="SpUsage" />
+        <import type="android.view.View" />
 
-    <TextView
-        android:id="@+id/txt_dev_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_dev_id"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_version"
-        app:layout_constraintStart_toStartOf="@id/txt_name"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name"
-        tools:ignore="SpUsage" />
+        <variable
+            name="data"
+            type="com.example.una_test.ChargingDeviceManagementActivity.Data" />
+    </data>
 
-    <TextView
-        android:id="@+id/txt_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_version"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_fw_update"
-        app:layout_constraintStart_toStartOf="@id/txt_dev_id"
-        app:layout_constraintTop_toBottomOf="@+id/txt_dev_id"
-        tools:ignore="SpUsage" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/test_2_device_style">
 
-    <ImageView
-        android:id="@+id/img_error"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:contentDescription="@string/img_error"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/txt_fw_update"
-        app:layout_constraintEnd_toStartOf="@id/txt_fw_update"
-        app:layout_constraintStart_toStartOf="@id/txt_version"
-        app:layout_constraintTop_toTopOf="@id/txt_fw_update"
-        app:srcCompat="@drawable/error" />
+        <ImageView
+            android:id="@+id/img_device"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/img_device"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_charger"/>
 
-    <TextView
-        android:id="@+id/txt_fw_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_fw_not_need_update"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/img_error"
-        app:layout_constraintTop_toBottomOf="@+id/txt_version"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:text="@{@string/txt_name(data.name)}"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txt_dev_id"
+            app:layout_constraintStart_toEndOf="@id/img_device"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:ignore="SpUsage" />
 
-    <ImageView
-        android:id="@+id/img_del"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="10dp"
-        android:contentDescription="@string/img_del"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/delete" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_dev_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/txt_dev_id(data.devId)}"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_version"
+            app:layout_constraintStart_toStartOf="@id/txt_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/txt_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_version"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_fw_update"
+            app:layout_constraintStart_toStartOf="@id/txt_dev_id"
+            app:layout_constraintTop_toBottomOf="@+id/txt_dev_id"
+            tools:ignore="SpUsage" />
+
+        <ImageView
+            android:id="@+id/img_error"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="@string/img_error"
+            android:visibility="@{data.fwUpdate ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/txt_fw_update"
+            app:layout_constraintEnd_toStartOf="@id/txt_fw_update"
+            app:layout_constraintStart_toStartOf="@id/txt_version"
+            app:layout_constraintTop_toTopOf="@id/txt_fw_update"
+            app:srcCompat="@drawable/error" />
+
+        <TextView
+            android:id="@+id/txt_fw_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{data.fwUpdate ? true : false}"
+            android:text="@{data.fwUpdate ? @string/txt_fw_need_update : @string/txt_fw_not_need_update}"
+            android:textColor="@color/fw_gray_e_blue"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_error"
+            app:layout_constraintTop_toBottomOf="@+id/txt_version"
+            tools:ignore="SpUsage" />
+
+        <ImageView
+            android:id="@+id/img_del"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/img_del"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/delete" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
