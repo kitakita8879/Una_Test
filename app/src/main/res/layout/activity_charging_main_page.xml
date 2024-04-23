@@ -1,638 +1,641 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/test_2_main_bg">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/img_charger"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/img_charger"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_charger_main" />
-
-    <TextView
-        android:id="@+id/txt_charger_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:gravity="center_vertical"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/img_charger"
-        app:layout_constraintStart_toEndOf="@id/img_charger"
-        app:layout_constraintTop_toTopOf="@id/img_charger"
-        tools:ignore="SpUsage" />
-
-    <ImageView
-        android:id="@+id/img_account"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="14dp"
-        android:contentDescription="@string/img_account"
-        android:foregroundGravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="@id/img_charger"
-        app:layout_constraintEnd_toStartOf="@id/img_home"
-        app:layout_constraintTop_toTopOf="@id/img_charger"
-        app:srcCompat="@drawable/account_circle" />
-
-    <ImageView
-        android:id="@+id/img_home"
-        android:layout_width="46dp"
-        android:layout_height="44dp"
-        android:background="@drawable/test_2_home_icon_bg"
-        android:contentDescription="@string/img_home"
-        android:paddingStart="2dp"
-        android:paddingEnd="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/img_charger"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/img_charger"
-        app:srcCompat="@drawable/home" />
-
-    <ImageView
-        android:id="@+id/img_header"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/img_header"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@id/view_state_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_home"
-        app:srcCompat="@drawable/car_animate" />
+        android:layout_height="match_parent"
+        android:background="@drawable/test_2_main_bg">
 
-    <View
-        android:id="@+id/view_state_bg"
-        android:layout_width="310dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="28dp"
-        android:background="@drawable/test_2_state_bg"
-        app:layout_constraintBottom_toTopOf="@id/txt_kWh_value"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/img_charger"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/img_charger"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_charger_main" />
 
-    <View
-        android:id="@+id/view_light_icon"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
-        android:layout_marginStart="17dp"
-        android:background="@drawable/test_2_light_icon"
-        android:foregroundGravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
-        app:layout_constraintStart_toStartOf="@id/view_state_bg"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg" />
+        <TextView
+            android:id="@+id/txt_charger_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_charger"
+            app:layout_constraintStart_toEndOf="@id/img_charger"
+            app:layout_constraintTop_toTopOf="@id/img_charger"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_charging"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:gravity="center_horizontal"
-        android:text="@string/txt_charging"
-        android:textColor="#FFFFFF"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
-        app:layout_constraintStart_toEndOf="@id/view_light_icon"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg"
-        tools:ignore="SpUsage" />
+        <ImageView
+            android:id="@+id/img_account"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="14dp"
+            android:contentDescription="@string/img_account"
+            android:foregroundGravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@id/img_charger"
+            app:layout_constraintEnd_toStartOf="@id/img_home"
+            app:layout_constraintTop_toTopOf="@id/img_charger"
+            app:srcCompat="@drawable/account_circle" />
 
-    <TextView
-        android:id="@+id/txt_duration_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/txt_duration_time"
-        android:textColor="#FFFFFF"
-        android:textSize="22dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
-        app:layout_constraintEnd_toStartOf="@id/img_pause"
-        app:layout_constraintStart_toEndOf="@id/txt_charging"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg"
-        tools:ignore="SpUsage" />
+        <ImageView
+            android:id="@+id/img_home"
+            android:layout_width="46dp"
+            android:layout_height="44dp"
+            android:background="@drawable/test_2_home_icon_bg"
+            android:contentDescription="@string/img_home"
+            android:paddingStart="2dp"
+            android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_charger"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_charger"
+            app:srcCompat="@drawable/home" />
 
-    <ImageView
-        android:id="@+id/img_pause"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/test_2_pause_bg"
-        android:contentDescription="@string/img_pause"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_state_bg"
-        app:layout_constraintTop_toTopOf="@id/view_state_bg"
-        app:srcCompat="@drawable/pause" />
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/img_header"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/view_state_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_home"
+            app:srcCompat="@drawable/car_animate" />
 
-    <TextView
-        android:id="@+id/txt_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/txt_duration"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@id/txt_duration_time"
-        app:layout_constraintStart_toStartOf="@id/txt_duration_time"
-        app:layout_constraintTop_toBottomOf="@id/view_state_bg"
-        tools:ignore="SpUsage" />
+        <View
+            android:id="@+id/view_state_bg"
+            android:layout_width="310dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/test_2_state_bg"
+            app:layout_constraintBottom_toTopOf="@id/txt_kWh_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view_light_icon"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="17dp"
+            android:background="@drawable/test_2_light_icon"
+            android:foregroundGravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
+            app:layout_constraintStart_toStartOf="@id/view_state_bg"
+            app:layout_constraintTop_toTopOf="@id/view_state_bg" />
 
-    <TextView
-        android:id="@+id/txt_kWh_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/txt_kWh_value"
-        android:textColor="#FFFFFF"
-        android:textSize="70dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/gl_1"
-        app:layout_constraintEnd_toStartOf="@+id/txt_kWh"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/gl_1"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_charging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/txt_charging"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
+            app:layout_constraintStart_toEndOf="@id/view_light_icon"
+            app:layout_constraintTop_toTopOf="@id/view_state_bg"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_kWh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/txt_kwh"
-        android:textColor="#0094D6"
-        android:textSize="27dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_kWh_value"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/txt_kWh_value"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_duration_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_duration_time"
+            android:textColor="#FFFFFF"
+            android:textSize="22dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
+            app:layout_constraintEnd_toStartOf="@id/img_pause"
+            app:layout_constraintStart_toEndOf="@id/txt_charging"
+            app:layout_constraintTop_toTopOf="@id/view_state_bg"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_voltage_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_voltage_value"
-        android:textColor="#FFFFFF"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/txt_voltage_unit"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/gl_2"
-        app:layout_constraintTop_toTopOf="@id/view_divider_1"
-        tools:ignore="SpUsage" />
+        <ImageView
+            android:id="@+id/img_pause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/test_2_pause_bg"
+            android:contentDescription="@string/img_pause"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_state_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_state_bg"
+            app:layout_constraintTop_toTopOf="@id/view_state_bg"
+            app:srcCompat="@drawable/pause" />
 
-    <TextView
-        android:id="@+id/txt_voltage_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/txt_voltage_unit"
-        android:textColor="#0094D6"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
-        app:layout_constraintEnd_toEndOf="@id/view_divider_1"
-        app:layout_constraintStart_toEndOf="@id/txt_voltage_value"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/txt_duration"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@id/txt_duration_time"
+            app:layout_constraintStart_toStartOf="@id/txt_duration_time"
+            app:layout_constraintTop_toBottomOf="@id/view_state_bg"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_voltage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="@string/txt_voltage"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_divider_1"
-        app:layout_constraintEnd_toEndOf="@id/txt_voltage_unit"
-        app:layout_constraintStart_toStartOf="@id/txt_voltage_value"
-        app:layout_constraintTop_toBottomOf="@id/txt_voltage_value"
-        tools:ignore="SpUsage" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view_divider_1"
-        android:layout_width="1dp"
-        android:layout_height="58dp"
-        android:background="@drawable/test_2_divider_gradient"
-        app:layout_constraintBottom_toTopOf="@+id/view_charging_current_bg"
-        app:layout_constraintEnd_toStartOf="@+id/view_divider_2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/gl_2"
-        app:layout_constraintTop_toBottomOf="@id/txt_kWh_value" />
+        <TextView
+            android:id="@+id/txt_kWh_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/txt_kWh_value"
+            android:textColor="#FFFFFF"
+            android:textSize="70dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/gl_1"
+            app:layout_constraintEnd_toStartOf="@+id/txt_kWh"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gl_1"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_current_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_current_value"
-        android:textColor="#FFFFFF"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
-        app:layout_constraintEnd_toStartOf="@id/txt_current_unit"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/view_divider_1"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_kWh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/txt_kwh"
+            android:textColor="#0094D6"
+            android:textSize="27dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_kWh_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/txt_kWh_value"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_current_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/txt_current_unit"
-        android:textColor="#0094D6"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
-        app:layout_constraintEnd_toStartOf="@id/view_divider_2"
-        app:layout_constraintStart_toEndOf="@id/txt_current_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_voltage_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_voltage_value"
+            android:textColor="#FFFFFF"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/txt_voltage_unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/gl_2"
+            app:layout_constraintTop_toTopOf="@id/view_divider_1"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_current"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage"
-        app:layout_constraintEnd_toEndOf="@id/txt_current_unit"
-        app:layout_constraintStart_toStartOf="@id/txt_current_value"
-        app:layout_constraintTop_toBottomOf="@id/txt_current_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_voltage_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/txt_voltage_unit"
+            android:textColor="#0094D6"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+            app:layout_constraintEnd_toEndOf="@id/view_divider_1"
+            app:layout_constraintStart_toEndOf="@id/txt_voltage_value"
+            tools:ignore="SpUsage" />
 
-    <View
-        android:id="@+id/view_divider_2"
-        android:layout_width="1dp"
-        android:layout_height="58dp"
-        android:background="@drawable/test_2_divider_gradient"
-        app:layout_constraintBottom_toBottomOf="@id/view_divider_1"
-        app:layout_constraintEnd_toStartOf="@id/gl_3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view_divider_1"
-        app:layout_constraintTop_toTopOf="@id/view_divider_1" />
+        <TextView
+            android:id="@+id/txt_voltage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/txt_voltage"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_divider_1"
+            app:layout_constraintEnd_toEndOf="@id/txt_voltage_unit"
+            app:layout_constraintStart_toStartOf="@id/txt_voltage_value"
+            app:layout_constraintTop_toBottomOf="@id/txt_voltage_value"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_power_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_power_value"
-        android:textColor="#FFFFFF"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
-        app:layout_constraintEnd_toStartOf="@id/txt_power_unit"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/view_divider_2"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
-        tools:ignore="SpUsage" />
+        <View
+            android:id="@+id/view_divider_1"
+            android:layout_width="1dp"
+            android:layout_height="58dp"
+            android:background="@drawable/test_2_divider_gradient"
+            app:layout_constraintBottom_toTopOf="@+id/view_charging_current_bg"
+            app:layout_constraintEnd_toStartOf="@+id/view_divider_2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/gl_2"
+            app:layout_constraintTop_toBottomOf="@id/txt_kWh_value" />
 
-    <TextView
-        android:id="@+id/txt_power_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/txt_power_unit"
-        android:textColor="#0094D6"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
-        app:layout_constraintEnd_toEndOf="@id/gl_3"
-        app:layout_constraintStart_toEndOf="@id/txt_power_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_current_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_current_value"
+            android:textColor="#FFFFFF"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+            app:layout_constraintEnd_toStartOf="@id/txt_current_unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/view_divider_1"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_power"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_voltage"
-        app:layout_constraintEnd_toEndOf="@id/txt_power_unit"
-        app:layout_constraintStart_toStartOf="@id/txt_power_value"
-        app:layout_constraintTop_toBottomOf="@id/txt_power_value"
-        app:layout_constraintTop_toTopOf="@id/txt_voltage"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_current_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/txt_current_unit"
+            android:textColor="#0094D6"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
+            app:layout_constraintEnd_toStartOf="@id/view_divider_2"
+            app:layout_constraintStart_toEndOf="@id/txt_current_value"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
+            tools:ignore="SpUsage" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        <TextView
+            android:id="@+id/txt_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_current"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage"
+            app:layout_constraintEnd_toEndOf="@id/txt_current_unit"
+            app:layout_constraintStart_toStartOf="@id/txt_current_value"
+            app:layout_constraintTop_toBottomOf="@id/txt_current_value"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage"
+            tools:ignore="SpUsage" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        <View
+            android:id="@+id/view_divider_2"
+            android:layout_width="1dp"
+            android:layout_height="58dp"
+            android:background="@drawable/test_2_divider_gradient"
+            app:layout_constraintBottom_toBottomOf="@id/view_divider_1"
+            app:layout_constraintEnd_toStartOf="@id/gl_3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view_divider_1"
+            app:layout_constraintTop_toTopOf="@id/view_divider_1" />
 
-    <View
-        android:id="@+id/view_charging_current_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/test_2_btm_style"
-        app:layout_constraintBottom_toTopOf="@+id/view_mode_select_bg"
-        app:layout_constraintHeight_percent="0.13"
-        app:layout_constraintStart_toStartOf="@id/gl_2"
-        app:layout_constraintTop_toBottomOf="@+id/view_divider_1"
-        app:layout_constraintWidth_percent="0.425" />
+        <TextView
+            android:id="@+id/txt_power_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_power_value"
+            android:textColor="#FFFFFF"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage_value"
+            app:layout_constraintEnd_toStartOf="@id/txt_power_unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/view_divider_2"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage_value"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_charging_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_current_value"
-        android:textColor="#FFFFFF"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/txt_charging_current"
-        app:layout_constraintEnd_toStartOf="@id/txt_charging_unit"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
-        app:layout_constraintTop_toTopOf="@id/view_charging_current_bg"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_power_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/txt_power_unit"
+            android:textColor="#0094D6"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage_unit"
+            app:layout_constraintEnd_toEndOf="@id/gl_3"
+            app:layout_constraintStart_toEndOf="@id/txt_power_value"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage_unit"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_charging_current"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:gravity="center"
-        android:text="@string/txt_charging_current"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/view_charging_current_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
-        app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
-        app:layout_constraintTop_toBottomOf="@id/txt_charging_value"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_power"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_voltage"
+            app:layout_constraintEnd_toEndOf="@id/txt_power_unit"
+            app:layout_constraintStart_toStartOf="@id/txt_power_value"
+            app:layout_constraintTop_toBottomOf="@id/txt_power_value"
+            app:layout_constraintTop_toTopOf="@id/txt_voltage"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_charging_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="@string/txt_current_unit"
-        android:textColor="#0094D6"
-        android:textSize="27dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/txt_charging_value"
-        app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
-        app:layout_constraintStart_toEndOf="@id/txt_charging_value"
-        tools:ignore="SpUsage" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
 
-    <View
-        android:id="@+id/view_lock_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/test_2_btm_style"
-        app:layout_constraintBottom_toBottomOf="@id/view_charging_current_bg"
-        app:layout_constraintEnd_toEndOf="@id/gl_3"
-        app:layout_constraintTop_toBottomOf="@id/txt_voltage"
-        app:layout_constraintTop_toTopOf="@id/view_charging_current_bg"
-        app:layout_constraintWidth_percent="0.425" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
 
-    <ImageView
-        android:id="@+id/img_locked"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:contentDescription="@string/img_locked"
-        app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
-        app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
-        app:srcCompat="@drawable/lock" />
+        <View
+            android:id="@+id/view_charging_current_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/test_2_btm_style"
+            app:layout_constraintBottom_toTopOf="@+id/view_mode_select_bg"
+            app:layout_constraintHeight_percent="0.13"
+            app:layout_constraintStart_toStartOf="@id/gl_2"
+            app:layout_constraintTop_toBottomOf="@+id/view_divider_1"
+            app:layout_constraintWidth_percent="0.425" />
 
-    <TextView
-        android:id="@+id/txt_locked"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/txt_locked"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
-        app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@id/txt_charging_current"
-        tools:ignore="SpUsage" />
+        <TextView
+            android:id="@+id/txt_charging_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_current_value"
+            android:textColor="#FFFFFF"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/txt_charging_current"
+            app:layout_constraintEnd_toStartOf="@id/txt_charging_unit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
+            app:layout_constraintTop_toTopOf="@id/view_charging_current_bg"
+            tools:ignore="SpUsage" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_locked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="img_locked,txt_locked" />
+        <TextView
+            android:id="@+id/txt_charging_current"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:gravity="center"
+            android:text="@string/txt_charging_current"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/view_charging_current_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
+            app:layout_constraintStart_toStartOf="@id/view_charging_current_bg"
+            app:layout_constraintTop_toBottomOf="@id/txt_charging_value"
+            tools:ignore="SpUsage" />
 
-    <ImageView
-        android:id="@+id/img_unlock"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:contentDescription="@string/img_unlock"
-        app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
-        app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
-        app:srcCompat="@drawable/lock_open_right" />
+        <TextView
+            android:id="@+id/txt_charging_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/txt_current_unit"
+            android:textColor="#0094D6"
+            android:textSize="27dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/txt_charging_value"
+            app:layout_constraintEnd_toEndOf="@id/view_charging_current_bg"
+            app:layout_constraintStart_toEndOf="@id/txt_charging_value"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_unlock"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/txt_unlock"
-        android:textColor="#757575"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
-        app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-        app:layout_constraintTop_toTopOf="@id/txt_charging_current"
-        tools:ignore="SpUsage" />
+        <View
+            android:id="@+id/view_lock_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/test_2_btm_style"
+            app:layout_constraintBottom_toBottomOf="@id/view_charging_current_bg"
+            app:layout_constraintEnd_toEndOf="@id/gl_3"
+            app:layout_constraintTop_toBottomOf="@id/txt_voltage"
+            app:layout_constraintTop_toTopOf="@id/view_charging_current_bg"
+            app:layout_constraintWidth_percent="0.425" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_unlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="img_unlock,txt_unlock" />
+        <ImageView
+            android:id="@+id/img_locked"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/img_locked"
+            app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
+            app:layout_constraintStart_toStartOf="@id/view_lock_bg"
+            app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
+            app:srcCompat="@drawable/lock" />
 
-    <View
-        android:id="@+id/view_mode_select_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/test_2_btm_style"
-        app:layout_constraintBottom_toTopOf="@+id/view_bottom_bar_bg"
-        app:layout_constraintEnd_toEndOf="@id/gl_3"
-        app:layout_constraintHeight_percent="0.13"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/gl_2"
-        app:layout_constraintTop_toBottomOf="@+id/view_charging_current_bg" />
+        <TextView
+            android:id="@+id/txt_locked"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_locked"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
+            app:layout_constraintStart_toStartOf="@id/view_lock_bg"
+            app:layout_constraintTop_toTopOf="@id/txt_charging_current"
+            tools:ignore="SpUsage" />
 
-    <ImageView
-        android:id="@+id/img_realtime_charge"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/img_realtime_charge"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toStartOf="@id/txt_realtime_charge"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        app:srcCompat="@drawable/ic_realtime_charge" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_locked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="img_locked,txt_locked" />
 
-    <TextView
-        android:id="@+id/txt_realtime_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_realtime_charge"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-        app:layout_constraintStart_toEndOf="@id/img_realtime_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        tools:ignore="SpUsage" />
+        <ImageView
+            android:id="@+id/img_unlock"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/img_unlock"
+            app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
+            app:layout_constraintStart_toStartOf="@id/view_lock_bg"
+            app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
+            app:srcCompat="@drawable/lock_open_right" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_mode_realtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="img_realtime_charge,txt_realtime_charge" />
+        <TextView
+            android:id="@+id/txt_unlock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_unlock"
+            android:textColor="#757575"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
+            app:layout_constraintStart_toStartOf="@id/view_lock_bg"
+            app:layout_constraintTop_toTopOf="@id/txt_charging_current"
+            tools:ignore="SpUsage" />
 
-    <ImageView
-        android:id="@+id/img_quantitative_charge"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/img_quantitative_charge"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toStartOf="@id/txt_quantitative_charge"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        app:srcCompat="@drawable/ic_quantitative_charge" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_unlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="img_unlock,txt_unlock" />
 
-    <TextView
-        android:id="@+id/txt_quantitative_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_quantitative_charge"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-        app:layout_constraintStart_toEndOf="@id/img_quantitative_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        tools:ignore="SpUsage" />
+        <View
+            android:id="@+id/view_mode_select_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/test_2_btm_style"
+            app:layout_constraintBottom_toTopOf="@+id/view_bottom_bar_bg"
+            app:layout_constraintEnd_toEndOf="@id/gl_3"
+            app:layout_constraintHeight_percent="0.13"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/gl_2"
+            app:layout_constraintTop_toBottomOf="@+id/view_charging_current_bg" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_mode_quantitative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="img_quantitative_charge,txt_quantitative_charge" />
+        <ImageView
+            android:id="@+id/img_realtime_charge"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/img_realtime_charge"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toStartOf="@id/txt_realtime_charge"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            app:srcCompat="@drawable/ic_realtime_charge" />
 
-    <ImageView
-        android:id="@+id/img_fixed_time_charge"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/img_fixed_time_charge"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toStartOf="@id/txt_fixed_time_charge"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        app:srcCompat="@drawable/ic_fixedtime_charge" />
+        <TextView
+            android:id="@+id/txt_realtime_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_realtime_charge"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
+            app:layout_constraintStart_toEndOf="@id/img_realtime_charge"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            tools:ignore="SpUsage" />
 
-    <TextView
-        android:id="@+id/txt_fixed_time_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_fixed_time_charge"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-        app:layout_constraintStart_toEndOf="@id/img_fixed_time_charge"
-        app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-        tools:ignore="SpUsage" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_mode_realtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="img_realtime_charge,txt_realtime_charge" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_mode_fixed_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="img_fixed_time_charge,txt_fixed_time_charge" />
+        <ImageView
+            android:id="@+id/img_quantitative_charge"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/img_quantitative_charge"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toStartOf="@id/txt_quantitative_charge"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            app:srcCompat="@drawable/ic_quantitative_charge" />
 
-    <View
-        android:id="@+id/view_bottom_bar_bg"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:background="#2C2C2C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/txt_quantitative_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_quantitative_charge"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
+            app:layout_constraintStart_toEndOf="@id/img_quantitative_charge"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            tools:ignore="SpUsage" />
 
-    <ImageView
-        android:id="@+id/img_bar_item_ev"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:contentDescription="@string/img_bar_item_ev"
-        app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
-        app:layout_constraintEnd_toStartOf="@+id/img_bar_item_charge"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/view_bottom_bar_bg"
-        app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
-        app:srcCompat="@drawable/ev_charger" />
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_mode_quantitative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="img_quantitative_charge,txt_quantitative_charge" />
 
-    <ImageView
-        android:id="@+id/img_bar_item_charge"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:contentDescription="@string/img_bar_item_charge"
-        app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
-        app:layout_constraintEnd_toStartOf="@+id/img_bar_item_note"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/img_bar_item_ev"
-        app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
-        app:srcCompat="@drawable/ic_chargermode" />
+        <ImageView
+            android:id="@+id/img_fixed_time_charge"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/img_fixed_time_charge"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toStartOf="@id/txt_fixed_time_charge"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            app:srcCompat="@drawable/ic_fixedtime_charge" />
 
-    <ImageView
-        android:id="@+id/img_bar_item_note"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:contentDescription="@string/img_bar_item_note"
-        app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
-        app:layout_constraintEnd_toEndOf="@id/view_bottom_bar_bg"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/img_bar_item_charge"
-        app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
-        app:srcCompat="@drawable/event_note" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_fixed_time_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_fixed_time_charge"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
+            app:layout_constraintStart_toEndOf="@id/img_fixed_time_charge"
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
+            tools:ignore="SpUsage" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_mode_fixed_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="img_fixed_time_charge,txt_fixed_time_charge" />
+
+        <View
+            android:id="@+id/view_bottom_bar_bg"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:background="#2C2C2C"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_bar_item_ev"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="@string/img_bar_item_ev"
+            app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
+            app:layout_constraintEnd_toStartOf="@+id/img_bar_item_charge"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/view_bottom_bar_bg"
+            app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
+            app:srcCompat="@drawable/ev_charger" />
+
+        <ImageView
+            android:id="@+id/img_bar_item_charge"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="@string/img_bar_item_charge"
+            app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
+            app:layout_constraintEnd_toStartOf="@+id/img_bar_item_note"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_bar_item_ev"
+            app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
+            app:srcCompat="@drawable/ic_chargermode" />
+
+        <ImageView
+            android:id="@+id/img_bar_item_note"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="@string/img_bar_item_note"
+            app:layout_constraintBottom_toBottomOf="@id/view_bottom_bar_bg"
+            app:layout_constraintEnd_toEndOf="@id/view_bottom_bar_bg"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_bar_item_charge"
+            app:layout_constraintTop_toTopOf="@id/view_bottom_bar_bg"
+            app:srcCompat="@drawable/event_note" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

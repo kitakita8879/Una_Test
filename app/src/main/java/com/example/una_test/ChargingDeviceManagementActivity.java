@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.una_test.databinding.ActivityChargingDeviceManagementBinding;
 import com.example.una_test.databinding.Test2AddDialogBinding;
+import com.example.una_test.databinding.Test2RemoveDialogBinding;
 import com.example.una_test.databinding.Test2ViewItemBinding;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.Objects;
 
 public class ChargingDeviceManagementActivity extends AppCompatActivity {
     public final ArrayList<Data> dataList = new ArrayList<>();
-    private ImageView imgCheck1, imgCheck2;
+    private Test2RemoveDialogBinding removeBinding;
     private Dialog mDialogRemove;
 
     @Override
@@ -53,19 +52,16 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         });
 
         mDialogRemove = new Dialog(ChargingDeviceManagementActivity.this, R.style.dialogRemove);
-        View mViewDialog = View.inflate(ChargingDeviceManagementActivity.this,
+        View viewDialog = View.inflate(ChargingDeviceManagementActivity.this,
                 R.layout.test_2_remove_dialog, null);
-        mDialogRemove.setContentView(mViewDialog);
-        imgCheck1 = mViewDialog.findViewById(R.id.img_check_1);
-        imgCheck2 = mViewDialog.findViewById(R.id.img_check_2);
-        TextView txtCancel = mViewDialog.findViewById(R.id.txt_cancel);
-        TextView txtRemove = mViewDialog.findViewById(R.id.txt_remove);
+        removeBinding = Test2RemoveDialogBinding.bind(viewDialog);
+        mDialogRemove.setContentView(viewDialog);
 
         binding.recyclerViewTest2.setLayoutManager(new LinearLayoutManager(this));
         RecyclerViewAdapter rvAdapter = new RecyclerViewAdapter(dataList);
         rvAdapter.setOnRecyclerItemClickListener((view, position) -> {
             checkRemoveMode(true);
-            txtRemove.setOnClickListener(v -> {
+            removeBinding.txtRemove.setOnClickListener(v -> {
                 dataList.remove(position);
                 rvAdapter.notifyItemRemoved(position);
                 mDialogRemove.dismiss();
@@ -78,9 +74,9 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
                 ChargingDeviceManagementActivity.RecyclerSpace(convertDpToPixel(30, this));
         binding.recyclerViewTest2.addItemDecoration(decoration);
 
-        txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
-        imgCheck1.setOnClickListener(v -> checkRemoveMode(true));
-        imgCheck2.setOnClickListener(v -> checkRemoveMode(false));
+        removeBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
+        removeBinding.imgCheck1.setOnClickListener(v -> checkRemoveMode(true));
+        removeBinding.imgCheck2.setOnClickListener(v -> checkRemoveMode(false));
 
         binding.viewAdd.setOnClickListener(v -> showAddDialog());
     }
@@ -109,11 +105,11 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
 
     private void checkRemoveMode(boolean checkMode) {
         if (checkMode) {
-            imgCheck1.setBackgroundResource(R.drawable.check_circle);
-            imgCheck2.setBackgroundResource(R.drawable.test_2_check_circle);
+            removeBinding.imgCheck1.setBackgroundResource(R.drawable.check_circle);
+            removeBinding.imgCheck2.setBackgroundResource(R.drawable.test_2_check_circle);
         } else {
-            imgCheck1.setBackgroundResource(R.drawable.test_2_check_circle);
-            imgCheck2.setBackgroundResource(R.drawable.check_circle);
+            removeBinding.imgCheck1.setBackgroundResource(R.drawable.test_2_check_circle);
+            removeBinding.imgCheck2.setBackgroundResource(R.drawable.check_circle);
         }
     }
 
@@ -129,7 +125,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         }
 
         @Bindable
-        public boolean getFwUpdate(){
+        public boolean getFwUpdate() {
             return this.fwUpdate;
         }
 
