@@ -23,7 +23,8 @@
             app:layout_constraintBottom_toTopOf="@+id/img_mode_2"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_realtime_charge" />
+            app:srcCompat="@drawable/ic_realtime_charge"
+            app:tint="@color/mode_white_s_blue" />
 
         <TextView
             android:id="@+id/txt_mode_1"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/txt_realtime_charge"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/img_mode_1"
@@ -39,8 +40,8 @@
             app:layout_constraintTop_toTopOf="@id/img_mode_1"
             tools:ignore="SpUsage" />
 
-        <Space
-            android:id="@+id/space_mode_1"
+        <View
+            android:id="@+id/view_mode_1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/view_divider_3"
@@ -62,11 +63,13 @@
             android:id="@+id/img_mode_2"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:backgroundTint="@color/mode_white_s_blue"
             android:contentDescription="@string/img_quantitative_charge"
             app:layout_constraintBottom_toTopOf="@+id/img_mode_3"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toBottomOf="@+id/img_mode_1"
-            app:srcCompat="@drawable/ic_quantitative_charge" />
+            app:srcCompat="@drawable/ic_quantitative_charge"
+            app:tint="@color/mode_white_s_blue" />
 
         <TextView
             android:id="@+id/txt_mode_2"
@@ -74,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/txt_quantitative_charge"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/img_mode_2"
@@ -82,8 +85,8 @@
             app:layout_constraintTop_toTopOf="@id/img_mode_2"
             tools:ignore="SpUsage" />
 
-        <Space
-            android:id="@+id/space_mode_2"
+        <View
+            android:id="@+id/view_mode_2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/view_divider_4"
@@ -105,11 +108,13 @@
             android:id="@+id/img_mode_3"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:backgroundTint="@color/mode_white_s_blue"
             android:contentDescription="@string/img_fixed_time_charge"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toBottomOf="@+id/img_mode_2"
-            app:srcCompat="@drawable/ic_fixedtime_charge" />
+            app:srcCompat="@drawable/ic_fixedtime_charge"
+            app:tint="@color/mode_white_s_blue" />
 
         <TextView
             android:id="@+id/txt_mode_3"
@@ -117,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/txt_fixed_time_charge"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/img_mode_3"
@@ -125,21 +130,12 @@
             app:layout_constraintTop_toTopOf="@id/img_mode_3"
             tools:ignore="SpUsage" />
 
-        <Space
-            android:id="@+id/space_mode_3"
+        <View
+            android:id="@+id/view_mode_3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider_4" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_mode"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            app:constraint_referenced_ids="view_divider_3, view_divider_4,
-         img_mode_1, txt_mode_1, space_mode_1, img_mode_2, txt_mode_2, space_mode_2,
-         img_mode_3, txt_mode_3, space_mode_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

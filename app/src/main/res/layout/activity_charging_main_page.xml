@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="unlock"
+            type="boolean" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -424,6 +433,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:contentDescription="@string/img_locked"
+            android:visibility="@{unlock ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
             app:layout_constraintStart_toStartOf="@id/view_lock_bg"
             app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
@@ -434,50 +444,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/txt_locked"
+            android:text="@{unlock ? @string/txt_unlock : @string/txt_locked}"
             android:textColor="#757575"
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
             app:layout_constraintStart_toStartOf="@id/view_lock_bg"
             app:layout_constraintTop_toTopOf="@id/txt_charging_current"
             tools:ignore="SpUsage" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_locked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:constraint_referenced_ids="img_locked,txt_locked" />
 
         <ImageView
             android:id="@+id/img_unlock"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:contentDescription="@string/img_unlock"
+            android:visibility="@{unlock ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
             app:layout_constraintStart_toStartOf="@id/view_lock_bg"
             app:layout_constraintTop_toTopOf="@+id/txt_charging_value"
             app:srcCompat="@drawable/lock_open_right" />
-
-        <TextView
-            android:id="@+id/txt_unlock"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/txt_unlock"
-            android:textColor="#757575"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="@id/view_lock_bg"
-            app:layout_constraintStart_toStartOf="@id/view_lock_bg"
-            app:layout_constraintTop_toTopOf="@id/txt_charging_current"
-            tools:ignore="SpUsage" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_unlock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:constraint_referenced_ids="img_unlock,txt_unlock" />
 
         <View
             android:id="@+id/view_mode_select_bg"
@@ -492,20 +476,20 @@
             app:layout_constraintTop_toBottomOf="@+id/view_charging_current_bg" />
 
         <ImageView
-            android:id="@+id/img_realtime_charge"
+            android:id="@+id/img_mode"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/img_realtime_charge"
             app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-            app:layout_constraintEnd_toStartOf="@id/txt_realtime_charge"
+            app:layout_constraintEnd_toStartOf="@id/txt_mode"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
             app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
             app:srcCompat="@drawable/ic_realtime_charge" />
 
         <TextView
-            android:id="@+id/txt_realtime_charge"
+            android:id="@+id/txt_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_realtime_charge"
@@ -514,84 +498,9 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
             app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-            app:layout_constraintStart_toEndOf="@id/img_realtime_charge"
+            app:layout_constraintStart_toEndOf="@id/img_mode"
             app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
             tools:ignore="SpUsage" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_mode_realtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:constraint_referenced_ids="img_realtime_charge,txt_realtime_charge" />
-
-        <ImageView
-            android:id="@+id/img_quantitative_charge"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/img_quantitative_charge"
-            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-            app:layout_constraintEnd_toStartOf="@id/txt_quantitative_charge"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-            app:srcCompat="@drawable/ic_quantitative_charge" />
-
-        <TextView
-            android:id="@+id/txt_quantitative_charge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_quantitative_charge"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-            app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-            app:layout_constraintStart_toEndOf="@id/img_quantitative_charge"
-            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-            tools:ignore="SpUsage" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_mode_quantitative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:constraint_referenced_ids="img_quantitative_charge,txt_quantitative_charge" />
-
-        <ImageView
-            android:id="@+id/img_fixed_time_charge"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/img_fixed_time_charge"
-            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-            app:layout_constraintEnd_toStartOf="@id/txt_fixed_time_charge"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-            app:srcCompat="@drawable/ic_fixedtime_charge" />
-
-        <TextView
-            android:id="@+id/txt_fixed_time_charge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_fixed_time_charge"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
-            app:layout_constraintEnd_toEndOf="@id/view_mode_select_bg"
-            app:layout_constraintStart_toEndOf="@id/img_fixed_time_charge"
-            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-            tools:ignore="SpUsage" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_mode_fixed_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:constraint_referenced_ids="img_fixed_time_charge,txt_fixed_time_charge" />
 
         <View
             android:id="@+id/view_bottom_bar_bg"
