@@ -30,7 +30,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     private Test2RemoveDialogBinding mRemoveBinding;
     private Dialog mDialogRemove;
     private RecyclerViewAdapter rvAdapter;
-    private final Boolean[] isRemoveData = {false};
+    private boolean isRemoveData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         dataList.add(new Data(2, 87654321, false));
 
         binding.imgBack.setOnClickListener(v -> {
-            if (isRemoveData[0]) {
+            if (isRemoveData) {
                 Intent intent = new Intent();
                 intent.putExtra("name", dataList.get(0).name);
                 setResult(RESULT_OK, intent);
@@ -77,7 +77,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             dataList.remove(position);
             rvAdapter.notifyItemRemoved(position);
             mDialogRemove.dismiss();
-            isRemoveData[0] = true;
+            isRemoveData = true;
         });
 
         mRemoveBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
@@ -104,7 +104,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
                 int name = Integer.parseInt(addDialogBinding.editNum.getText().toString());
                 int devId = name + 10000000;
                 dataList.add(new Data(name, devId, false));
-                rvAdapter.notifyItemInserted(dataList.size());
+                //rvAdapter.notifyItemInserted(dataList.size() - 1);
                 addDialog.dismiss();
             }
         });

@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         TextView txtTest1 = findViewById(R.id.test_1);
         TextView txtTest2 = findViewById(R.id.test_2);
         txtTest1.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this
-                    , ListViewAndRecycleViewActivity.class);
+            Intent intent = new Intent(MainActivity.this,
+                    ListViewAndRecycleViewActivity.class);
             startActivity(intent);
         });
 
         txtTest2.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this
-                    , ChargingMainActivity.class);
+            Intent intent = new Intent(MainActivity.this,
+                    ChargingMainActivity.class);
             startActivity(intent);
         });
     }
