@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView txtTest1 = findViewById(R.id.test_1);
         TextView txtTest2 = findViewById(R.id.test_2);
+        TextView txtTest3 = findViewById(R.id.test_3);
         txtTest1.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
                     ListViewAndRecycleViewActivity.class);
@@ -26,5 +27,12 @@ public class MainActivity extends AppCompatActivity {
                     ChargingMainActivity.class);
             startActivity(intent);
         });
+
+        txtTest3.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    TestLedMainActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

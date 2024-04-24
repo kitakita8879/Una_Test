@@ -24,6 +24,7 @@
         <activity android:name=".ListViewAndRecycleViewActivity" />
         <activity android:name=".ChargingMainActivity" />
         <activity android:name=".ChargingDeviceManagementActivity" />
+        <activity android:name=".TestLedMainActivity" />
     </application>
 
 </manifest>
