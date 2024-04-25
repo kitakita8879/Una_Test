@@ -61,4 +61,16 @@
     <string name="txt_add">Add</string>
     <string name="txt_hint">Charger name</string>
     <string name="test3">TEST3</string>
+    <string name="txt_use_setting">Use Setting</string>
+    <string name="txt_hyperlight_settings">Hyperlight Settings</string>
+    <string name="txt_recalibrate">Recalibrate</string>
+    <string name="txt_battle_mode">Battle Mode</string>
+    <string name="txt_customization">Customization</string>
+    <string name="txt_brightness">Brightness</string>
+    <string name="txt_accelerating">Accelerating</string>
+    <string name="txt_led_mode">LED Mode</string>
+    <string name="txt_scan_mode">Scan Mode</string>
+    <string name="txt_color">Color</string>
+    <string name="txt_speed">Speed</string>
+    <string name="txt_select">Select</string>
 </resources>
