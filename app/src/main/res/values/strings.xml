@@ -68,8 +68,9 @@
     <string name="txt_customization">Customization</string>
     <string name="txt_brightness">Brightness</string>
     <string name="txt_accelerating">Accelerating</string>
-    <string name="txt_led_mode">LED Mode</string>
-    <string name="txt_scan_mode">Scan Mode</string>
+    <string name="txt_led">LED Mode</string>
+    <string name="txt_led_mode1">Scan Mode</string>
+    <string name="txt_led_mode2">Gsensor Setting</string>
     <string name="txt_color">Color</string>
     <string name="txt_speed">Speed</string>
     <string name="txt_select">Select</string>
