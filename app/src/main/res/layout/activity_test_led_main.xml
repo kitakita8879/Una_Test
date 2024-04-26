@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@drawable/background_image"
+    android:backgroundTint="@color/black"
+    android:backgroundTintMode="add">
 
     <View
         android:id="@+id/view_top_bar"
@@ -33,21 +35,22 @@
         android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/recalibrate_btn"
+        app:layout_constraintTop_toTopOf="@id/cl_recalibrate_btn"
         tools:ignore="SpUsage" />
 
     <ImageView
+        android:id="@+id/img_hint"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/recalibrate_btn"
-        app:layout_constraintEnd_toStartOf="@id/recalibrate_btn"
-        app:layout_constraintTop_toTopOf="@id/recalibrate_btn"
+        app:layout_constraintBottom_toBottomOf="@id/cl_recalibrate_btn"
+        app:layout_constraintEnd_toStartOf="@id/cl_recalibrate_btn"
+        app:layout_constraintTop_toTopOf="@id/cl_recalibrate_btn"
         app:srcCompat="@drawable/info"
         tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recalibrate_btn"
+        android:id="@+id/cl_recalibrate_btn"
         android:layout_width="94dp"
         android:layout_height="28dp"
         android:layout_marginTop="10dp"
@@ -81,16 +84,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/battle_mode_btn"
+        android:id="@+id/cl_battle_mode"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="14.5dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/stroke_blue4_corner4"
         android:backgroundTint="@color/black2"
-        app:layout_constraintEnd_toStartOf="@id/customization_btn"
+        app:layout_constraintEnd_toStartOf="@id/cl_customization"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recalibrate_btn">
+        app:layout_constraintTop_toBottomOf="@id/cl_recalibrate_btn">
 
         <ImageView
             android:id="@+id/img_battle_mode"
@@ -121,7 +124,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/customization_btn"
+        android:id="@+id/cl_customization"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="14.5dp"
@@ -130,8 +133,8 @@
         android:background="@drawable/stroke_blue4_corner4"
         android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/battle_mode_btn"
-        app:layout_constraintTop_toBottomOf="@id/recalibrate_btn">
+        app:layout_constraintStart_toEndOf="@id/cl_battle_mode"
+        app:layout_constraintTop_toBottomOf="@id/cl_recalibrate_btn">
 
         <ImageView
             android:id="@+id/img_customization"
@@ -162,7 +165,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/battle_mode_item"
+        android:id="@+id/cl_battle_mode_item"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="14.5dp"
@@ -172,7 +175,7 @@
         app:layout_constraintBottom_toTopOf="@id/txt_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/battle_mode_btn">
+        app:layout_constraintTop_toBottomOf="@id/cl_battle_mode">
 
         <View
             android:id="@+id/view_brightness_bg"
@@ -232,7 +235,7 @@
             tools:ignore="ContentDescription" />
 
         <ExpandableListView
-            android:id="@+id/battle_mode_list_view"
+            android:id="@+id/ex_battle_mode_list_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
@@ -244,7 +247,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ExpandableListView
-        android:id="@+id/customization_list_view"
+        android:id="@+id/ex_customization_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="14.5dp"
@@ -256,7 +259,7 @@
         app:layout_constraintBottom_toTopOf="@id/txt_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/customization_btn" />
+        app:layout_constraintTop_toBottomOf="@id/cl_customization" />
 
     <TextView
         android:id="@+id/txt_cancel"

@@ -1,6 +1,7 @@
 package com.example.una_test;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,45 +22,89 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestLedMainActivity extends AppCompatActivity {
-    List<GroupItem> group = Arrays.asList(new GroupItem("Accelerating", R.drawable.aecelerating),
+    List<GroupItem> group = Arrays.asList(
+            new GroupItem("Accelerating", R.drawable.aecelerating),
             new GroupItem("Constant Speed", R.drawable.constant),
             new GroupItem("Decelerating", R.drawable.decelerating));
-
-    List<ChildItem> battleModeChild = Collections.singletonList(new ChildItem(1, 1, 10, 10));
-    List<ChildItem> customizationChild = Collections.singletonList(new ChildItem(1, 1, 10, 10));
+    List<List<ChildItem>> battleModeChild = Collections.singletonList(
+            Arrays.asList(new ChildItem(R.string.txt_led_mode1, R.color.green, 30, 10),
+                    new ChildItem(R.string.txt_led_mode2, R.color.red, 30, 20),
+                    new ChildItem(R.string.txt_led_mode1, R.color.green, 30, 30)));
+    List<List<ChildItem>> customizationChild = Collections.singletonList(
+            Arrays.asList(new ChildItem(R.string.txt_select, R.string.txt_select, 10, 10),
+                    new ChildItem(R.string.txt_select, R.string.txt_select, 20, 20),
+                    new ChildItem(R.string.txt_select, R.string.txt_select, 30, 30)));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_led_main);
 
-        ConstraintLayout battleModeBtn = findViewById(R.id.battle_mode_btn);
-        ConstraintLayout customizationBtn = findViewById(R.id.customization_btn);
-        ConstraintLayout battleModeItem = findViewById(R.id.battle_mode_item);
-        ExpandableListView battleModeView = findViewById(R.id.battle_mode_list_view);
-        ExpandableListView customizationItem = findViewById(R.id.customization_list_view);
+        ConstraintLayout clBattleMode = findViewById(R.id.cl_battle_mode);
+        ConstraintLayout clCustomization = findViewById(R.id.cl_customization);
+        ConstraintLayout clBattleModeItem = findViewById(R.id.cl_battle_mode_item);
+        ConstraintLayout clRecalibrateBtn = findViewById(R.id.cl_recalibrate_btn);
+        ExpandableListView exBattleModeView = findViewById(R.id.ex_battle_mode_list_view);
+        ExpandableListView exCustomizationItem = findViewById(R.id.ex_customization_list_view);
+        SeekBar seekBarBrightnessBattle = findViewById(R.id.seek_bar_brightness);
+        TextView txtCancel = findViewById(R.id.txt_cancel);
+        TextView txtSetting = findViewById(R.id.txt_use_setting);
+        ImageView imgHint = findViewById(R.id.img_hint);
 
         ExpandableAdapter battleModeAdapter = new ExpandableAdapter(this, group,
                 battleModeChild, false);
-        battleModeView.setAdapter(battleModeAdapter);
+        ExpandableAdapter customizationAdapter = new ExpandableAdapter(this, group,
+                customizationChild, true);
+        exBattleModeView.setAdapter(battleModeAdapter);
+        exCustomizationItem.setAdapter(customizationAdapter);
 
-        battleModeBtn.setOnClickListener(v -> {
-            battleModeItem.setVisibility(View.VISIBLE);
-            customizationItem.setVisibility(View.INVISIBLE);
-            battleModeBtn.getBackground().setTint(getResources().getColor(R.color.black2, getTheme()));
-            customizationBtn.getBackground().setTint(getResources().getColor(R.color.black, getTheme()));
+        for (int i = 0; i < group.size(); i++) {
+            exBattleModeView.expandGroup(i);
+            exCustomizationItem.expandGroup(i);
+        }
+
+        clBattleMode.setOnClickListener(v -> {
+            clBattleModeItem.setVisibility(View.VISIBLE);
+            exCustomizationItem.setVisibility(View.INVISIBLE);
+            clBattleMode.getBackground().setTint(
+                    getResources().getColor(R.color.black2, getTheme()));
+            clCustomization.getBackground().setTint(
+                    getResources().getColor(R.color.black, getTheme()));
         });
 
-        customizationBtn.setOnClickListener(v -> {
-            battleModeItem.setVisibility(View.INVISIBLE);
-            ExpandableAdapter customizationAdapter = new ExpandableAdapter(this, group,
-                    customizationChild, true);
-            customizationItem.setAdapter(customizationAdapter);
-            customizationItem.setVisibility(View.VISIBLE);
-            battleModeBtn.getBackground().setTint(getResources().getColor(R.color.black, getTheme()));
-            customizationBtn.getBackground().setTint(getResources().getColor(R.color.black2, getTheme()));
+        clCustomization.setOnClickListener(v -> {
+            clBattleModeItem.setVisibility(View.INVISIBLE);
+            exCustomizationItem.setVisibility(View.VISIBLE);
+            clBattleMode.getBackground().setTint(
+                    getResources().getColor(R.color.black, getTheme()));
+            clCustomization.getBackground().setTint(
+                    getResources().getColor(R.color.black2, getTheme()));
         });
 
+        seekBarBrightnessBattle.setProgress(battleModeChild.get(0).get(0).mBrightness);
+        seekBarBrightnessBattle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                for (int i = 0; i < battleModeChild.size(); i++) {
+                    battleModeChild.get(0).get(i).mBrightness = seekBar.getProgress();
+                }
+            }
+        });
+
+        txtCancel.setOnClickListener(v -> finish());
+        txtSetting.setOnClickListener(v -> finish());
+        clRecalibrateBtn.setOnClickListener(v -> Toast.makeText(TestLedMainActivity.this,
+                "Recalibrate Button", Toast.LENGTH_SHORT).show());
+        imgHint.setOnClickListener(v -> Toast.makeText(TestLedMainActivity.this,
+                "Hint Button", Toast.LENGTH_SHORT).show());
     }
 
     private static class GroupItem {
@@ -72,7 +118,7 @@ public class TestLedMainActivity extends AppCompatActivity {
     }
 
     private static class ChildItem {
-        private final int mLedMode, mColor, mBrightness, mSpeed;
+        private int mLedMode, mBrightness, mSpeed, mColor;
 
         ChildItem(int ledMode, int color, int brightness, int speed) {
             this.mLedMode = ledMode;
@@ -82,17 +128,15 @@ public class TestLedMainActivity extends AppCompatActivity {
         }
     }
 
-    private static class ExpandableAdapter extends BaseExpandableListAdapter {
+    private class ExpandableAdapter extends BaseExpandableListAdapter {
         List<GroupItem> group;
-        List<ChildItem> childItem;
+        List<List<ChildItem>> childItem;
         LayoutInflater layoutInflater;
-        ImageView imgIndicator, imgBattleColor;
+        ImageView imgIndicator;
         boolean isCustomization;
-        ConstraintLayout brightnessItem, customLed, customColor, ledItem, colorItem, speedItem;
-        TextView txtBattleLed;
-        SeekBar speedBar, brightnessBar;
 
-        ExpandableAdapter(Context context, List<GroupItem> group, List<ChildItem> childItem, boolean isCustomization) {
+        ExpandableAdapter(Context context, List<GroupItem> group,
+                          List<List<ChildItem>> childItem, boolean isCustomization) {
             this.group = group;
             this.childItem = childItem;
             this.layoutInflater = LayoutInflater.from(context);
@@ -111,12 +155,12 @@ public class TestLedMainActivity extends AppCompatActivity {
 
         @Override
         public Object getGroup(int groupPosition) {
-            return null;
+            return group.get(groupPosition);
         }
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            return null;
+            return childItem.get(childPosition).get(groupPosition);
         }
 
         @Override
@@ -134,64 +178,169 @@ public class TestLedMainActivity extends AppCompatActivity {
             return false;
         }
 
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.expandable_list_view_item, parent, false);
+        class GroupViewHolder {
+            TextView txtTitle;
+            ImageView imgTitle;
+
+            GroupViewHolder(View view) {
+                txtTitle = view.findViewById(R.id.txt_title);
+                imgTitle = view.findViewById(R.id.img_title);
             }
-            convertView.setTag(R.layout.expandable_list_view_item, groupPosition);
-            TextView txt_title = convertView.findViewById(R.id.txt_title);
-            ImageView img_title = convertView.findViewById(R.id.img_title);
-            txt_title.setText(group.get(groupPosition).mode);
-            img_title.setImageResource(group.get(groupPosition).img);
-            imgIndicator = convertView.findViewById(R.id.indicator);
+        }
+
+        class ChildViewHolder {
+            ConstraintLayout clBrightnessItem, clLedCustom, clColorCustom, clLedItem,
+                    clColorItem, clSpeedItem;
+            TextView txtLed, txtColor;
+            SeekBar seekBarSpeed, seekBarBrightness;
+            ImageView imgColor;
+
+            ChildViewHolder(View view) {
+                clLedItem = view.findViewById(R.id.cl_led_item);
+                clLedCustom = view.findViewById(R.id.cl_customization_led);
+                txtLed = view.findViewById(R.id.txt_led);
+                clColorItem = view.findViewById(R.id.cl_color_item);
+                clColorCustom = view.findViewById(R.id.cl_customization_color);
+                imgColor = view.findViewById(R.id.img_color);
+                txtColor = view.findViewById(R.id.txt_color);
+                clBrightnessItem = view.findViewById(R.id.cl_brightness_item);
+                seekBarBrightness = view.findViewById(R.id.seek_bar_brightness);
+                clSpeedItem = view.findViewById(R.id.cl_speed_item);
+                seekBarSpeed = view.findViewById(R.id.seek_bar_speed);
+            }
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded,
+                                 View convertView, ViewGroup parent) {
+            GroupViewHolder groupViewHolder;
+            if (convertView == null) {
+                convertView = layoutInflater.inflate(R.layout.expandable_list_view_item,
+                        parent, false);
+                groupViewHolder = new GroupViewHolder(convertView);
+                convertView.setTag(groupViewHolder);
+            } else {
+                groupViewHolder = (GroupViewHolder) convertView.getTag();
+            }
+            groupViewHolder.txtTitle.setText(group.get(groupPosition).mode);
+            groupViewHolder.imgTitle.setImageResource(group.get(groupPosition).img);
+            imgIndicator = convertView.findViewById(R.id.img_indicator);
             imgIndicator.setSelected(false);
             return convertView;
         }
 
         @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        public View getChildView(int groupPosition, int childPosition,
+                                 boolean isLastChild, View convertView, ViewGroup parent) {
+            ChildViewHolder childViewHolder;
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.expandable_list_view_childitem, parent, false);
-            }
-            convertView.setTag(R.layout.expandable_list_view_childitem, groupPosition);
-            imgIndicator.setSelected(true);
-            brightnessItem = convertView.findViewById(R.id.brightness_item);
-            customLed = convertView.findViewById(R.id.customization_led);
-            customColor = convertView.findViewById(R.id.customization_color);
-            imgBattleColor = convertView.findViewById(R.id.img_color);
-            txtBattleLed = convertView.findViewById(R.id.txt_battle_led);
-            speedItem = convertView.findViewById(R.id.speed_item);
-            speedBar = convertView.findViewById(R.id.seek_bar_speed);
-            ledItem = convertView.findViewById(R.id.led_mode);
-            colorItem = convertView.findViewById(R.id.color_item);
-            brightnessBar = convertView.findViewById(R.id.seek_bar_brightness);
-            if (isCustomization) {
-                brightnessItem.setVisibility(View.VISIBLE);
-                customLed.setVisibility(View.VISIBLE);
-                customColor.setVisibility(View.VISIBLE);
-                imgBattleColor.setVisibility(View.INVISIBLE);
-                txtBattleLed.setVisibility(View.INVISIBLE);
-                speedItem.setEnabled(true);
-                ledItem.setEnabled(true);
-                colorItem.setEnabled(true);
+                convertView = layoutInflater.inflate(R.layout.expandable_list_view_childitem,
+                        parent, false);
+                childViewHolder = new ChildViewHolder(convertView);
+                convertView.setTag(childViewHolder);
             } else {
-                brightnessItem.setVisibility(View.GONE);
-                customLed.setVisibility(View.INVISIBLE);
-                customColor.setVisibility(View.INVISIBLE);
-                imgBattleColor.setVisibility(View.VISIBLE);
-                txtBattleLed.setVisibility(View.VISIBLE);
-                speedItem.setEnabled(false);
-                speedBar.setEnabled(false);
-                ledItem.setEnabled(false);
-                colorItem.setEnabled(false);
+                childViewHolder = (ChildViewHolder) convertView.getTag();
             }
+
+            imgIndicator.setSelected(true);
+            if (isCustomization) {
+                childViewHolder.seekBarSpeed.setProgress(childItem
+                        .get(childPosition).get(groupPosition).mSpeed);
+                childViewHolder.seekBarBrightness.setProgress(childItem
+                        .get(childPosition).get(groupPosition).mBrightness);
+                childViewHolder.txtLed.setText(childItem
+                        .get(childPosition).get(groupPosition).mLedMode);
+                if (childItem.get(childPosition).get(groupPosition).mColor == R.string.txt_select) {
+                    childViewHolder.imgColor.setVisibility(View.INVISIBLE);
+                    childViewHolder.txtColor.setVisibility(View.VISIBLE);
+                } else {
+                    childViewHolder.txtColor.setVisibility(View.INVISIBLE);
+                    childViewHolder.imgColor.setVisibility(View.VISIBLE);
+                }
+            } else {
+                childViewHolder.clBrightnessItem.setVisibility(View.GONE);
+                childViewHolder.txtColor.setVisibility(View.INVISIBLE);
+                childViewHolder.clSpeedItem.setEnabled(false);
+                childViewHolder.seekBarSpeed.setEnabled(false);
+                childViewHolder.clLedItem.setEnabled(false);
+                childViewHolder.clLedCustom.setEnabled(false);
+                childViewHolder.clColorItem.setEnabled(false);
+                childViewHolder.clColorCustom.setEnabled(false);
+                childViewHolder.seekBarSpeed.setProgress(childItem
+                        .get(childPosition).get(groupPosition).mSpeed);
+                childViewHolder.txtLed.setText(childItem
+                        .get(childPosition).get(groupPosition).mLedMode);
+                childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
+                        .getColor(childItem.get(childPosition).get(groupPosition).mColor, getTheme())));
+            }
+
+            childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    childItem.get(childPosition).get(groupPosition).mSpeed = childViewHolder
+                            .seekBarSpeed.getProgress();
+                }
+            });
+            childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(new SeekBar
+                    .OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    childItem.get(childPosition).get(groupPosition).mBrightness = childViewHolder
+                            .seekBarBrightness.getProgress();
+                }
+            });
+
+            childViewHolder.clLedCustom.setOnClickListener(v -> {
+                if (childItem.get(childPosition).get(groupPosition).mLedMode == R.string
+                        .txt_led_mode1) {
+                    childItem.get(childPosition).get(groupPosition).mLedMode = R.string
+                            .txt_led_mode2;
+                } else {
+                    childItem.get(childPosition).get(groupPosition).mLedMode = R.string
+                            .txt_led_mode1;
+                }
+                childViewHolder.txtLed.setText(
+                        childItem.get(childPosition).get(groupPosition).mLedMode);
+                notifyDataSetChanged();
+            });
+
+            childViewHolder.clColorCustom.setOnClickListener(v -> {
+                childViewHolder.imgColor.setVisibility(View.VISIBLE);
+                if (childItem.get(childPosition).get(groupPosition).mColor == R.color.green) {
+                    childItem.get(childPosition).get(groupPosition).mColor = R.color.red;
+                } else {
+                    childItem.get(childPosition).get(groupPosition).mColor = R.color.green;
+                }
+                Toast.makeText(TestLedMainActivity.this, "click group" + groupPosition,
+                        Toast.LENGTH_SHORT).show();
+                childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
+                        .getColor(childItem.get(childPosition).get(groupPosition).mColor,
+                                getTheme())));
+                notifyDataSetChanged();
+            });
+
             return convertView;
         }
 
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return false;
+            return true;
         }
     }
 }
