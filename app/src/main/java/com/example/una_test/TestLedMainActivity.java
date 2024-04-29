@@ -26,14 +26,20 @@ public class TestLedMainActivity extends AppCompatActivity {
             new GroupItem("Accelerating", R.drawable.aecelerating),
             new GroupItem("Constant Speed", R.drawable.constant),
             new GroupItem("Decelerating", R.drawable.decelerating));
-    List<List<ChildItem>> battleModeChild = Collections.singletonList(
-            Arrays.asList(new ChildItem(R.string.txt_led_mode1, R.color.green, 30, 10),
-                    new ChildItem(R.string.txt_led_mode2, R.color.red, 30, 20),
-                    new ChildItem(R.string.txt_led_mode1, R.color.green, 30, 30)));
-    List<List<ChildItem>> customizationChild = Collections.singletonList(
-            Arrays.asList(new ChildItem(R.string.txt_select, R.string.txt_select, 10, 10),
-                    new ChildItem(R.string.txt_select, R.string.txt_select, 20, 20),
-                    new ChildItem(R.string.txt_select, R.string.txt_select, 30, 30)));
+    List<List<ChildItem>> battleModeChild = Arrays.asList(
+            Collections.singletonList(new ChildItem(R.string.txt_led_mode1, R.color.green,
+                    30, 10)),
+            Collections.singletonList(new ChildItem(R.string.txt_led_mode2, R.color.red,
+                    30, 20)),
+            Collections.singletonList(new ChildItem(R.string.txt_led_mode1, R.color.green,
+                    30, 30)));
+    List<List<ChildItem>> customizationChild = Arrays.asList(
+            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+                    10, 10)),
+            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+                    20, 20)),
+            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+                    30, 30)));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,7 +100,7 @@ public class TestLedMainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 for (int i = 0; i < battleModeChild.size(); i++) {
-                    battleModeChild.get(0).get(i).mBrightness = seekBar.getProgress();
+                    battleModeChild.get(i).get(0).mBrightness = seekBar.getProgress();
                 }
             }
         });
@@ -150,7 +156,7 @@ public class TestLedMainActivity extends AppCompatActivity {
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return childItem.size();
+            return childItem.get(groupPosition).size();
         }
 
         @Override
@@ -160,7 +166,7 @@ public class TestLedMainActivity extends AppCompatActivity {
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            return childItem.get(childPosition).get(groupPosition);
+            return childItem.get(groupPosition).get(childPosition);
         }
 
         @Override
@@ -241,21 +247,24 @@ public class TestLedMainActivity extends AppCompatActivity {
             } else {
                 childViewHolder = (ChildViewHolder) convertView.getTag();
             }
-
             imgIndicator.setSelected(true);
+
+            childViewHolder.seekBarSpeed.setProgress(childItem.get(groupPosition)
+                    .get(childPosition).mSpeed);
+            childViewHolder.txtLed.setText(childItem.get(groupPosition).get(childPosition).mLedMode);
+
             if (isCustomization) {
-                childViewHolder.seekBarSpeed.setProgress(childItem
-                        .get(childPosition).get(groupPosition).mSpeed);
                 childViewHolder.seekBarBrightness.setProgress(childItem
-                        .get(childPosition).get(groupPosition).mBrightness);
-                childViewHolder.txtLed.setText(childItem
-                        .get(childPosition).get(groupPosition).mLedMode);
-                if (childItem.get(childPosition).get(groupPosition).mColor == R.string.txt_select) {
+                        .get(groupPosition).get(childPosition).mBrightness);
+                if (childItem.get(groupPosition).get(childPosition).mColor == R.string.txt_select) {
                     childViewHolder.imgColor.setVisibility(View.INVISIBLE);
                     childViewHolder.txtColor.setVisibility(View.VISIBLE);
                 } else {
                     childViewHolder.txtColor.setVisibility(View.INVISIBLE);
                     childViewHolder.imgColor.setVisibility(View.VISIBLE);
+                    childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
+                            .getColor(childItem.get(groupPosition).get(childPosition).mColor,
+                                    getTheme())));
                 }
             } else {
                 childViewHolder.clBrightnessItem.setVisibility(View.GONE);
@@ -266,12 +275,8 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.clLedCustom.setEnabled(false);
                 childViewHolder.clColorItem.setEnabled(false);
                 childViewHolder.clColorCustom.setEnabled(false);
-                childViewHolder.seekBarSpeed.setProgress(childItem
-                        .get(childPosition).get(groupPosition).mSpeed);
-                childViewHolder.txtLed.setText(childItem
-                        .get(childPosition).get(groupPosition).mLedMode);
                 childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
-                        .getColor(childItem.get(childPosition).get(groupPosition).mColor, getTheme())));
+                        .getColor(childItem.get(groupPosition).get(childPosition).mColor, getTheme())));
             }
 
             childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -285,7 +290,7 @@ public class TestLedMainActivity extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    childItem.get(childPosition).get(groupPosition).mSpeed = childViewHolder
+                    childItem.get(groupPosition).get(childPosition).mSpeed = childViewHolder
                             .seekBarSpeed.getProgress();
                 }
             });
@@ -301,40 +306,40 @@ public class TestLedMainActivity extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    childItem.get(childPosition).get(groupPosition).mBrightness = childViewHolder
+                    childItem.get(groupPosition).get(childPosition).mBrightness = childViewHolder
                             .seekBarBrightness.getProgress();
                 }
             });
 
             childViewHolder.clLedCustom.setOnClickListener(v -> {
-                if (childItem.get(childPosition).get(groupPosition).mLedMode == R.string
+                if (childItem.get(groupPosition).get(childPosition).mLedMode == R.string
                         .txt_led_mode1) {
-                    childItem.get(childPosition).get(groupPosition).mLedMode = R.string
+                    childItem.get(groupPosition).get(childPosition).mLedMode = R.string
                             .txt_led_mode2;
                 } else {
-                    childItem.get(childPosition).get(groupPosition).mLedMode = R.string
+                    childItem.get(groupPosition).get(childPosition).mLedMode = R.string
                             .txt_led_mode1;
                 }
                 childViewHolder.txtLed.setText(
-                        childItem.get(childPosition).get(groupPosition).mLedMode);
+                        childItem.get(groupPosition).get(childPosition).mLedMode);
                 notifyDataSetChanged();
             });
 
             childViewHolder.clColorCustom.setOnClickListener(v -> {
                 childViewHolder.imgColor.setVisibility(View.VISIBLE);
-                if (childItem.get(childPosition).get(groupPosition).mColor == R.color.green) {
-                    childItem.get(childPosition).get(groupPosition).mColor = R.color.red;
+                childViewHolder.txtColor.setVisibility(View.INVISIBLE);
+                if (childItem.get(groupPosition).get(childPosition).mColor == R.color.green) {
+                    childItem.get(groupPosition).get(childPosition).mColor = R.color.red;
                 } else {
-                    childItem.get(childPosition).get(groupPosition).mColor = R.color.green;
+                    childItem.get(groupPosition).get(childPosition).mColor = R.color.green;
                 }
                 Toast.makeText(TestLedMainActivity.this, "click group" + groupPosition,
                         Toast.LENGTH_SHORT).show();
                 childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
-                        .getColor(childItem.get(childPosition).get(groupPosition).mColor,
+                        .getColor(childItem.get(groupPosition).get(childPosition).mColor,
                                 getTheme())));
                 notifyDataSetChanged();
             });
-
             return convertView;
         }
 
