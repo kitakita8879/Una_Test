@@ -27,14 +27,14 @@
             android:contentDescription="@string/img_device"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_charger"/>
+            app:srcCompat="@drawable/ic_charger" />
 
         <TextView
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:text="@{@string/txt_name(data.name), default = @string/txt_name}"
+            android:text="@{@string/label_my_charger(data.name), default = @string/label_my_charger}"
             android:textColor="#FFFFFF"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -48,7 +48,7 @@
             android:id="@+id/txt_dev_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/txt_dev_id(data.devId), default = @string/txt_dev_id}"
+            android:text="@{@string/label_device_id_sign(data.devId), default = @string/label_device_id_sign}"
             android:textColor="#757575"
             android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@+id/txt_version"
@@ -60,7 +60,7 @@
             android:id="@+id/txt_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_version"
+            android:text="@string/label_v100_sign"
             android:textColor="#757575"
             android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@+id/txt_fw_update"
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="@{data.fwUpdate}"
-            android:text="@{data.fwUpdate ? @string/txt_fw_need_update : @string/txt_fw_not_need_update}"
+            android:text="@{data.fwUpdate ? @string/label_firmware_update_available : @string/label_firmware_is_up_to_date}"
             android:textColor="@color/fw_gray_e_blue"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"

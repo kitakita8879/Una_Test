@@ -31,7 +31,7 @@ public class ChargingMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_charging_main_page);
 
-        mBinding.txtChargerName.setText(String.format(getString(R.string.txt_name), mNameData));
+        mBinding.txtChargerName.setText(String.format(getString(R.string.label_my_charger), mNameData));
         mBinding.viewLockBg.setOnClickListener(v -> mBinding.setUnlock(!mBinding.getUnlock()));
         mBinding.viewModeSelectBg.setOnClickListener(v -> {
             showModeDialog();
@@ -45,7 +45,7 @@ public class ChargingMainActivity extends AppCompatActivity {
                         mNameData = Objects.requireNonNull(result.getData())
                                 .getIntExtra("name", 1);
                         mBinding.txtChargerName.setText(String
-                                .format(getString(R.string.txt_name), mNameData));
+                                .format(getString(R.string.label_my_charger), mNameData));
                     }
                 });
 
@@ -94,21 +94,21 @@ public class ChargingMainActivity extends AppCompatActivity {
                 mSelectBinding.imgMode1.setSelected(true);
                 mBinding.imgMode.setImageDrawable(ContextCompat
                         .getDrawable(this, R.drawable.ic_realtime_charge));
-                mBinding.txtMode.setText(R.string.txt_realtime_charge);
+                mBinding.txtMode.setText(R.string.label_real_time_charging_upper);
                 break;
             case 2:
                 mSelectBinding.txtMode2.setSelected(true);
                 mSelectBinding.imgMode2.setSelected(true);
                 mBinding.imgMode.setImageDrawable(ContextCompat
                         .getDrawable(this, R.drawable.ic_quantitative_charge));
-                mBinding.txtMode.setText(R.string.txt_quantitative_charge);
+                mBinding.txtMode.setText(R.string.label_quantitative_charging_upper);
                 break;
             default:
                 mSelectBinding.txtMode3.setSelected(true);
                 mSelectBinding.imgMode3.setSelected(true);
                 mBinding.imgMode.setImageDrawable(ContextCompat
                         .getDrawable(this, R.drawable.ic_fixedtime_charge));
-                mBinding.txtMode.setText(R.string.txt_fixed_time_charge);
+                mBinding.txtMode.setText(R.string.label_fixed_time_charging_upper);
         }
     }
 }

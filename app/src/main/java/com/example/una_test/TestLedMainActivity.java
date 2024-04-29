@@ -22,23 +22,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestLedMainActivity extends AppCompatActivity {
-    List<GroupItem> group = Arrays.asList(
+    private final List<GroupItem> group = Arrays.asList(
             new GroupItem("Accelerating", R.drawable.aecelerating),
             new GroupItem("Constant Speed", R.drawable.constant),
             new GroupItem("Decelerating", R.drawable.decelerating));
-    List<List<ChildItem>> battleModeChild = Arrays.asList(
-            Collections.singletonList(new ChildItem(R.string.txt_led_mode1, R.color.green,
+    private final List<List<ChildItem>> battleModeChild = Arrays.asList(
+            Collections.singletonList(new ChildItem(R.string.label_scan_mode, R.color.green,
                     30, 10)),
-            Collections.singletonList(new ChildItem(R.string.txt_led_mode2, R.color.red,
+            Collections.singletonList(new ChildItem(R.string.label_gsensor_settings, R.color.red,
                     30, 20)),
-            Collections.singletonList(new ChildItem(R.string.txt_led_mode1, R.color.green,
+            Collections.singletonList(new ChildItem(R.string.label_scan_mode, R.color.green,
                     30, 30)));
-    List<List<ChildItem>> customizationChild = Arrays.asList(
-            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+    private final List<List<ChildItem>> customizationChild = Arrays.asList(
+            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
                     10, 10)),
-            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
                     20, 20)),
-            Collections.singletonList(new ChildItem(R.string.txt_select, R.string.txt_select,
+            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
                     30, 30)));
 
     @Override
@@ -75,14 +75,14 @@ public class TestLedMainActivity extends AppCompatActivity {
             clBattleMode.getBackground().setTint(
                     getResources().getColor(R.color.black2, getTheme()));
             clCustomization.getBackground().setTint(
-                    getResources().getColor(R.color.black, getTheme()));
+                    getResources().getColor(R.color.transparent, getTheme()));
         });
 
         clCustomization.setOnClickListener(v -> {
             clBattleModeItem.setVisibility(View.INVISIBLE);
             exCustomizationItem.setVisibility(View.VISIBLE);
             clBattleMode.getBackground().setTint(
-                    getResources().getColor(R.color.black, getTheme()));
+                    getResources().getColor(R.color.transparent, getTheme()));
             clCustomization.getBackground().setTint(
                     getResources().getColor(R.color.black2, getTheme()));
         });
@@ -256,7 +256,7 @@ public class TestLedMainActivity extends AppCompatActivity {
             if (isCustomization) {
                 childViewHolder.seekBarBrightness.setProgress(childItem
                         .get(groupPosition).get(childPosition).mBrightness);
-                if (childItem.get(groupPosition).get(childPosition).mColor == R.string.txt_select) {
+                if (childItem.get(groupPosition).get(childPosition).mColor == R.string.label_select) {
                     childViewHolder.imgColor.setVisibility(View.INVISIBLE);
                     childViewHolder.txtColor.setVisibility(View.VISIBLE);
                 } else {
@@ -276,10 +276,12 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.clColorItem.setEnabled(false);
                 childViewHolder.clColorCustom.setEnabled(false);
                 childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
-                        .getColor(childItem.get(groupPosition).get(childPosition).mColor, getTheme())));
+                        .getColor(childItem.get(groupPosition).get(childPosition).mColor,
+                                getTheme())));
             }
 
-            childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar
+                    .OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 }
@@ -313,12 +315,12 @@ public class TestLedMainActivity extends AppCompatActivity {
 
             childViewHolder.clLedCustom.setOnClickListener(v -> {
                 if (childItem.get(groupPosition).get(childPosition).mLedMode == R.string
-                        .txt_led_mode1) {
+                        .label_scan_mode) {
                     childItem.get(groupPosition).get(childPosition).mLedMode = R.string
-                            .txt_led_mode2;
+                            .label_gsensor_settings;
                 } else {
                     childItem.get(groupPosition).get(childPosition).mLedMode = R.string
-                            .txt_led_mode1;
+                            .label_scan_mode;
                 }
                 notifyDataSetChanged();
             });
