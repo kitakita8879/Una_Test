@@ -3,7 +3,6 @@ package com.example.una_test;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,7 +228,6 @@ public class TestLedMainActivity extends AppCompatActivity {
             } else {
                 groupViewHolder = (GroupViewHolder) convertView.getTag();
             }
-            Log.e("expandableListView", "getGroupView: "+ convertView.getTag());
             groupViewHolder.txtTitle.setText(group.get(groupPosition).mode);
             groupViewHolder.imgTitle.setImageResource(group.get(groupPosition).img);
             imgIndicator = convertView.findViewById(R.id.img_indicator);
@@ -249,7 +247,6 @@ public class TestLedMainActivity extends AppCompatActivity {
             } else {
                 childViewHolder = (ChildViewHolder) convertView.getTag();
             }
-            Log.d("expandableListView", "getChildView: "+ convertView.getTag());
             imgIndicator.setSelected(true);
 
             childViewHolder.seekBarSpeed.setProgress(childItem.get(groupPosition)
