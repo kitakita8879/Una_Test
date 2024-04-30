@@ -10,6 +10,10 @@
         <variable
             name="unlock"
             type="boolean" />
+
+        <variable
+            name="mode"
+            type="com.example.una_test.ChargingMainActivity.ModeType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -481,18 +485,18 @@
             android:layout_height="55dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/img_realtime_charge"
+            android:src="@{mode == mode.REAL_TIME ? @drawable/ic_realtime_charge : mode == mode.QUANTITATIVE ? @drawable/ic_quantitative_charge : @drawable/ic_fixedtime_charge, default=@drawable/ic_realtime_charge}"
             app:layout_constraintBottom_toBottomOf="@id/view_mode_select_bg"
             app:layout_constraintEnd_toStartOf="@id/txt_mode"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/view_mode_select_bg"
-            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg"
-            app:srcCompat="@drawable/ic_realtime_charge" />
+            app:layout_constraintTop_toTopOf="@id/view_mode_select_bg" />
 
         <TextView
             android:id="@+id/txt_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_real_time_charging_upper"
+            android:text="@{mode == mode.REAL_TIME ? @string/label_real_time_charging_upper : mode == mode.QUANTITATIVE ? @string/label_quantitative_charging_upper : @string/label_fixed_time_charging_upper, default=@string/label_real_time_charging_upper}"
             android:textColor="#FFFFFF"
             android:textSize="18dp"
             android:textStyle="bold"
