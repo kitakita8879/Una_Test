@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.example.una_test.ChargingMainActivity.ModeType" />
+
         <variable
             name="mode"
             type="com.example.una_test.ChargingMainActivity.ModeType" />
@@ -31,7 +33,7 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:contentDescription="@string/img_realtime_charge"
-            android:selected="@{mode == mode.REAL_TIME}"
+            android:selected="@{mode == ModeType.REAL_TIME}"
             app:layout_constraintBottom_toTopOf="@+id/img_mode_2"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:selected="@{mode == mode.REAL_TIME}"
+            android:selected="@{mode == ModeType.REAL_TIME}"
             android:text="@string/label_real_time_charging_upper"
             android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
@@ -57,7 +59,7 @@
             android:id="@+id/view_mode_1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:onClick="@{()->activity.modeSelect(mode.REAL_TIME)}"
+            android:onClick="@{()->activity.modeSelect(ModeType.REAL_TIME)}"
             app:layout_constraintBottom_toTopOf="@id/view_divider_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +81,7 @@
             android:layout_height="52dp"
             android:backgroundTint="@color/mode_white_s_blue"
             android:contentDescription="@string/img_quantitative_charge"
-            android:selected="@{mode == mode.QUANTITATIVE}"
+            android:selected="@{mode == ModeType.QUANTITATIVE}"
             app:layout_constraintBottom_toTopOf="@+id/img_mode_3"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toBottomOf="@+id/img_mode_1"
@@ -91,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:selected="@{mode == mode.QUANTITATIVE}"
+            android:selected="@{mode == ModeType.QUANTITATIVE}"
             android:text="@string/label_quantitative_charging_upper"
             android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
@@ -105,7 +107,7 @@
             android:id="@+id/view_mode_2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:onClick="@{()->activity.modeSelect(mode.QUANTITATIVE)}"
+            android:onClick="@{()->activity.modeSelect(ModeType.QUANTITATIVE)}"
             app:layout_constraintBottom_toTopOf="@id/view_divider_4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider_3" />
@@ -127,7 +129,7 @@
             android:layout_height="52dp"
             android:backgroundTint="@color/mode_white_s_blue"
             android:contentDescription="@string/img_fixed_time_charge"
-            android:selected="@{mode == mode.FIXED_TIME}"
+            android:selected="@{mode == ModeType.FIXED_TIME}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/gl_4"
             app:layout_constraintTop_toBottomOf="@+id/img_mode_2"
@@ -139,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:selected="@{mode == mode.FIXED_TIME}"
+            android:selected="@{mode == ModeType.FIXED_TIME}"
             android:text="@string/label_fixed_time_charging_upper"
             android:textColor="@color/mode_white_s_blue"
             android:textSize="18dp"
@@ -153,7 +155,7 @@
             android:id="@+id/view_mode_3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:onClick="@{()->activity.modeSelect(mode.FIXED_TIME)}"
+            android:onClick="@{()->activity.modeSelect(ModeType.FIXED_TIME)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_divider_4" />
