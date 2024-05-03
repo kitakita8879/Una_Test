@@ -3,6 +3,7 @@ package com.example.una_test;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,24 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestLedMainActivity extends AppCompatActivity {
-    private final List<GroupItem> group = Arrays.asList(
-            new GroupItem("Accelerating", R.drawable.aecelerating),
-            new GroupItem("Constant Speed", R.drawable.constant),
-            new GroupItem("Decelerating", R.drawable.decelerating));
-    private final List<List<ChildItem>> battleModeChild = Arrays.asList(
-            Collections.singletonList(new ChildItem(R.string.label_scan_mode, R.color.green,
-                    30, 10)),
-            Collections.singletonList(new ChildItem(R.string.label_gsensor_settings, R.color.red,
-                    30, 20)),
-            Collections.singletonList(new ChildItem(R.string.label_scan_mode, R.color.green,
-                    30, 30)));
-    private final List<List<ChildItem>> customizationChild = Arrays.asList(
-            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
-                    10, 10)),
-            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
-                    20, 20)),
-            Collections.singletonList(new ChildItem(R.string.label_select, R.string.label_select,
-                    30, 30)));
+
+    private static int mBattleBright = 30;
+    String TAG = "TestLed";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,14 +43,37 @@ public class TestLedMainActivity extends AppCompatActivity {
         TextView txtSetting = findViewById(R.id.txt_use_setting);
         ImageView imgHint = findViewById(R.id.img_hint);
 
-        ExpandableAdapter battleModeAdapter = new ExpandableAdapter(this, group,
-                battleModeChild, false);
-        ExpandableAdapter customizationAdapter = new ExpandableAdapter(this, group,
-                customizationChild, true);
+        final List<ExpandableAdapter.GroupItem> battleGroup = Arrays.asList(
+                new ExpandableAdapter.GroupItem("Accelerating", R.drawable.aecelerating,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_scan_mode, R.color.green, 10))),
+                new ExpandableAdapter.GroupItem("Constant Speed", R.drawable.constant,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_gsensor_settings, R.color.red, 20))),
+                new ExpandableAdapter.GroupItem("Decelerating", R.drawable.decelerating,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_scan_mode, R.color.green, 30))));
+
+        final List<ExpandableAdapter.GroupItem> customGroup = Arrays.asList(
+                new ExpandableAdapter.GroupItem("Accelerating", R.drawable.aecelerating,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_select, R.string.label_select, 10, 10,
+                                mLedListener, mColorListener, mBrightListener, mSpeedListener))),
+                new ExpandableAdapter.GroupItem("Constant Speed", R.drawable.constant,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_select, R.string.label_select, 20, 20,
+                                mLedListener, mColorListener, mBrightListener, mSpeedListener))),
+                new ExpandableAdapter.GroupItem("Decelerating", R.drawable.decelerating,
+                        Collections.singletonList(new ExpandableAdapter.ChildItem(
+                                R.string.label_select, R.string.label_select, 30, 30,
+                                mLedListener, mColorListener, mBrightListener, mSpeedListener))));
+
+        ExpandableAdapter battleModeAdapter = new ExpandableAdapter(this, battleGroup);
+        ExpandableAdapter customizationAdapter = new ExpandableAdapter(this, customGroup);
         exBattleModeView.setAdapter(battleModeAdapter);
         exCustomizationItem.setAdapter(customizationAdapter);
 
-        for (int i = 0; i < group.size(); i++) {
+        for (int i = 0; i < battleGroup.size(); i++) {
             exBattleModeView.expandGroup(i);
             exCustomizationItem.expandGroup(i);
         }
@@ -87,10 +96,12 @@ public class TestLedMainActivity extends AppCompatActivity {
                     getResources().getColor(R.color.black2, getTheme()));
         });
 
-        seekBarBrightnessBattle.setProgress(battleModeChild.get(0).get(0).mBrightness);
+        seekBarBrightnessBattle.setProgress(mBattleBright);
         seekBarBrightnessBattle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mBattleBright = seekBar.getProgress();
+                Log.e(TAG, "battle bright " + mBattleBright);
             }
 
             @Override
@@ -99,9 +110,6 @@ public class TestLedMainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                for (int i = 0; i < battleModeChild.size(); i++) {
-                    battleModeChild.get(i).get(0).mBrightness = seekBar.getProgress();
-                }
             }
         });
 
@@ -113,60 +121,116 @@ public class TestLedMainActivity extends AppCompatActivity {
                 "Hint Button", Toast.LENGTH_SHORT).show());
     }
 
-    private static class GroupItem {
-        private final String mode;
-        private final int img;
+    private final ExpandableAdapter.ChildItem.LedModeListener mLedListener = (item, mode) -> {
+        String title = item.mMode;
+        Log.e(TAG, title + " LED listener" + ":" + getResources().getString(mode));
+    };
 
-        GroupItem(String mode, int img) {
-            this.mode = mode;
-            this.img = img;
+    private final ExpandableAdapter.ChildItem.ColorListener mColorListener = (item, color) -> {
+        String title = item.mMode;
+        Log.e(TAG, title + " color listener" + ":" + getResources().getString(color));
+    };
+
+    private final ExpandableAdapter.ChildItem.BrightListener mBrightListener = (item, progress) -> {
+        String title = item.mMode;
+        Log.e(TAG, title + " bright listener" + ":" + progress);
+    };
+
+    private final ExpandableAdapter.ChildItem.SpeedListener mSpeedListener = (item, progress) -> {
+        String title = item.mMode;
+        Log.e(TAG, title + " speed listener" + ":" + progress);
+    };
+
+    private static class ExpandableAdapter extends BaseExpandableListAdapter {
+        private final List<GroupItem> mGroup;
+        private final Context mContext;
+        private final LayoutInflater mLayoutInflater;
+        private ImageView mImgIndicator;
+
+        private static class GroupItem {
+            private final String mMode;
+            private final int mImg;
+            private final List<ChildItem> mChild;
+
+            GroupItem(String mode, int img, List<ChildItem> child) {
+                this.mMode = mode;
+                this.mImg = img;
+                this.mChild = child;
+            }
         }
-    }
 
-    private static class ChildItem {
-        private int mLedMode, mBrightness, mSpeed, mColor;
+        private static class ChildItem {
+            private interface LedModeListener {
+                void listener(GroupItem item, int mode);
+            }
 
-        ChildItem(int ledMode, int color, int brightness, int speed) {
-            this.mLedMode = ledMode;
-            this.mBrightness = brightness;
-            this.mColor = color;
-            this.mSpeed = speed;
+            private interface ColorListener {
+                void listener(GroupItem item, int color);
+            }
+
+            private interface BrightListener {
+                void listener(GroupItem item, int progress);
+            }
+
+            private interface SpeedListener {
+                void listener(GroupItem item, int progress);
+            }
+
+            private int mLedMode, mBrightness, mSpeed, mColor;
+            private final LedModeListener mLedListener;
+            private final ColorListener mColorListener;
+            private final BrightListener mBrightListener;
+            private final SpeedListener mSpeedListener;
+
+            private ChildItem(int ledMode, int color, int speed) {
+                this.mLedMode = ledMode;
+                this.mColor = color;
+                this.mBrightness = mBattleBright;
+                this.mSpeed = speed;
+                this.mLedListener = null;
+                this.mColorListener = null;
+                this.mBrightListener = null;
+                this.mSpeedListener = null;
+            }
+
+            private ChildItem(int ledMode, int color, int brightness, int speed,
+                              LedModeListener ledListener, ColorListener colorListener,
+                              BrightListener brightListener, SpeedListener speedListener) {
+                this.mLedMode = ledMode;
+                this.mLedListener = ledListener;
+                this.mColor = color;
+                this.mColorListener = colorListener;
+                this.mBrightness = brightness;
+                this.mBrightListener = brightListener;
+                this.mSpeed = speed;
+                this.mSpeedListener = speedListener;
+            }
         }
-    }
 
-    private class ExpandableAdapter extends BaseExpandableListAdapter {
-        List<GroupItem> group;
-        List<List<ChildItem>> childItem;
-        LayoutInflater layoutInflater;
-        ImageView imgIndicator;
-        boolean isCustomization;
-
-        ExpandableAdapter(Context context, List<GroupItem> group,
-                          List<List<ChildItem>> childItem, boolean isCustomization) {
-            this.group = group;
-            this.childItem = childItem;
-            this.layoutInflater = LayoutInflater.from(context);
-            this.isCustomization = isCustomization;
+        ExpandableAdapter(Context context, List<GroupItem> group) {
+            this.mGroup = group;
+            this.mLayoutInflater = LayoutInflater.from(context);
+            this.mContext = context;
         }
 
         @Override
         public int getGroupCount() {
-            return group.size();
+            return mGroup.size();
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return childItem.get(groupPosition).size();
+            return mGroup.get(groupPosition).mChild.size();
         }
 
         @Override
         public Object getGroup(int groupPosition) {
-            return group.get(groupPosition);
+            return mGroup.get(groupPosition);
         }
 
         @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childItem.get(groupPosition).get(childPosition);
+        public ChildItem getChild(int groupPosition, int childPosition) {
+            return mGroup.get(groupPosition).mChild.get(childPosition);
         }
 
         @Override
@@ -184,7 +248,7 @@ public class TestLedMainActivity extends AppCompatActivity {
             return false;
         }
 
-        class GroupViewHolder {
+        private static class GroupViewHolder {
             TextView txtTitle;
             ImageView imgTitle;
 
@@ -194,7 +258,7 @@ public class TestLedMainActivity extends AppCompatActivity {
             }
         }
 
-        class ChildViewHolder {
+        private static class ChildViewHolder {
             ConstraintLayout clBrightnessItem, clLedCustom, clColorCustom, clLedItem,
                     clColorItem, clSpeedItem;
             TextView txtLed, txtColor;
@@ -221,17 +285,18 @@ public class TestLedMainActivity extends AppCompatActivity {
                                  View convertView, ViewGroup parent) {
             GroupViewHolder groupViewHolder;
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.expandable_list_view_item,
+                convertView = mLayoutInflater.inflate(R.layout.expandable_list_view_item,
                         parent, false);
                 groupViewHolder = new GroupViewHolder(convertView);
                 convertView.setTag(groupViewHolder);
             } else {
                 groupViewHolder = (GroupViewHolder) convertView.getTag();
             }
-            groupViewHolder.txtTitle.setText(group.get(groupPosition).mode);
-            groupViewHolder.imgTitle.setImageResource(group.get(groupPosition).img);
-            imgIndicator = convertView.findViewById(R.id.img_indicator);
-            imgIndicator.setSelected(false);
+            GroupItem item = mGroup.get(groupPosition);
+            groupViewHolder.txtTitle.setText(item.mMode);
+            groupViewHolder.imgTitle.setImageResource(item.mImg);
+            mImgIndicator = convertView.findViewById(R.id.img_indicator);
+            mImgIndicator.setSelected(false);
             return convertView;
         }
 
@@ -240,103 +305,107 @@ public class TestLedMainActivity extends AppCompatActivity {
                                  boolean isLastChild, View convertView, ViewGroup parent) {
             ChildViewHolder childViewHolder;
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.expandable_list_view_childitem,
+                convertView = mLayoutInflater.inflate(R.layout.expandable_list_view_childitem,
                         parent, false);
                 childViewHolder = new ChildViewHolder(convertView);
                 convertView.setTag(childViewHolder);
             } else {
                 childViewHolder = (ChildViewHolder) convertView.getTag();
             }
-            imgIndicator.setSelected(true);
+            mImgIndicator.setSelected(true);
 
-            childViewHolder.seekBarSpeed.setProgress(childItem.get(groupPosition)
-                    .get(childPosition).mSpeed);
-            childViewHolder.txtLed.setText(childItem.get(groupPosition).get(childPosition).mLedMode);
+            GroupItem groupItem = mGroup.get(groupPosition);
+            ChildItem item = mGroup.get(groupPosition).mChild.get(childPosition);
 
-            if (isCustomization) {
-                childViewHolder.seekBarBrightness.setProgress(childItem
-                        .get(groupPosition).get(childPosition).mBrightness);
-                if (childItem.get(groupPosition).get(childPosition).mColor == R.string.label_select) {
-                    childViewHolder.imgColor.setVisibility(View.INVISIBLE);
-                    childViewHolder.txtColor.setVisibility(View.VISIBLE);
-                } else {
-                    childViewHolder.txtColor.setVisibility(View.INVISIBLE);
-                    childViewHolder.imgColor.setVisibility(View.VISIBLE);
-                    childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
-                            .getColor(childItem.get(groupPosition).get(childPosition).mColor,
-                                    getTheme())));
-                }
+            childViewHolder.seekBarSpeed.setProgress(item.mSpeed);
+            childViewHolder.txtLed.setText(item.mLedMode);
+
+            if (item.mBrightListener != null) {
+                childViewHolder.seekBarBrightness.setProgress(item.mBrightness);
+                childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(new SeekBar
+                        .OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        item.mBrightness = childViewHolder.seekBarBrightness.getProgress();
+                        item.mBrightListener.listener(groupItem, item.mBrightness);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
             } else {
                 childViewHolder.clBrightnessItem.setVisibility(View.GONE);
-                childViewHolder.txtColor.setVisibility(View.INVISIBLE);
-                childViewHolder.clSpeedItem.setEnabled(false);
-                childViewHolder.seekBarSpeed.setEnabled(false);
-                childViewHolder.clLedItem.setEnabled(false);
-                childViewHolder.clLedCustom.setEnabled(false);
-                childViewHolder.clColorItem.setEnabled(false);
-                childViewHolder.clColorCustom.setEnabled(false);
-                childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(getResources()
-                        .getColor(childItem.get(groupPosition).get(childPosition).mColor,
-                                getTheme())));
+                childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(null);
             }
 
-            childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar
-                    .OnSeekBarChangeListener() {
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                }
+            if (item.mSpeedListener != null) {
+                childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar
+                        .OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        item.mSpeed = childViewHolder.seekBarSpeed.getProgress();
+                        item.mSpeedListener.listener(groupItem, item.mSpeed);
+                    }
 
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-                }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
 
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                    childItem.get(groupPosition).get(childPosition).mSpeed = childViewHolder
-                            .seekBarSpeed.getProgress();
-                }
-            });
-            childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(new SeekBar
-                    .OnSeekBarChangeListener() {
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+            } else {
+                childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(null);
+                childViewHolder.clSpeedItem.setEnabled(false);
+                childViewHolder.seekBarSpeed.setEnabled(false);
+            }
 
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
-                }
+            if (item.mLedListener != null) {
+                childViewHolder.clLedCustom.setOnClickListener(v -> {
+                    if (item.mLedMode == R.string.label_scan_mode) {
+                        item.mLedMode = R.string.label_gsensor_settings;
+                    } else {
+                        item.mLedMode = R.string.label_scan_mode;
+                    }
+                    notifyDataSetChanged();
+                    item.mLedListener.listener(groupItem, item.mLedMode);
+                });
+            } else {
+                childViewHolder.clLedCustom.setOnClickListener(null);
+                childViewHolder.clLedItem.setEnabled(false);
+                childViewHolder.clLedCustom.setEnabled(false);
+            }
 
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                    childItem.get(groupPosition).get(childPosition).mBrightness = childViewHolder
-                            .seekBarBrightness.getProgress();
-                }
-            });
+            if (item.mColorListener != null) {
+                boolean isEmpty = (item.mColor == R.string.label_select);
+                childViewHolder.imgColor.setVisibility(isEmpty ? View.INVISIBLE : View.VISIBLE);
+                childViewHolder.txtColor.setVisibility(isEmpty ? View.VISIBLE : View.INVISIBLE);
+                childViewHolder.imgColor.setImageTintList(isEmpty ? null : ColorStateList
+                        .valueOf(mContext.getResources().getColor(item.mColor, mContext.getTheme())));
 
-            childViewHolder.clLedCustom.setOnClickListener(v -> {
-                if (childItem.get(groupPosition).get(childPosition).mLedMode == R.string
-                        .label_scan_mode) {
-                    childItem.get(groupPosition).get(childPosition).mLedMode = R.string
-                            .label_gsensor_settings;
-                } else {
-                    childItem.get(groupPosition).get(childPosition).mLedMode = R.string
-                            .label_scan_mode;
-                }
-                notifyDataSetChanged();
-            });
-
-            childViewHolder.clColorCustom.setOnClickListener(v -> {
-                childViewHolder.imgColor.setVisibility(View.VISIBLE);
+                childViewHolder.clColorCustom.setOnClickListener(v -> {
+                    if (item.mColor == R.color.green) {
+                        item.mColor = R.color.red;
+                    } else {
+                        item.mColor = R.color.green;
+                    }
+                    notifyDataSetChanged();
+                    item.mColorListener.listener(groupItem, item.mColor);
+                });
+            } else {
+                childViewHolder.clColorCustom.setOnClickListener(null);
                 childViewHolder.txtColor.setVisibility(View.INVISIBLE);
-                if (childItem.get(groupPosition).get(childPosition).mColor == R.color.green) {
-                    childItem.get(groupPosition).get(childPosition).mColor = R.color.red;
-                } else {
-                    childItem.get(groupPosition).get(childPosition).mColor = R.color.green;
-                }
-                Toast.makeText(TestLedMainActivity.this, "click group" + groupPosition,
-                        Toast.LENGTH_SHORT).show();
-                notifyDataSetChanged();
-            });
+                childViewHolder.clColorItem.setEnabled(false);
+                childViewHolder.clColorCustom.setEnabled(false);
+                childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(mContext
+                        .getResources().getColor(item.mColor, mContext.getTheme())));
+            }
             return convertView;
         }
 
