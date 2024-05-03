@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableField;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     private Dialog mDialogRemove;
     private RecyclerViewAdapter rvAdapter;
     private boolean isRemoveData = false;
+    public final ObservableField<String> test = new ObservableField<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +101,13 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         addDialog.show();
         Objects.requireNonNull(addDialog.getWindow()).setLayout(
                 convertDpToPixel(300, this), WindowManager.LayoutParams.WRAP_CONTENT);
+        addDialogBinding.setItem(this);
         addDialogBinding.txtAdd.setOnClickListener(v -> {
             if (!addDialogBinding.editNum.getText().toString().isEmpty()) {
                 int name = Integer.parseInt(addDialogBinding.editNum.getText().toString());
                 int devId = name + 10000000;
                 dataList.add(new Data(name, devId, false));
-                //rvAdapter.notifyItemInserted(dataList.size() - 1);
+                rvAdapter.notifyItemInserted(dataList.size() - 1);
                 addDialog.dismiss();
             }
         });
