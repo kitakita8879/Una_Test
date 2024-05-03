@@ -46,26 +46,26 @@ public class TestLedMainActivity extends AppCompatActivity {
         final List<ExpandableAdapter.GroupItem> battleGroup = Arrays.asList(
                 new ExpandableAdapter.GroupItem("Accelerating", R.drawable.aecelerating,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_scan_mode, R.color.green, 10))),
+                                LEDMode.SCAN, LedColor.GREEN, 10))),
                 new ExpandableAdapter.GroupItem("Constant Speed", R.drawable.constant,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_gsensor_settings, R.color.red, 20))),
+                                LEDMode.GSENSOR, LedColor.RED, 20))),
                 new ExpandableAdapter.GroupItem("Decelerating", R.drawable.decelerating,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_scan_mode, R.color.green, 30))));
+                                LEDMode.SCAN, LedColor.GREEN, 30))));
 
         final List<ExpandableAdapter.GroupItem> customGroup = Arrays.asList(
                 new ExpandableAdapter.GroupItem("Accelerating", R.drawable.aecelerating,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_select, R.string.label_select, 10, 10,
+                                LEDMode.CLOSE, LedColor.NULL, 10, 10,
                                 mLedListener, mColorListener, mBrightListener, mSpeedListener))),
                 new ExpandableAdapter.GroupItem("Constant Speed", R.drawable.constant,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_select, R.string.label_select, 20, 20,
+                                LEDMode.CLOSE, LedColor.NULL, 20, 20,
                                 mLedListener, mColorListener, mBrightListener, mSpeedListener))),
                 new ExpandableAdapter.GroupItem("Decelerating", R.drawable.decelerating,
                         Collections.singletonList(new ExpandableAdapter.ChildItem(
-                                R.string.label_select, R.string.label_select, 30, 30,
+                                LEDMode.CLOSE, LedColor.NULL, 30, 30,
                                 mLedListener, mColorListener, mBrightListener, mSpeedListener))));
 
         ExpandableAdapter battleModeAdapter = new ExpandableAdapter(this, battleGroup);
@@ -121,25 +121,49 @@ public class TestLedMainActivity extends AppCompatActivity {
                 "Hint Button", Toast.LENGTH_SHORT).show());
     }
 
-    private final ExpandableAdapter.ChildItem.LedModeListener mLedListener = (item, mode) -> {
-        String title = item.mMode;
-        Log.e(TAG, title + " LED listener" + ":" + getResources().getString(mode));
-    };
+    private final ExpandableAdapter.ChildItem.LedModeListener mLedListener = (groupMode, mode) ->
+            Log.e(TAG, groupMode + " LED listener " + getResources().getString(mode.ledName()));
 
-    private final ExpandableAdapter.ChildItem.ColorListener mColorListener = (item, color) -> {
-        String title = item.mMode;
-        Log.e(TAG, title + " color listener" + ":" + getResources().getString(color));
-    };
+    private final ExpandableAdapter.ChildItem.ColorListener mColorListener = (groupMode, color) ->
+            Log.e(TAG, groupMode + " color listener " + getResources().getString(color.ledColor()));
 
-    private final ExpandableAdapter.ChildItem.BrightListener mBrightListener = (item, progress) -> {
-        String title = item.mMode;
-        Log.e(TAG, title + " bright listener" + ":" + progress);
-    };
+    private final ExpandableAdapter.ChildItem.BrightListener mBrightListener = (groupMode, progress) ->
+            Log.e(TAG, groupMode + " bright listener " + progress);
 
-    private final ExpandableAdapter.ChildItem.SpeedListener mSpeedListener = (item, progress) -> {
-        String title = item.mMode;
-        Log.e(TAG, title + " speed listener" + ":" + progress);
-    };
+    private final ExpandableAdapter.ChildItem.SpeedListener mSpeedListener = (groupMode, progress) ->
+            Log.e(TAG, groupMode + " speed listener " + progress);
+
+    private enum LEDMode {
+        CLOSE, SCAN, GSENSOR;
+
+        private int ledName() {
+            switch (this) {
+                case SCAN:
+                    return R.string.label_scan_mode;
+                case GSENSOR:
+                    return R.string.label_gsensor_settings;
+                default:
+                    return R.string.label_select;
+            }
+        }
+    }
+
+    private enum LedColor {
+        RED, GREEN, BLUE, NULL;
+
+        private int ledColor() {
+            switch (this) {
+                case RED:
+                    return R.color.red;
+                case BLUE:
+                    return R.color.blue1;
+                case GREEN:
+                    return R.color.green;
+                default:
+                    return -1;
+            }
+        }
+    }
 
     private static class ExpandableAdapter extends BaseExpandableListAdapter {
         private final List<GroupItem> mGroup;
@@ -161,31 +185,33 @@ public class TestLedMainActivity extends AppCompatActivity {
 
         private static class ChildItem {
             private interface LedModeListener {
-                void listener(GroupItem item, int mode);
+                void listener(String groupMode, LEDMode mode);
             }
 
             private interface ColorListener {
-                void listener(GroupItem item, int color);
+                void listener(String groupMode, LedColor color);
             }
 
             private interface BrightListener {
-                void listener(GroupItem item, int progress);
+                void listener(String groupMode, int progress);
             }
 
             private interface SpeedListener {
-                void listener(GroupItem item, int progress);
+                void listener(String groupMode, int progress);
             }
 
-            private int mLedMode, mBrightness, mSpeed, mColor;
+            private LEDMode mLedMode;
+            private LedColor mColor;
+            private int mBrightness, mSpeed;
             private final LedModeListener mLedListener;
             private final ColorListener mColorListener;
             private final BrightListener mBrightListener;
             private final SpeedListener mSpeedListener;
 
-            private ChildItem(int ledMode, int color, int speed) {
+            private ChildItem(LEDMode ledMode, LedColor color, int speed) {
                 this.mLedMode = ledMode;
                 this.mColor = color;
-                this.mBrightness = mBattleBright;
+                this.mBrightness = -1;
                 this.mSpeed = speed;
                 this.mLedListener = null;
                 this.mColorListener = null;
@@ -193,7 +219,7 @@ public class TestLedMainActivity extends AppCompatActivity {
                 this.mSpeedListener = null;
             }
 
-            private ChildItem(int ledMode, int color, int brightness, int speed,
+            private ChildItem(LEDMode ledMode, LedColor color, int brightness, int speed,
                               LedModeListener ledListener, ColorListener colorListener,
                               BrightListener brightListener, SpeedListener speedListener) {
                 this.mLedMode = ledMode;
@@ -314,11 +340,11 @@ public class TestLedMainActivity extends AppCompatActivity {
             }
             mImgIndicator.setSelected(true);
 
-            GroupItem groupItem = mGroup.get(groupPosition);
+            String groupMode = mGroup.get(groupPosition).mMode;
             ChildItem item = mGroup.get(groupPosition).mChild.get(childPosition);
 
             childViewHolder.seekBarSpeed.setProgress(item.mSpeed);
-            childViewHolder.txtLed.setText(item.mLedMode);
+            childViewHolder.txtLed.setText(item.mLedMode.ledName());
 
             if (item.mBrightListener != null) {
                 childViewHolder.seekBarBrightness.setProgress(item.mBrightness);
@@ -327,7 +353,7 @@ public class TestLedMainActivity extends AppCompatActivity {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         item.mBrightness = childViewHolder.seekBarBrightness.getProgress();
-                        item.mBrightListener.listener(groupItem, item.mBrightness);
+                        item.mBrightListener.listener(groupMode, item.mBrightness);
                     }
 
                     @Override
@@ -349,7 +375,7 @@ public class TestLedMainActivity extends AppCompatActivity {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         item.mSpeed = childViewHolder.seekBarSpeed.getProgress();
-                        item.mSpeedListener.listener(groupItem, item.mSpeed);
+                        item.mSpeedListener.listener(groupMode, item.mSpeed);
                     }
 
                     @Override
@@ -368,13 +394,13 @@ public class TestLedMainActivity extends AppCompatActivity {
 
             if (item.mLedListener != null) {
                 childViewHolder.clLedCustom.setOnClickListener(v -> {
-                    if (item.mLedMode == R.string.label_scan_mode) {
-                        item.mLedMode = R.string.label_gsensor_settings;
+                    if (item.mLedMode == LEDMode.SCAN) {
+                        item.mLedMode = LEDMode.GSENSOR;
                     } else {
-                        item.mLedMode = R.string.label_scan_mode;
+                        item.mLedMode = LEDMode.SCAN;
                     }
                     notifyDataSetChanged();
-                    item.mLedListener.listener(groupItem, item.mLedMode);
+                    item.mLedListener.listener(groupMode, item.mLedMode);
                 });
             } else {
                 childViewHolder.clLedCustom.setOnClickListener(null);
@@ -383,20 +409,23 @@ public class TestLedMainActivity extends AppCompatActivity {
             }
 
             if (item.mColorListener != null) {
-                boolean isEmpty = (item.mColor == R.string.label_select);
+                boolean isEmpty = (item.mColor == LedColor.NULL);
                 childViewHolder.imgColor.setVisibility(isEmpty ? View.INVISIBLE : View.VISIBLE);
                 childViewHolder.txtColor.setVisibility(isEmpty ? View.VISIBLE : View.INVISIBLE);
                 childViewHolder.imgColor.setImageTintList(isEmpty ? null : ColorStateList
-                        .valueOf(mContext.getResources().getColor(item.mColor, mContext.getTheme())));
+                        .valueOf(mContext.getResources().getColor(item.mColor.ledColor(),
+                                mContext.getTheme())));
 
                 childViewHolder.clColorCustom.setOnClickListener(v -> {
-                    if (item.mColor == R.color.green) {
-                        item.mColor = R.color.red;
+                    if (item.mColor == LedColor.GREEN) {
+                        item.mColor = LedColor.BLUE;
+                    } else if (item.mColor == LedColor.RED) {
+                        item.mColor = LedColor.GREEN;
                     } else {
-                        item.mColor = R.color.green;
+                        item.mColor = LedColor.RED;
                     }
                     notifyDataSetChanged();
-                    item.mColorListener.listener(groupItem, item.mColor);
+                    item.mColorListener.listener(groupMode, item.mColor);
                 });
             } else {
                 childViewHolder.clColorCustom.setOnClickListener(null);
@@ -404,7 +433,7 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.clColorItem.setEnabled(false);
                 childViewHolder.clColorCustom.setEnabled(false);
                 childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(mContext
-                        .getResources().getColor(item.mColor, mContext.getTheme())));
+                        .getResources().getColor(item.mColor.ledColor(), mContext.getTheme())));
             }
             return convertView;
         }
