@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtTest1 = findViewById(R.id.test_1);
         TextView txtTest2 = findViewById(R.id.test_2);
         TextView txtTest3 = findViewById(R.id.test_3);
+        TextView txtTest4 = findViewById(R.id.test_4);
         txtTest1.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
                     ListViewAndRecycleViewActivity.class);
@@ -34,5 +35,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        txtTest4.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    TestComponentsActivity.class);
+            startActivity(intent);
+        });
     }
 }

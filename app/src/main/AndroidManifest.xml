@@ -25,6 +25,12 @@
         <activity android:name=".ChargingMainActivity" />
         <activity android:name=".ChargingDeviceManagementActivity" />
         <activity android:name=".TestLedMainActivity" />
+        <activity android:name=".TestComponentsActivity" />
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
