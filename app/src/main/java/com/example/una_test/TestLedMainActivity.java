@@ -24,6 +24,7 @@ import java.util.List;
 
 public class TestLedMainActivity extends AppCompatActivity {
 
+    // todo: choco 應該不會用 static
     private static int mBattleBright = 30;
     String TAG = "TestLed";
 
@@ -100,6 +101,7 @@ public class TestLedMainActivity extends AppCompatActivity {
         seekBarBrightnessBattle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // todo: choco 可以直接用 progress
                 mBattleBright = seekBar.getProgress();
                 Log.e(TAG, "battle bright " + mBattleBright);
             }
@@ -184,6 +186,7 @@ public class TestLedMainActivity extends AppCompatActivity {
         }
 
         private static class ChildItem {
+            // todo: choco 建議 GroupItem, ChildItem 也要丟回去
             private interface LedModeListener {
                 void listener(String groupMode, LEDMode mode);
             }

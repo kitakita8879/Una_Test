@@ -27,11 +27,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ChargingDeviceManagementActivity extends AppCompatActivity {
+    // todo: choco 通常不會有 public, 只要有寫到 public, static 都要注意是否能避免
     public final ArrayList<Data> dataList = new ArrayList<>();
     private Test2RemoveDialogBinding mRemoveBinding;
     private Dialog mDialogRemove;
     private RecyclerViewAdapter rvAdapter;
     private boolean isRemoveData = false;
+    // todo: choco 測試已知故意寫錯時不會要求 coding style, 如果是正式的會盡量要求, 甚至是屬性排列順序
     public final ObservableField<String> test = new ObservableField<>();
 
     @Override
@@ -65,12 +67,14 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     }
 
     private void showRemoveDialog(int position) {
+        // todo: choco mDialogRemove, mRemoveBinding 可以 local use, 同 showAddDialog
         mDialogRemove = new Dialog(this, R.style.dialogRemove);
         View viewDialog = View.inflate(this, R.layout.test_2_remove_dialog, null);
         mRemoveBinding = Test2RemoveDialogBinding.bind(viewDialog);
         mDialogRemove.setContentView(viewDialog);
 
         mDialogRemove.show();
+        // todo: dialog 除非特別寬、高, 印象中不需要改到 window
         Objects.requireNonNull(mDialogRemove.getWindow()).setLayout(
                 convertDpToPixel(300, ChargingDeviceManagementActivity.this),
                 WindowManager.LayoutParams.WRAP_CONTENT);
@@ -116,6 +120,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     }
 
     public static class Data {
+        // todo: choco name, devId 如果不會被更改記得加 final
         public int name, devId;
         public boolean fwUpdate;
 
@@ -130,6 +135,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         }
     }
 
+    // todo: choco 可以學學改用 ListAdapter, 了解 ListAdapter 好處, 對比當前 RecyclerView.Adapter
     private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
         private final ArrayList<Data> mDataList;
         private OnRecyclerItemClickListener mClickListener;
@@ -154,6 +160,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // todo: choco 通常不會 R. 換行, 會連 R.layout 都換行
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R
                     .layout.test_2_view_item, parent, false);
             return new ViewHolder(itemView);
@@ -162,8 +169,10 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
             holder.binding.setData(mDataList.get(position));
+            // todo: choco 命名不明確, 如果是 del 應該會是 onDelClick, 且可以把 item 丟出去, 不用只丟 position
             holder.binding.imgDel.setOnClickListener(v ->
                     mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition()));
+            // todo: choco 身為 adapter, 最好只關注自身 UI, 避免處理與自身 UI 無關的事, 達到解耦
             holder.binding.viewItem.setOnClickListener(v -> {
                 Intent intent = new Intent();
                 intent.putExtra("name", mDataList.get(holder.getAdapterPosition()).name);
