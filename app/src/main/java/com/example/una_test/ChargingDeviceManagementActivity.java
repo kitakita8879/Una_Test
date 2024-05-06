@@ -61,6 +61,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         binding.recyclerViewTest2.addItemDecoration(decoration);
 
         binding.viewAdd.setOnClickListener(v -> showAddDialog());
+        binding.setClickNum(0);
     }
 
     private void showRemoveDialog(int position) {
