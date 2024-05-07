@@ -72,9 +72,10 @@
     <string name="label_color">Color</string>
     <string name="label_speed">Speed</string>
     <string name="label_select">Select</string>
-    <string name="label_component_practise">四大元件練習</string>
+    <string name="label_component_practise">Component practise</string>
     <string name="label_start_service">Start service</string>
     <string name="label_stop_service">Stop service</string>
     <string name="label_bind_service">Bind service</string>
     <string name="label_unbind_service">Unbind Service</string>
+    <string name="label_broadcast">Broadcast</string>
 </resources>
