@@ -24,9 +24,8 @@ import java.util.List;
 
 public class TestLedMainActivity extends AppCompatActivity {
 
-    // todo: choco 應該不會用 static
-    private static int mBattleBright = 30;
-    String TAG = "TestLed";
+    private int mBattleBright = 30;
+    private static final String TAG = "TestLed";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,8 +100,7 @@ public class TestLedMainActivity extends AppCompatActivity {
         seekBarBrightnessBattle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // todo: choco 可以直接用 progress
-                mBattleBright = seekBar.getProgress();
+                mBattleBright = progress;
                 Log.e(TAG, "battle bright " + mBattleBright);
             }
 
@@ -123,17 +121,25 @@ public class TestLedMainActivity extends AppCompatActivity {
                 "Hint Button", Toast.LENGTH_SHORT).show());
     }
 
-    private final ExpandableAdapter.ChildItem.LedModeListener mLedListener = (groupMode, mode) ->
-            Log.e(TAG, groupMode + " LED listener " + getResources().getString(mode.ledName()));
+    private final ExpandableAdapter.ChildItem.LedModeListener mLedListener = (group, child, mode) -> {
+        String groupMode = group.mMode;
+        Log.e(TAG, groupMode + " LED listener " + getResources().getString(mode.ledName()));
+    };
 
-    private final ExpandableAdapter.ChildItem.ColorListener mColorListener = (groupMode, color) ->
-            Log.e(TAG, groupMode + " color listener " + getResources().getString(color.ledColor()));
+    private final ExpandableAdapter.ChildItem.ColorListener mColorListener = (group, child, color) -> {
+        String groupMode = group.mMode;
+        Log.e(TAG, groupMode + " color listener " + getResources().getString(color.ledColor()));
+    };
 
-    private final ExpandableAdapter.ChildItem.BrightListener mBrightListener = (groupMode, progress) ->
-            Log.e(TAG, groupMode + " bright listener " + progress);
+    private final ExpandableAdapter.ChildItem.BrightListener mBrightListener = (group, child, progress) -> {
+        String groupMode = group.mMode;
+        Log.e(TAG, groupMode + " bright listener " + progress);
+    };
 
-    private final ExpandableAdapter.ChildItem.SpeedListener mSpeedListener = (groupMode, progress) ->
-            Log.e(TAG, groupMode + " speed listener " + progress);
+    private final ExpandableAdapter.ChildItem.SpeedListener mSpeedListener = (group, child, progress) -> {
+        String groupMode = group.mMode;
+        Log.e(TAG, groupMode + " speed listener " + progress);
+    };
 
     private enum LEDMode {
         CLOSE, SCAN, GSENSOR;
@@ -186,21 +192,20 @@ public class TestLedMainActivity extends AppCompatActivity {
         }
 
         private static class ChildItem {
-            // todo: choco 建議 GroupItem, ChildItem 也要丟回去
             private interface LedModeListener {
-                void listener(String groupMode, LEDMode mode);
+                void listener(GroupItem groupItem, ChildItem childItem, LEDMode mode);
             }
 
             private interface ColorListener {
-                void listener(String groupMode, LedColor color);
+                void listener(GroupItem groupItem, ChildItem childItem, LedColor color);
             }
 
             private interface BrightListener {
-                void listener(String groupMode, int progress);
+                void listener(GroupItem groupItem, ChildItem childItem, int progress);
             }
 
             private interface SpeedListener {
-                void listener(String groupMode, int progress);
+                void listener(GroupItem groupItem, ChildItem childItem, int progress);
             }
 
             private LEDMode mLedMode;
@@ -343,20 +348,20 @@ public class TestLedMainActivity extends AppCompatActivity {
             }
             mImgIndicator.setSelected(true);
 
-            String groupMode = mGroup.get(groupPosition).mMode;
-            ChildItem item = mGroup.get(groupPosition).mChild.get(childPosition);
+            GroupItem group = mGroup.get(groupPosition);
+            ChildItem child = mGroup.get(groupPosition).mChild.get(childPosition);
 
-            childViewHolder.seekBarSpeed.setProgress(item.mSpeed);
-            childViewHolder.txtLed.setText(item.mLedMode.ledName());
+            childViewHolder.seekBarSpeed.setProgress(child.mSpeed);
+            childViewHolder.txtLed.setText(child.mLedMode.ledName());
 
-            if (item.mBrightListener != null) {
-                childViewHolder.seekBarBrightness.setProgress(item.mBrightness);
+            if (child.mBrightListener != null) {
+                childViewHolder.seekBarBrightness.setProgress(child.mBrightness);
                 childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(new SeekBar
                         .OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        item.mBrightness = childViewHolder.seekBarBrightness.getProgress();
-                        item.mBrightListener.listener(groupMode, item.mBrightness);
+                        child.mBrightness = progress;
+                        child.mBrightListener.listener(group, child, child.mBrightness);
                     }
 
                     @Override
@@ -372,13 +377,13 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.seekBarBrightness.setOnSeekBarChangeListener(null);
             }
 
-            if (item.mSpeedListener != null) {
+            if (child.mSpeedListener != null) {
                 childViewHolder.seekBarSpeed.setOnSeekBarChangeListener(new SeekBar
                         .OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        item.mSpeed = childViewHolder.seekBarSpeed.getProgress();
-                        item.mSpeedListener.listener(groupMode, item.mSpeed);
+                        child.mSpeed = progress;
+                        child.mSpeedListener.listener(group, child, child.mSpeed);
                     }
 
                     @Override
@@ -395,15 +400,15 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.seekBarSpeed.setEnabled(false);
             }
 
-            if (item.mLedListener != null) {
+            if (child.mLedListener != null) {
                 childViewHolder.clLedCustom.setOnClickListener(v -> {
-                    if (item.mLedMode == LEDMode.SCAN) {
-                        item.mLedMode = LEDMode.GSENSOR;
+                    if (child.mLedMode == LEDMode.SCAN) {
+                        child.mLedMode = LEDMode.GSENSOR;
                     } else {
-                        item.mLedMode = LEDMode.SCAN;
+                        child.mLedMode = LEDMode.SCAN;
                     }
                     notifyDataSetChanged();
-                    item.mLedListener.listener(groupMode, item.mLedMode);
+                    child.mLedListener.listener(group, child, child.mLedMode);
                 });
             } else {
                 childViewHolder.clLedCustom.setOnClickListener(null);
@@ -411,24 +416,24 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.clLedCustom.setEnabled(false);
             }
 
-            if (item.mColorListener != null) {
-                boolean isEmpty = (item.mColor == LedColor.NULL);
+            if (child.mColorListener != null) {
+                boolean isEmpty = (child.mColor == LedColor.NULL);
                 childViewHolder.imgColor.setVisibility(isEmpty ? View.INVISIBLE : View.VISIBLE);
                 childViewHolder.txtColor.setVisibility(isEmpty ? View.VISIBLE : View.INVISIBLE);
                 childViewHolder.imgColor.setImageTintList(isEmpty ? null : ColorStateList
-                        .valueOf(mContext.getResources().getColor(item.mColor.ledColor(),
+                        .valueOf(mContext.getResources().getColor(child.mColor.ledColor(),
                                 mContext.getTheme())));
 
                 childViewHolder.clColorCustom.setOnClickListener(v -> {
-                    if (item.mColor == LedColor.GREEN) {
-                        item.mColor = LedColor.BLUE;
-                    } else if (item.mColor == LedColor.RED) {
-                        item.mColor = LedColor.GREEN;
+                    if (child.mColor == LedColor.GREEN) {
+                        child.mColor = LedColor.BLUE;
+                    } else if (child.mColor == LedColor.RED) {
+                        child.mColor = LedColor.GREEN;
                     } else {
-                        item.mColor = LedColor.RED;
+                        child.mColor = LedColor.RED;
                     }
                     notifyDataSetChanged();
-                    item.mColorListener.listener(groupMode, item.mColor);
+                    child.mColorListener.listener(group, child, child.mColor);
                 });
             } else {
                 childViewHolder.clColorCustom.setOnClickListener(null);
@@ -436,7 +441,7 @@ public class TestLedMainActivity extends AppCompatActivity {
                 childViewHolder.clColorItem.setEnabled(false);
                 childViewHolder.clColorCustom.setEnabled(false);
                 childViewHolder.imgColor.setImageTintList(ColorStateList.valueOf(mContext
-                        .getResources().getColor(item.mColor.ledColor(), mContext.getTheme())));
+                        .getResources().getColor(child.mColor.ledColor(), mContext.getTheme())));
             }
             return convertView;
         }
