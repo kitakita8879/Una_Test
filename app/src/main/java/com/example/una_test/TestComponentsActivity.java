@@ -20,21 +20,28 @@ public class TestComponentsActivity extends AppCompatActivity {
     private Button btnBroadcast;
     private IntentFilter mIntentFilter;
 
+    public static final String TAG_SERVICE = "MyService";
     private static final String TEST_BROADCAST = "TEST_BROADCAST";
     private static final String TEST_ACTION = "com.example.una_test.MyDynamicReceiver";
+    private MyService mMyService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four_components);
 
-        Intent intent = new Intent(TestComponentsActivity.this, MyService.class);
+        Intent intent = new Intent(this, MyService.class);
         findViewById(R.id.btn_start).setOnClickListener(v -> startService(intent));
         findViewById(R.id.btn_stop).setOnClickListener(v -> stopService(intent));
 
         findViewById(R.id.btn_bind).setOnClickListener(v -> bindService(intent, mConnection,
                 BIND_AUTO_CREATE));
-        findViewById(R.id.btn_unbind).setOnClickListener(v -> unbindService(mConnection));
+        findViewById(R.id.btn_unbind).setOnClickListener(v -> {
+            if (mMyService != null) {
+                mMyService = null;
+                unbindService(mConnection);
+            }
+        });
 
         btnBroadcast = findViewById(R.id.btn_broadcast);
         mIntentFilter = new IntentFilter();
@@ -66,12 +73,14 @@ public class TestComponentsActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             MyService.MyBinder mBinder = (MyService.MyBinder) service;
             mBinder.showLog();
-            Log.d("MyService", "onServiceConnected");
+            mMyService = mBinder.getService();
+            Log.d(TAG_SERVICE, "onServiceConnected");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d("MyService", "onServiceDisconnected");
+            Log.d(TAG_SERVICE, "onServiceDisconnected");
+            mMyService = null;
         }
     };
 
