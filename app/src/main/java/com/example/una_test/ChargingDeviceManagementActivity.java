@@ -27,14 +27,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ChargingDeviceManagementActivity extends AppCompatActivity {
-    // todo: choco 通常不會有 public, 只要有寫到 public, static 都要注意是否能避免
-    public final ArrayList<Data> dataList = new ArrayList<>();
     private Test2RemoveDialogBinding mRemoveBinding;
-    private Dialog mDialogRemove;
-    private RecyclerViewAdapter rvAdapter;
-    private boolean isRemoveData = false;
-    // todo: choco 測試已知故意寫錯時不會要求 coding style, 如果是正式的會盡量要求, 甚至是屬性排列順序
-    public final ObservableField<String> test = new ObservableField<>();
+    private RecyclerViewAdapter mRvAdapter;
+    private boolean mIsRemoveData = false;
+    private final ArrayList<Data> mDataList = new ArrayList<>();
+    public ObservableField<String> test = new ObservableField<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +39,22 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         ActivityChargingDeviceManagementBinding binding = DataBindingUtil
                 .setContentView(this, R.layout.activity_charging_device_management);
 
-        dataList.add(new Data(1, 12345678, true));
-        dataList.add(new Data(2, 87654321, false));
+        mDataList.add(new Data(1, 12345678, true));
+        mDataList.add(new Data(2, 87654321, false));
 
         binding.imgBack.setOnClickListener(v -> {
-            if (isRemoveData) {
+            if (mIsRemoveData) {
                 Intent intent = new Intent();
-                intent.putExtra("name", dataList.get(0).name);
+                intent.putExtra("name", mDataList.get(0).name);
                 setResult(RESULT_OK, intent);
             }
             finish();
         });
 
         binding.recyclerViewTest2.setLayoutManager(new LinearLayoutManager(this));
-        rvAdapter = new RecyclerViewAdapter(dataList);
-        rvAdapter.setOnRecyclerItemClickListener((view, position) -> this.showRemoveDialog(position));
-        binding.recyclerViewTest2.setAdapter(rvAdapter);
+        mRvAdapter = new RecyclerViewAdapter(mDataList);
+        mRvAdapter.setOnRecyclerItemClickListener(mRvClickListener);
+        binding.recyclerViewTest2.setAdapter(mRvAdapter);
 
         RecyclerSpace decoration = new RecyclerSpace(convertDpToPixel(30, this));
         binding.recyclerViewTest2.addItemDecoration(decoration);
@@ -66,27 +63,34 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         binding.setClickNum(0);
     }
 
+    private final OnRecyclerItemClickListener mRvClickListener = new OnRecyclerItemClickListener() {
+        @Override
+        public void onDeleteClick(int position) {
+            showRemoveDialog(position);
+        }
+
+        @Override
+        public void onItemClick(int name) {
+            Intent intent = new Intent();
+            intent.putExtra("name", name);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    };
+
     private void showRemoveDialog(int position) {
-        // todo: choco mDialogRemove, mRemoveBinding 可以 local use, 同 showAddDialog
-        mDialogRemove = new Dialog(this, R.style.dialogRemove);
+        Dialog mDialogRemove = new Dialog(this, R.style.dialogRemove);
         View viewDialog = View.inflate(this, R.layout.test_2_remove_dialog, null);
         mRemoveBinding = Test2RemoveDialogBinding.bind(viewDialog);
         mDialogRemove.setContentView(viewDialog);
-
         mDialogRemove.show();
-        // todo: dialog 除非特別寬、高, 印象中不需要改到 window
-        Objects.requireNonNull(mDialogRemove.getWindow()).setLayout(
-                convertDpToPixel(300, ChargingDeviceManagementActivity.this),
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
         mRemoveBinding.imgCheck1.setSelected(true);
         mRemoveBinding.txtRemove.setOnClickListener(v -> {
-            dataList.remove(position);
-            rvAdapter.notifyItemRemoved(position);
+            mDataList.remove(position);
+            mRvAdapter.notifyItemRemoved(position);
             mDialogRemove.dismiss();
-            isRemoveData = true;
+            mIsRemoveData = true;
         });
-
         mRemoveBinding.txtCancel.setOnClickListener(v -> mDialogRemove.dismiss());
         mRemoveBinding.imgCheck1.setOnClickListener(v -> {
             mRemoveBinding.imgCheck1.setSelected(true);
@@ -111,8 +115,8 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             if (!addDialogBinding.editNum.getText().toString().isEmpty()) {
                 int name = Integer.parseInt(addDialogBinding.editNum.getText().toString());
                 int devId = name + 10000000;
-                dataList.add(new Data(name, devId, false));
-                rvAdapter.notifyItemInserted(dataList.size() - 1);
+                mDataList.add(new Data(name, devId, false));
+                mRvAdapter.notifyItemInserted(mDataList.size() - 1);
                 addDialog.dismiss();
             }
         });
@@ -120,8 +124,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     }
 
     public static class Data {
-        // todo: choco name, devId 如果不會被更改記得加 final
-        public int name, devId;
+        public final int name, devId;
         public boolean fwUpdate;
 
         Data(int name, int devId, boolean fwUpdate) {
@@ -136,7 +139,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     }
 
     // todo: choco 可以學學改用 ListAdapter, 了解 ListAdapter 好處, 對比當前 RecyclerView.Adapter
-    private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+    private static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
         private final ArrayList<Data> mDataList;
         private OnRecyclerItemClickListener mClickListener;
 
@@ -148,7 +151,7 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
             this.mClickListener = listener;
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+        static class ViewHolder extends RecyclerView.ViewHolder {
             final Test2ViewItemBinding binding;
 
             ViewHolder(View item) {
@@ -160,25 +163,18 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            // todo: choco 通常不會 R. 換行, 會連 R.layout 都換行
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R
-                    .layout.test_2_view_item, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(
+                    R.layout.test_2_view_item, parent, false);
             return new ViewHolder(itemView);
         }
 
         @Override
         public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
             holder.binding.setData(mDataList.get(position));
-            // todo: choco 命名不明確, 如果是 del 應該會是 onDelClick, 且可以把 item 丟出去, 不用只丟 position
             holder.binding.imgDel.setOnClickListener(v ->
-                    mClickListener.onRecyclerItemClick(v, holder.getAdapterPosition()));
-            // todo: choco 身為 adapter, 最好只關注自身 UI, 避免處理與自身 UI 無關的事, 達到解耦
-            holder.binding.viewItem.setOnClickListener(v -> {
-                Intent intent = new Intent();
-                intent.putExtra("name", mDataList.get(holder.getAdapterPosition()).name);
-                setResult(RESULT_OK, intent);
-                finish();
-            });
+                    mClickListener.onDeleteClick(holder.getAdapterPosition()));
+            holder.binding.viewItem.setOnClickListener(v ->
+                    mClickListener.onItemClick(mDataList.get(holder.getAdapterPosition()).name));
             holder.binding.imgDevice.setOnClickListener(v -> {
                 boolean fwReverse = mDataList.get(holder.getAdapterPosition()).fwUpdate;
                 mDataList.get(holder.getAdapterPosition()).setFwUpdate(!fwReverse);
@@ -213,6 +209,8 @@ public class ChargingDeviceManagementActivity extends AppCompatActivity {
     }
 
     private interface OnRecyclerItemClickListener {
-        void onRecyclerItemClick(View view, int position);
+        void onDeleteClick(int position);
+
+        void onItemClick(int name);
     }
 }
