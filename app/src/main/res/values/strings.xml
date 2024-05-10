@@ -79,4 +79,5 @@
     <string name="label_unbind_service">Unbind Service</string>
     <string name="label_broadcast">Broadcast</string>
     <string name="label_local_broadcast">Local Broadcast</string>
+    <string name="label_fragment_practise">Fragment practise</string>
 </resources>

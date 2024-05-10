@@ -26,6 +26,7 @@
         <activity android:name=".ChargingDeviceManagementActivity" />
         <activity android:name=".TestLedMainActivity" />
         <activity android:name=".TestComponentsActivity" />
+        <activity android:name=".TestFragmentActivity" />
 
         <service
             android:name=".MyService"
