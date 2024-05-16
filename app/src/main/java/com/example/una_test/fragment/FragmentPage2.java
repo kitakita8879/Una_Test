@@ -1,17 +1,18 @@
 package com.example.una_test.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.una_test.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class FragmentPage2 extends Fragment {
     @Nullable
@@ -24,23 +25,15 @@ public class FragmentPage2 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SeekBar seekBar = view.findViewById(R.id.seekbar);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getActivity(), "Seekbar progress " + seekBar.getProgress(),
-                        Toast.LENGTH_SHORT).show();
-            }
+        CoordinatorLayout coordinatorLayout = view.findViewById(R.id.coordinator);
+        view.findViewById(R.id.fab).setOnClickListener(v -> {
+            Snackbar snackbar = Snackbar.make(coordinatorLayout,
+                    "Floating Action Button click", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("CANCEL", v1 -> snackbar.dismiss())
+                    .setBackgroundTint(getResources().getColor(R.color.blue1,
+                            requireContext().getTheme()))
+                    .setTextColor(Color.WHITE)
+                    .show();
         });
     }
 }
