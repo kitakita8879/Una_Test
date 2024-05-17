@@ -6,10 +6,24 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/label_input_exception"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpUsage" />
+
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:importantForAutofill="no"
         android:textColor="@color/white"
         android:textSize="24dp"
@@ -36,5 +50,93 @@
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_input"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/label_compute_exception"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_ans"
+        tools:ignore="SpUsage" />
+
+    <EditText
+        android:id="@+id/edit_num1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/black2"
+        android:importantForAutofill="no"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toStartOf="@id/txt_operator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_ans"
+        app:layout_constraintWidth_percent="0.25"
+        tools:ignore="LabelFor,SpUsage,TextFields" />
+
+    <TextView
+        android:id="@+id/txt_operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_div_sign"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toStartOf="@id/edit_num2"
+        app:layout_constraintStart_toEndOf="@id/edit_num1"
+        app:layout_constraintTop_toTopOf="@id/edit_num1"
+        tools:ignore="SpUsage" />
+
+    <EditText
+        android:id="@+id/edit_num2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/black2"
+        android:importantForAutofill="no"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toStartOf="@id/txt_ans2"
+        app:layout_constraintStart_toEndOf="@id/txt_operator"
+        app:layout_constraintTop_toTopOf="@id/edit_num1"
+        app:layout_constraintWidth_percent="0.25"
+        tools:ignore="LabelFor,SpUsage,TextFields" />
+
+    <TextView
+        android:id="@+id/txt_ans2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_equal_sign"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_num2"
+        app:layout_constraintTop_toTopOf="@id/edit_num1"
+        app:layout_constraintWidth_percent="0.25"
+        tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/btn_compute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_compute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_ans2" />
+
+    <TextView
+        android:id="@+id/txt_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_compute"
         tools:ignore="SpUsage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

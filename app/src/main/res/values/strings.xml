@@ -95,4 +95,9 @@
     <string name="label_no_input">No input</string>
     <string name="label_input_format_error">Input format error</string>
     <string name="label_try_catch_end">try catch end</string>
+    <string name="label_compute_exception">Compute exception</string>
+    <string name="label_input_exception">Input exception</string>
+    <string name="label_equal_sign">= %.2f</string>
+    <string name="label_div_sign">÷</string>
+    <string name="label_compute">Compute</string>
 </resources>
