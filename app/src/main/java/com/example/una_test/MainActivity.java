@@ -41,5 +41,11 @@ public class MainActivity extends AppCompatActivity {
                     TestFragmentActivity.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.test_6).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    TestTryCatchActivity.class);
+            startActivity(intent);
+        });
     }
 }

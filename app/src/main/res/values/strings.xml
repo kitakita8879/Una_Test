@@ -89,4 +89,10 @@
     <string name="label_drawer_close">Drawer close</string>
     <string name="label_popup_window">Popup window</string>
     <string name="label_image">Image</string>
+    <string name="label_try_catch_practise">Try catch practise</string>
+    <string name="label_input">Input</string>
+    <string name="label_input_sign">Input: %d</string>
+    <string name="label_no_input">No input</string>
+    <string name="label_input_format_error">Input format error</string>
+    <string name="label_try_catch_end">try catch end</string>
 </resources>
