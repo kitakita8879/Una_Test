@@ -36,13 +36,11 @@ public class TestThreadActivity extends AppCompatActivity {
                 switch (msg.what) {
                     case 1:
                         txtHandler.setText(msg.obj.toString());
-                        txtHandler.setBackgroundColor(getResources().getColor(R.color.transparent,
-                                getTheme()));
+                        txtHandler.setBackgroundColor(getColor(R.color.transparent));
                         break;
                     case 2:
                         txtHandler.setText(msg.obj.toString());
-                        txtHandler.setBackgroundColor(getResources().getColor(R.color.blue1,
-                                getTheme()));
+                        txtHandler.setBackgroundColor(getColor(R.color.blue1));
                         break;
                 }
             }
@@ -81,7 +79,20 @@ public class TestThreadActivity extends AppCompatActivity {
                                 txtHandler.getText())));
                     }
                 }.start();
+            }
+        });
 
+        findViewById(R.id.btn_run_ui).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        runOnUiThread(() -> txtHandler.setText(R.string.label_run_on_ui));
+                        txtHandler.post(() -> txtHandler.setBackgroundColor(getColor(R.color.black2)));
+                    }
+                }.start();
             }
         });
     }

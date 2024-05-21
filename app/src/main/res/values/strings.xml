@@ -101,6 +101,7 @@
     <string name="label_div_sign">÷</string>
     <string name="label_compute">Compute</string>
     <string name="label_thread_practise">Thread practise</string>
-    <string name="label_handler_thread_1">Handler thread 1</string>
-    <string name="label_handler_thread_2">Handler thread 2</string>
+    <string name="label_handler_1">Handler 1</string>
+    <string name="label_handler_2">Handler 2</string>
+    <string name="label_run_on_ui">Run on ui</string>
 </resources>

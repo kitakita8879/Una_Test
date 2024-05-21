@@ -10,29 +10,39 @@
         android:id="@+id/btn_thread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/label_thread_practise"
+        app:layout_constraintEnd_toStartOf="@id/btn_run_ui"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_run_ui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_run_on_ui"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_thread"
+        app:layout_constraintTop_toTopOf="@id/btn_thread" />
 
     <Button
         android:id="@+id/btn_handler1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/label_handler_thread_1"
-        app:layout_constraintStart_toStartOf="@id/btn_thread"
+        android:text="@string/label_handler_1"
+        app:layout_constraintEnd_toStartOf="@id/btn_handler2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_thread" />
 
     <Button
         android:id="@+id/btn_handler2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/label_handler_thread_2"
-        app:layout_constraintStart_toStartOf="@id/btn_thread"
-        app:layout_constraintTop_toBottomOf="@id/btn_handler1" />
+        android:text="@string/label_handler_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_handler1"
+        app:layout_constraintTop_toTopOf="@id/btn_handler1" />
 
     <TextView
         android:id="@+id/txt_handler"
