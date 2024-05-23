@@ -106,4 +106,9 @@
     <string name="label_run_on_ui">Run on ui</string>
     <string name="label_please_input_17_sign">Please input 1~7</string>
     <string name="label_thread_block">Thread block</string>
+    <string name="label_abstract_factory_practise">Abstract factory practise</string>
+    <string name="label_chocolate_cake">Chocolate Cake</string>
+    <string name="label_chocolate_pudding">Chocolate Pudding</string>
+    <string name="label_blueberry_cake">Blueberry Cake</string>
+    <string name="label_blueberry_pudding">Blueberry Pudding</string>
 </resources>

@@ -29,6 +29,7 @@
         <activity android:name=".TestFragmentActivity" />
         <activity android:name=".TestTryCatchActivity" />
         <activity android:name=".TestThreadActivity" />
+        <activity android:name=".AbstractFactoryPatternActivity" />
 
         <service
             android:name=".MyService"
