@@ -104,4 +104,6 @@
     <string name="label_handler_1">Handler 1</string>
     <string name="label_handler_2">Handler 2</string>
     <string name="label_run_on_ui">Run on ui</string>
+    <string name="label_please_input_17_sign">Please input 1~7</string>
+    <string name="label_thread_block">Thread block</string>
 </resources>
