@@ -17,14 +17,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 public class TestThreadActivity extends AppCompatActivity {
 
     private final String TAG = "THREAD_PRACTISE";
-    private TextView txtAns, txtAns2;
+    private TextView txtAns, txtAns2, txtTime, txtTime2;
     private long startTime;
     private final HashSet<Integer> mNodeSet = new HashSet<>();
+    private final List<Integer> mIntegerList = new ArrayList<>();
+    private final List<Integer> mIntegerList2 = new ArrayList<>();
     private final List<Integer> output = new ArrayList<>();
     private final List<Integer> output2 = new ArrayList<>();
 
@@ -37,6 +40,8 @@ public class TestThreadActivity extends AppCompatActivity {
         EditText editNode = findViewById(R.id.edit_node);
         txtAns = findViewById(R.id.txt_ans);
         txtAns2 = findViewById(R.id.txt_ans2);
+        txtTime = findViewById(R.id.txt_time);
+        txtTime2 = findViewById(R.id.txt_time2);
 
         findViewById(R.id.btn_thread).setOnClickListener(v -> {
             new MyThread().start();
@@ -119,6 +124,66 @@ public class TestThreadActivity extends AppCompatActivity {
                 searchGraphChoco(start);
                 startTime = System.currentTimeMillis();
             }
+        });
+
+        findViewById(R.id.btn_block).setOnClickListener(v -> {
+            new Thread(this::threadBlockChoco).start();
+            new Thread(this::threadBlock).start();
+        });
+    }
+
+    private void threadBlockChoco() {
+        mIntegerList2.clear();
+        long funStart = System.currentTimeMillis();
+        CountDownLatch latch = new CountDownLatch(3);
+        for (int i = 1; i <= 3; i++) {
+            int index = i;
+            new Thread(() -> {
+                try {
+                    Thread.sleep(index * 1000);
+                    mIntegerList2.add(index);
+                    latch.countDown();
+                } catch (InterruptedException e) {
+                    e.fillInStackTrace();
+                }
+            }).start();
+        }
+        try {
+            latch.await();
+        } catch (InterruptedException ignore) {
+        }
+        runOnUiThread(() -> {
+            long duration = System.currentTimeMillis() - funStart;
+            txtTime2.setText(String.format("%s %s ms", mIntegerList2, duration));
+        });
+    }
+
+    private void threadBlock() {
+        mIntegerList.clear();
+        long funStart = System.currentTimeMillis();
+        Thread[] threads = new Thread[3];
+        for (int i = 0; i < 3; i++) {
+            int index = i + 1;
+            threads[i] = new Thread(() -> {
+                try {
+                    Thread.sleep(index * 1000);
+                    mIntegerList.add(index);
+                } catch (InterruptedException e) {
+                    e.fillInStackTrace();
+                }
+            });
+            threads[i].start();
+        }
+        for (int i = 0; i < 3; i++) {
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        runOnUiThread(() -> {
+            long duration = System.currentTimeMillis() - funStart;
+            txtTime.setText(String.format("%s %s ms", mIntegerList, duration));
         });
     }
 

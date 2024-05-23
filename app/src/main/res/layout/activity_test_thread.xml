@@ -110,4 +110,35 @@
         android:textSize="26dp"
         app:layout_constraintTop_toBottomOf="@id/txt_ans"
         tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/btn_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_thread_block"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_ans2" />
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_block"
+        app:layout_constraintWidth_percent="0.5"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_time2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_block"
+        app:layout_constraintWidth_percent="0.5"
+        tools:ignore="SpUsage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
