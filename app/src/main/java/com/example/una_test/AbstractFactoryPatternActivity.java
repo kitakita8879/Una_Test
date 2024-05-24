@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class AbstractFactoryPatternActivity extends AppCompatActivity {
     private TextView txtShow;
+    private AbstractDessertFactory mFactory;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,23 +19,38 @@ public class AbstractFactoryPatternActivity extends AppCompatActivity {
         setContentView(R.layout.activity_abstract_factory_pattern);
 
         txtShow = findViewById(R.id.txt_show);
-        findViewById(R.id.btn_1).setOnClickListener(v -> bakery(Taste.CHOCOLATE, DessertType.CAKE));
-        findViewById(R.id.btn_2).setOnClickListener(v -> bakery(Taste.CHOCOLATE, DessertType.PUDDING));
-        findViewById(R.id.btn_3).setOnClickListener(v -> bakery(Taste.BLUEBERRY, DessertType.CAKE));
-        findViewById(R.id.btn_4).setOnClickListener(v -> bakery(Taste.BLUEBERRY, DessertType.PUDDING));
+        findViewById(R.id.btn_1).setOnClickListener(v -> {
+            bakery(Taste.CHOCOLATE);
+            AbstractDrink drink = mFactory.createDrink(true);
+            txtShow.setText(String.format("%s price %s size %s", drink.getDrinkName(),
+                    drink.getDrinkPrice(), drink.getDrinkSize()));
+        });
+        findViewById(R.id.btn_2).setOnClickListener(v -> {
+            bakery(Taste.CHOCOLATE);
+            AbstractDessert dessert = mFactory.createDessert();
+            txtShow.setText(String.format("%s price %s", dessert.getDessertName(),
+                    dessert.getDessertPrice()));
+        });
+        findViewById(R.id.btn_3).setOnClickListener(v -> {
+            bakery(Taste.BLUEBERRY);
+            AbstractDrink drink = mFactory.createDrink(false);
+            txtShow.setText(String.format("%s price %s size %s", drink.getDrinkName(),
+                    drink.getDrinkPrice(), drink.getDrinkSize()));
+        });
+        findViewById(R.id.btn_4).setOnClickListener(v -> {
+            bakery(Taste.BLUEBERRY);
+            AbstractDessert dessert = mFactory.createDessert();
+            txtShow.setText(String.format("%s price %s", dessert.getDessertName(),
+                    dessert.getDessertPrice()));
+        });
     }
 
-    private void bakery(Taste taste, DessertType DessertType) {
-        AbstractDessertFactory factory;
-        AbstractDessert dessert;
-        if (Objects.requireNonNull(DessertType) == AbstractFactoryPatternActivity.DessertType.CAKE) {
-            factory = new CakeFactory();
+    private void bakery(Taste taste) {
+        if (Objects.requireNonNull(taste) == Taste.CHOCOLATE) {
+            mFactory = new ChocolateFactory(taste);
         } else {
-            factory = new PuddingFactory();
+            mFactory = new BlueBerryFactory(taste);
         }
-        dessert = factory.createDessert(taste);
-        txtShow.setText(String.format("%s price %s ",
-                dessert.getDessertName(), dessert.getDessertPrice()));
     }
 
     private abstract static class AbstractDessert {
@@ -64,43 +80,83 @@ public class AbstractFactoryPatternActivity extends AppCompatActivity {
         }
     }
 
-    private static class Cake extends AbstractDessert {
-        private final String mTaste;
-        private final int mTastePrice;
+    private abstract static class AbstractDrink {
+        abstract String getDrinkName();
+
+        abstract int getDrinkPrice();
+
+        abstract String getDrinkSize();
+    }
+
+    private static class Milk extends AbstractDrink {
+
+        private final String mTaste, mSize;
+        private final int mPrice;
 
         @Override
-        String getDessertName() {
-            return mTaste + "Cake";
+        String getDrinkName() {
+            return mTaste + "milk";
         }
 
         @Override
-        int getDessertPrice() {
-            return mTastePrice * 100;
+        int getDrinkPrice() {
+            return mPrice;
         }
 
-        Cake(Taste taste) {
+        @Override
+        String getDrinkSize() {
+            return mSize;
+        }
+
+        Milk(Taste taste, boolean isLarge) {
             this.mTaste = taste.toString();
-            this.mTastePrice = taste.equals(Taste.CHOCOLATE) ? 2 : 1;
+            this.mPrice = isLarge ? 60 : 30;
+            this.mSize = isLarge ? "Large" : "Small";
         }
     }
 
     private abstract static class AbstractDessertFactory {
-        abstract AbstractDessert createDessert(Taste taste);
+
+        abstract AbstractDessert createDessert();
+
+        abstract AbstractDrink createDrink(boolean isLarge);
     }
 
-    private static class PuddingFactory extends AbstractDessertFactory {
+    private static class ChocolateFactory extends AbstractDessertFactory {
+
+        private final Taste mTaste;
 
         @Override
-        AbstractDessert createDessert(Taste taste) {
-            return new Pudding(taste);
+        AbstractDessert createDessert() {
+            return new Pudding(mTaste);
+        }
+
+        @Override
+        AbstractDrink createDrink(boolean isLarge) {
+            return new Milk(mTaste, isLarge);
+        }
+
+        ChocolateFactory(Taste taste) {
+            this.mTaste = taste;
         }
     }
 
-    private static class CakeFactory extends AbstractDessertFactory {
+    private static class BlueBerryFactory extends AbstractDessertFactory {
+
+        private final Taste mTaste;
 
         @Override
-        AbstractDessert createDessert(Taste taste) {
-            return new Cake(taste);
+        AbstractDessert createDessert() {
+            return new Pudding(mTaste);
+        }
+
+        @Override
+        AbstractDrink createDrink(boolean isLarge) {
+            return new Milk(mTaste, isLarge);
+        }
+
+        BlueBerryFactory(Taste taste) {
+            this.mTaste = taste;
         }
     }
 
@@ -115,23 +171,6 @@ public class AbstractFactoryPatternActivity extends AppCompatActivity {
                     return "Chocolate";
                 case BLUEBERRY:
                     return "Blueberry";
-                default:
-                    return "";
-            }
-        }
-    }
-
-    private enum DessertType {
-        PUDDING, CAKE;
-
-        @NonNull
-        @Override
-        public String toString() {
-            switch (this) {
-                case PUDDING:
-                    return "pudding";
-                case CAKE:
-                    return "cake";
                 default:
                     return "";
             }
