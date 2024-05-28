@@ -1,5 +1,6 @@
 package com.example.una_test;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
 public class AbstractFactoryPatternActivity extends AppCompatActivity {
+    private static final String PREF_NAME_ORDER = "order";
     private TextView txtShow;
     private AbstractDessertFactory mFactory;
 
@@ -18,30 +20,51 @@ public class AbstractFactoryPatternActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abstract_factory_pattern);
 
+        SharedPreferences order = getSharedPreferences(PREF_NAME_ORDER, MODE_PRIVATE);
+        SharedPreferences.Editor editor = order.edit();
+
+        TextView txtOrder = findViewById(R.id.txt_order);
         txtShow = findViewById(R.id.txt_show);
         findViewById(R.id.btn_1).setOnClickListener(v -> {
             bakery(Taste.CHOCOLATE);
             AbstractDrink drink = mFactory.createDrink(true);
             txtShow.setText(String.format("%s price %s size %s", drink.getDrinkName(),
                     drink.getDrinkPrice(), drink.getDrinkSize()));
+            editor.putString("Drink1", String.valueOf(txtShow.getText()));
+            editor.apply();
+            txtOrder.setText(String.valueOf(order.getAll()));
         });
         findViewById(R.id.btn_2).setOnClickListener(v -> {
             bakery(Taste.CHOCOLATE);
             AbstractDessert dessert = mFactory.createDessert();
             txtShow.setText(String.format("%s price %s", dessert.getDessertName(),
                     dessert.getDessertPrice()));
+            editor.putString("Dessert1", String.valueOf(txtShow.getText()));
+            editor.apply();
+            txtOrder.setText(String.valueOf(order.getAll()));
         });
         findViewById(R.id.btn_3).setOnClickListener(v -> {
             bakery(Taste.BLUEBERRY);
             AbstractDrink drink = mFactory.createDrink(false);
             txtShow.setText(String.format("%s price %s size %s", drink.getDrinkName(),
                     drink.getDrinkPrice(), drink.getDrinkSize()));
+            editor.putString("Drink2", String.valueOf(txtShow.getText()));
+            editor.apply();
+            txtOrder.setText(String.valueOf(order.getAll()));
         });
         findViewById(R.id.btn_4).setOnClickListener(v -> {
             bakery(Taste.BLUEBERRY);
             AbstractDessert dessert = mFactory.createDessert();
             txtShow.setText(String.format("%s price %s", dessert.getDessertName(),
                     dessert.getDessertPrice()));
+            editor.putString("Dessert2", String.valueOf(txtShow.getText()));
+            editor.apply();
+            txtOrder.setText(String.valueOf(order.getAll()));
+        });
+        findViewById(R.id.btn_clear).setOnClickListener(v -> {
+            editor.clear();
+            editor.apply();
+            txtOrder.setText(String.valueOf(order.getAll()));
         });
     }
 
