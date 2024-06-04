@@ -30,6 +30,7 @@
         <activity android:name=".TestTryCatchActivity" />
         <activity android:name=".TestThreadActivity" />
         <activity android:name=".AbstractFactoryPatternActivity" />
+        <activity android:name=".EditTextActivity" />
 
         <service
             android:name=".MyService"

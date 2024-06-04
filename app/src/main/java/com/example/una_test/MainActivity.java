@@ -59,5 +59,11 @@ public class MainActivity extends AppCompatActivity {
                     AbstractFactoryPatternActivity.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.test_9).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    EditTextActivity.class);
+            startActivity(intent);
+        });
     }
 }
