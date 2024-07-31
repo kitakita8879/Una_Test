@@ -113,4 +113,9 @@
     <string name="label_blueberry_pudding">Blueberry Pudding</string>
     <string name="label_clear">Clear</string>
     <string name="label_edittext_practise">EditText practise</string>
+    <string name="label_input_stream_output_stream">InputStream OutputStream</string>
+    <string name="label_read_file_content_upper">READ FILE CONTENT</string>
+    <string name="label_copy_content">COPY CONTENT</string>
+    <string name="label_show_copy">show copy</string>
+    <string name="label_read">read</string>
 </resources>

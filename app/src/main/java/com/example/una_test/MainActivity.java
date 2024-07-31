@@ -65,5 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     EditTextActivity.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.test_10).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    TestStreamActivity.class);
+            startActivity(intent);
+        });
     }
 }

@@ -31,6 +31,7 @@
         <activity android:name=".TestThreadActivity" />
         <activity android:name=".AbstractFactoryPatternActivity" />
         <activity android:name=".EditTextActivity" />
+        <activity android:name=".TestStreamActivity" />
 
         <service
             android:name=".MyService"
