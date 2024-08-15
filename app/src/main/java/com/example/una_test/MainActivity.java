@@ -71,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
                     TestStreamActivity.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.test_11).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    TestRotateScreenActivity.class);
+            startActivity(intent);
+        });
     }
 }

@@ -149,4 +149,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/test_9" />
+
+    <TextView
+        android:id="@+id/test_11"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/label_rotate_screen"
+        android:textColor="#1292D0"
+        android:textSize="27sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/test_10" />
 </androidx.constraintlayout.widget.ConstraintLayout>

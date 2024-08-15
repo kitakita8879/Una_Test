@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1B1A1A">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="@string/label_rotate_screen"
+        android:textColor="@color/white"
+        android:textSize="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpUsage" />
+
+    <View
+        android:id="@+id/v_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue1"
+        app:layout_constraintBottom_toTopOf="@id/v_5"
+        app:layout_constraintEnd_toStartOf="@id/v_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_title" />
+
+    <View
+        android:id="@+id/v_2"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/blue1"
+        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintEnd_toStartOf="@id/v_3"
+        app:layout_constraintStart_toEndOf="@id/v_1"
+        app:layout_constraintTop_toTopOf="@id/v_1" />
+
+    <View
+        android:id="@+id/v_3"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/blue1"
+        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintEnd_toStartOf="@id/v_4"
+        app:layout_constraintStart_toEndOf="@id/v_2"
+        app:layout_constraintTop_toTopOf="@id/v_1" />
+
+    <View
+        android:id="@+id/v_4"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/blue1"
+        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintEnd_toEndOf="@id/gl_1"
+        app:layout_constraintStart_toEndOf="@id/v_3"
+        app:layout_constraintTop_toTopOf="@id/v_1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <TextView
+        android:id="@+id/txt_answer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_1"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_add_upper"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_1"
+        app:layout_constraintTop_toBottomOf="@id/txt_answer"
+        tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/btn_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_sub_upper"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_1"
+        app:layout_constraintTop_toBottomOf="@id/btn_add"
+        tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/label_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_1"
+        app:layout_constraintTop_toBottomOf="@id/btn_sub" />
+
+    <View
+        android:id="@+id/v_5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

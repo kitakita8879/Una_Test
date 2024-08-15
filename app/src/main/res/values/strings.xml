@@ -118,4 +118,7 @@
     <string name="label_copy_content">COPY CONTENT</string>
     <string name="label_show_copy">show copy</string>
     <string name="label_read">read</string>
+    <string name="label_rotate_screen">Rotate Screen</string>
+    <string name="label_sub_upper">SUB</string>
+    <string name="label_add_upper">ADD</string>
 </resources>
