@@ -1,6 +1,12 @@
 package com.example.una_test;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,6 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +27,7 @@ public class TestRotateScreenActivity extends AppCompatActivity {
     private boolean mIsConnect;
     private View mViewConnectSimulation;
     private TextView mTxtAnswer;
+    private static final String CHANNEL_ID = "TEST_CHANNEL_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +80,37 @@ public class TestRotateScreenActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_cancel).setOnClickListener(v -> finish());
+
+        findViewById(R.id.txt_1).setOnClickListener(v -> callNotify());
+    }
+
+    private void callNotify() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("TEST")
+                .setContentText("TEST TEST")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager)
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        String channelName = "name";
+        String channelDesc = "desc";
+        NotificationChannel channel;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(CHANNEL_ID, channelName,
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(channelDesc);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "no notification permission", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        NotificationManagerCompat.from(this).notify(0, builder.build());
     }
 
     @Override

@@ -19,17 +19,22 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpUsage" />
 
-    <View
-        android:id="@+id/v_1"
+    <TextView
+        android:id="@+id/txt_1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_notification"
+        android:textColor="@color/white"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/v_5"
         app:layout_constraintEnd_toStartOf="@id/v_2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_title" />
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        tools:ignore="SpUsage" />
 
     <View
         android:id="@+id/v_2"
@@ -37,10 +42,10 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
-        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintBottom_toBottomOf="@id/txt_1"
         app:layout_constraintEnd_toStartOf="@id/v_3"
-        app:layout_constraintStart_toEndOf="@id/v_1"
-        app:layout_constraintTop_toTopOf="@id/v_1" />
+        app:layout_constraintStart_toEndOf="@id/txt_1"
+        app:layout_constraintTop_toTopOf="@id/txt_1" />
 
     <View
         android:id="@+id/v_3"
@@ -48,10 +53,10 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
-        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintBottom_toBottomOf="@id/txt_1"
         app:layout_constraintEnd_toStartOf="@id/v_4"
         app:layout_constraintStart_toEndOf="@id/v_2"
-        app:layout_constraintTop_toTopOf="@id/v_1" />
+        app:layout_constraintTop_toTopOf="@id/txt_1" />
 
     <View
         android:id="@+id/v_4"
@@ -59,10 +64,10 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
-        app:layout_constraintBottom_toBottomOf="@id/v_1"
+        app:layout_constraintBottom_toBottomOf="@id/txt_1"
         app:layout_constraintEnd_toEndOf="@id/gl_1"
         app:layout_constraintStart_toEndOf="@id/v_3"
-        app:layout_constraintTop_toTopOf="@id/v_1" />
+        app:layout_constraintTop_toTopOf="@id/txt_1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_1"
@@ -126,5 +131,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gl_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_1" />
+        app:layout_constraintTop_toBottomOf="@id/txt_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

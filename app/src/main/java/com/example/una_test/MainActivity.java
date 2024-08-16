@@ -1,9 +1,14 @@
 package com.example.una_test;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,5 +82,17 @@ public class MainActivity extends AppCompatActivity {
                     TestRotateScreenActivity.class);
             startActivity(intent);
         });
+
+        checkPermission();
+    }
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {Manifest.permission.POST_NOTIFICATIONS}, 1);
+                Log.d("UNA", "checkPermission: fail");
+            }
+        }
     }
 }

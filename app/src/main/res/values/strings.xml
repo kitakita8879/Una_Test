@@ -121,4 +121,5 @@
     <string name="label_rotate_screen">Rotate Screen</string>
     <string name="label_sub_upper">SUB</string>
     <string name="label_add_upper">ADD</string>
+    <string name="label_notification">通知</string>
 </resources>
