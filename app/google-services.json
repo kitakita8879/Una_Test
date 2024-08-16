@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "391259037424",
+    "project_id": "una-test-2d735",
+    "storage_bucket": "una-test-2d735.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391259037424:android:c1cc0aac7cf6581dae2c35",
+        "android_client_info": {
+          "package_name": "com.example.una_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyLQMbgyUTlv1g50OSL7BpRi-GCYrgPRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

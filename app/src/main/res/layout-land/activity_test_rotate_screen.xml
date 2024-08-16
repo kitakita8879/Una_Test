@@ -31,21 +31,26 @@
         android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/v_5"
-        app:layout_constraintEnd_toStartOf="@id/v_2"
+        app:layout_constraintEnd_toStartOf="@id/txt_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_title"
         tools:ignore="SpUsage" />
 
-    <View
-        android:id="@+id/v_2"
+    <TextView
+        android:id="@+id/txt_2"
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_topic_android"
+        android:textColor="@color/white"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/txt_1"
         app:layout_constraintEnd_toStartOf="@id/v_3"
         app:layout_constraintStart_toEndOf="@id/txt_1"
-        app:layout_constraintTop_toTopOf="@id/txt_1" />
+        app:layout_constraintTop_toTopOf="@id/txt_1"
+        tools:ignore="SpUsage" />
 
     <View
         android:id="@+id/v_3"
@@ -55,7 +60,7 @@
         android:background="@color/blue1"
         app:layout_constraintBottom_toBottomOf="@id/txt_1"
         app:layout_constraintEnd_toStartOf="@id/v_4"
-        app:layout_constraintStart_toEndOf="@id/v_2"
+        app:layout_constraintStart_toEndOf="@id/txt_2"
         app:layout_constraintTop_toTopOf="@id/txt_1" />
 
     <View

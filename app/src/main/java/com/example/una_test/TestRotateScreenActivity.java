@@ -3,11 +3,14 @@ package com.example.una_test;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -82,14 +87,33 @@ public class TestRotateScreenActivity extends AppCompatActivity {
         findViewById(R.id.btn_cancel).setOnClickListener(v -> finish());
 
         findViewById(R.id.txt_1).setOnClickListener(v -> callNotify());
+
+        findViewById(R.id.txt_2).setOnClickListener(v ->
+                registerTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
+    }
+
+    private void registerTopic(String topic) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
+                .addOnCompleteListener(task -> {
+                    String result = "fail";
+                    if (task.isSuccessful()) {
+                        result = "success";
+                    }
+                    Log.e("UNA", "onComplete: subscribe topic android " + result);
+                });
     }
 
     private void callNotify() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.info)
                 .setContentTitle("TEST")
                 .setContentText("TEST TEST")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         NotificationManager notificationManager = (NotificationManager)
