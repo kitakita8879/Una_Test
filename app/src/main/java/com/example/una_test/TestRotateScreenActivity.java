@@ -103,7 +103,7 @@ public class TestRotateScreenActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         result = "success";
                     }
-                    Log.e("UNA", "onComplete: subscribe topic android " + result);
+                    Log.e("UNA", "onComplete: subscribe topic " + topic + result);
                 });
     }
 

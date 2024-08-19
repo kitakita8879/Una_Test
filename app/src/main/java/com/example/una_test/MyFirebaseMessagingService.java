@@ -24,7 +24,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -54,12 +53,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (message.getNotification() != null) {
             buildNotification(message.getNotification());
         }
-        Log.d(TAG, "onMessageReceived: message " +
-                Objects.requireNonNull(message.getNotification()).getTitle());
     }
 
     private void buildNotification(@NonNull RemoteMessage.Notification message) {
-        Log.d(TAG, "buildNotification: start");
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
