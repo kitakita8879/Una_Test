@@ -23,7 +23,10 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Objects;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public static final String TOPIC_ANDROID = "Android";
@@ -71,14 +74,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setAutoCancel(true);
 
         if (message.getImageUrl() != null) {
-            // TODO: 2024/8/16 開著app 時的通知的圖片未完成
-            Log.d(TAG, "buildNotification: image uri " + message.getImageUrl());
-            try (InputStream inputStream = this.getContentResolver().openInputStream(message.getImageUrl())) {
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                builder.setStyle(new NotificationCompat.BigPictureStyle()
-                        .bigPicture(bitmap));
+            try {
+                URL url = new URL(message.getImageUrl().toString());
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                try (InputStream inputStream = connection.getInputStream()) {
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    builder.setLargeIcon(bitmap)
+                            .setStyle(new NotificationCompat.BigPictureStyle()
+                                    .bigPicture(bitmap)
+                                    .bigLargeIcon(null));
+                }
             } catch (IOException e) {
-                Log.e(TAG, "buildNotification: image get fail");
+                Log.e(TAG, "buildNotification: get image fail " + e.getMessage());
             }
         }
 

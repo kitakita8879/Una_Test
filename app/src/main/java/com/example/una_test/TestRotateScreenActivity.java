@@ -90,6 +90,10 @@ public class TestRotateScreenActivity extends AppCompatActivity {
 
         findViewById(R.id.txt_2).setOnClickListener(v ->
                 registerTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
+
+        findViewById(R.id.txt_3).setOnClickListener(v ->
+                FirebaseMessaging.getInstance()
+                        .unsubscribeFromTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
     }
 
     private void registerTopic(String topic) {

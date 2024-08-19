@@ -123,4 +123,5 @@
     <string name="label_add_upper">ADD</string>
     <string name="label_notification">通知</string>
     <string name="label_topic_android">topic\nAndroid</string>
+    <string name="label_unregister">unregister</string>
 </resources>
