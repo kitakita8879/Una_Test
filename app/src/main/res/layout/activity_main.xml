@@ -156,7 +156,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="@string/label_rotate_screen"
+        android:text="@string/label_rotate_and_notification"
         android:textColor="#1292D0"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"

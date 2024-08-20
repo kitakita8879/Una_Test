@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -27,17 +28,20 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TestRotateScreenActivity extends AppCompatActivity {
+public class TestRotateAndNotificationActivity extends AppCompatActivity {
+    private static final String CHANNEL_HIGH = "CHANNEL_HIGH";
+    private static final String CHANNEL_DEFAULT = "CHANNEL_DEFAULT";
+    private static final String CHANNEL_LOW = "CHANNEL_LOW";
+    private static final String CHANNEL_MIN = "CHANNEL_MIN";
     private int mAnswer;
     private boolean mIsConnect;
     private View mViewConnectSimulation;
     private TextView mTxtAnswer;
-    private static final String CHANNEL_ID = "TEST_CHANNEL_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_rotate_screen);
+        setContentView(R.layout.activity_test_rotate_and_notification);
 
         mAnswer = 0;
         mIsConnect = false;
@@ -56,7 +60,7 @@ public class TestRotateScreenActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         mViewConnectSimulation.setBackgroundColor(getResources().getColor(
                                 mIsConnect ? R.color.blue1 : R.color.red, getTheme()));
-                        Toast.makeText(TestRotateScreenActivity.this,
+                        Toast.makeText(TestRotateAndNotificationActivity.this,
                                 "onResume connect", Toast.LENGTH_SHORT).show();
                     });
                 }
@@ -86,7 +90,14 @@ public class TestRotateScreenActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_cancel).setOnClickListener(v -> finish());
 
-        findViewById(R.id.txt_1).setOnClickListener(v -> callNotify());
+        findViewById(R.id.txt_notification_default).setOnClickListener(v ->
+                callNotify(CHANNEL_DEFAULT, R.string.label_notification_default));
+        findViewById(R.id.txt_notification_high).setOnClickListener(v ->
+                callNotify(CHANNEL_HIGH, R.string.label_notification_high));
+        findViewById(R.id.txt_notification_low).setOnClickListener(v ->
+                callNotify(CHANNEL_LOW, R.string.label_notification_low));
+        findViewById(R.id.txt_notification_min).setOnClickListener(v ->
+                callNotify(CHANNEL_MIN, R.string.label_notification_min));
 
         findViewById(R.id.txt_2).setOnClickListener(v ->
                 registerTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
@@ -94,6 +105,15 @@ public class TestRotateScreenActivity extends AppCompatActivity {
         findViewById(R.id.txt_3).setOnClickListener(v ->
                 FirebaseMessaging.getInstance()
                         .unsubscribeFromTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
+
+        findViewById(R.id.txt_notification_setting).setOnClickListener(v -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                intent.putExtra(Settings.EXTRA_CHANNEL_ID, CHANNEL_DEFAULT);
+                startActivity(intent);
+            }
+        });
     }
 
     private void registerTopic(String topic) {
@@ -107,38 +127,62 @@ public class TestRotateScreenActivity extends AppCompatActivity {
                 });
     }
 
-    private void callNotify() {
+    private void callNotify(String channelId, int title) {
+        int priority, importance, notificationId;
+        switch (channelId) {
+            case CHANNEL_HIGH:
+                priority = NotificationCompat.PRIORITY_HIGH;
+                importance = NotificationManager.IMPORTANCE_HIGH;
+                notificationId = 3;
+                break;
+            case CHANNEL_LOW:
+                priority = NotificationCompat.PRIORITY_LOW;
+                importance = NotificationManager.IMPORTANCE_LOW;
+                notificationId = 1;
+                break;
+            case CHANNEL_MIN:
+                priority = NotificationCompat.PRIORITY_MIN;
+                importance = NotificationManager.IMPORTANCE_MIN;
+                notificationId = 0;
+                break;
+            default:
+                priority = NotificationCompat.PRIORITY_DEFAULT;
+                importance = NotificationManager.IMPORTANCE_DEFAULT;
+                notificationId = 2;
+        }
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.info)
-                .setContentTitle("TEST")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.ic_chargermode)
+                .setContentTitle(getResources().getText(title))
                 .setContentText("TEST TEST")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(priority)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         NotificationManager notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
-        String channelName = "name";
-        String channelDesc = "desc";
+        String channelDesc = channelId + " Priority " + priority;
         NotificationChannel channel;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channel = new NotificationChannel(CHANNEL_ID, channelName,
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(channelDesc);
-            notificationManager.createNotificationChannel(channel);
+            channel = notificationManager.getNotificationChannel(channelId);
+            if (channel == null) {
+                channel = new NotificationChannel(channelId, channelId,
+                        importance);
+                channel.setDescription(channelDesc);
+                notificationManager.createNotificationChannel(channel);
+            }
         }
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "no notification permission", Toast.LENGTH_SHORT).show();
+            Log.e("UNA", "callNotify: no notification permission ");
             return;
         }
-        NotificationManagerCompat.from(this).notify(0, builder.build());
+        NotificationManagerCompat.from(this).notify(notificationId, builder.build());
     }
 
     @Override
@@ -146,7 +190,7 @@ public class TestRotateScreenActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // 不會執行onPause onStop
         //onSaveInstance 因api 差異可能會執行onStop 階段
-        setContentView(R.layout.activity_test_rotate_screen);
+        setContentView(R.layout.activity_test_rotate_and_notification);
         initView();
     }
 

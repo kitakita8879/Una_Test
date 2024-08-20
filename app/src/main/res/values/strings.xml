@@ -118,10 +118,14 @@
     <string name="label_copy_content">COPY CONTENT</string>
     <string name="label_show_copy">show copy</string>
     <string name="label_read">read</string>
-    <string name="label_rotate_screen">Rotate Screen</string>
+    <string name="label_rotate_and_notification"><![CDATA[Rotate & Notification]]></string>
     <string name="label_sub_upper">SUB</string>
     <string name="label_add_upper">ADD</string>
-    <string name="label_notification">通知</string>
+    <string name="label_notification_default">預設\n通知</string>
+    <string name="label_notification_high">緊急\n通知</string>
+    <string name="label_notification_low">無聲\n通知</string>
+    <string name="label_notification_min">超小\n通知</string>
     <string name="label_topic_android">topic\nAndroid</string>
     <string name="label_unregister">unregister</string>
+    <string name="label_go_to_setting">go to setting</string>
 </resources>

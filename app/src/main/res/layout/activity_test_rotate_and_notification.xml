@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="@string/label_rotate_screen"
+        android:text="@string/label_rotate_and_notification"
         android:textColor="@color/white"
         android:textSize="28dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,20 +20,61 @@
         tools:ignore="SpUsage" />
 
     <TextView
-        android:id="@+id/txt_1"
+        android:id="@+id/txt_notification_default"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/blue1"
         android:gravity="center"
-        android:text="@string/label_notification"
+        android:text="@string/label_notification_default"
         android:textColor="@color/white"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@id/v_5"
         app:layout_constraintEnd_toStartOf="@id/txt_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_title"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_notification_high"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_notification_high"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_notification_default"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_notification_low"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_notification_low"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/txt_notification_high"
+        app:layout_constraintTop_toBottomOf="@id/txt_notification_default"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_notification_min"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_notification_min"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/txt_notification_low"
+        app:layout_constraintTop_toBottomOf="@id/txt_notification_default"
         tools:ignore="SpUsage" />
 
     <TextView
@@ -46,10 +87,10 @@
         android:text="@string/label_topic_android"
         android:textColor="@color/white"
         android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_1"
+        app:layout_constraintBottom_toBottomOf="@id/txt_notification_default"
         app:layout_constraintEnd_toStartOf="@id/txt_3"
-        app:layout_constraintStart_toEndOf="@id/txt_1"
-        app:layout_constraintTop_toTopOf="@id/txt_1"
+        app:layout_constraintStart_toEndOf="@id/txt_notification_default"
+        app:layout_constraintTop_toTopOf="@id/txt_notification_default"
         tools:ignore="SpUsage" />
 
     <TextView
@@ -58,44 +99,40 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
+        android:gravity="center"
         android:text="@string/label_unregister"
         android:textColor="@color/white"
         android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_1"
-        app:layout_constraintEnd_toStartOf="@id/v_4"
+        app:layout_constraintBottom_toBottomOf="@id/txt_notification_default"
+        app:layout_constraintEnd_toStartOf="@id/txt_notification_setting"
         app:layout_constraintStart_toEndOf="@id/txt_2"
-        app:layout_constraintTop_toTopOf="@id/txt_1"
+        app:layout_constraintTop_toTopOf="@id/txt_notification_default"
         tools:ignore="SpUsage" />
 
-    <View
-        android:id="@+id/v_4"
+    <TextView
+        android:id="@+id/txt_notification_setting"
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
         android:background="@color/blue1"
-        app:layout_constraintBottom_toBottomOf="@id/txt_1"
-        app:layout_constraintEnd_toEndOf="@id/gl_1"
+        android:gravity="center"
+        android:text="@string/label_go_to_setting"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/txt_notification_default"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/txt_3"
-        app:layout_constraintTop_toTopOf="@id/txt_1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintTop_toTopOf="@id/txt_notification_default" />
 
     <TextView
         android:id="@+id/txt_answer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/gl_1"
-        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_notification_min"
         tools:ignore="SpUsage" />
 
     <Button
@@ -105,8 +142,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/label_add_upper"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/gl_1"
+        app:layout_constraintEnd_toStartOf="@id/btn_sub"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_answer"
         tools:ignore="SpUsage" />
 
@@ -114,13 +151,20 @@
         android:id="@+id/btn_sub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/label_sub_upper"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/gl_1"
-        app:layout_constraintTop_toBottomOf="@id/btn_add"
+        app:layout_constraintStart_toEndOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="@id/btn_add"
         tools:ignore="SpUsage" />
+
+    <View
+        android:id="@+id/v_5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_sub" />
 
     <Button
         android:id="@+id/btn_cancel"
@@ -129,16 +173,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/label_cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/gl_1"
-        app:layout_constraintTop_toBottomOf="@id/btn_sub" />
-
-    <View
-        android:id="@+id/v_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/gl_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_1" />
+        app:layout_constraintTop_toBottomOf="@id/v_5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

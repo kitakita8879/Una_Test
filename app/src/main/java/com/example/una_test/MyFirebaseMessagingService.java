@@ -10,10 +10,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -51,15 +53,29 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         if (message.getNotification() != null) {
-            buildNotification(message.getNotification());
+            if (!message.getData().isEmpty()) {
+                if (message.getData().containsKey("web")) {
+                    String data = message.getData().get("web");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
+                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                            intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                    buildNotification(message.getNotification(), pendingIntent);
+                } else {
+                    buildNotification(message.getNotification(), null);
+                }
+            } else {
+                buildNotification(message.getNotification(), null);
+            }
         }
     }
 
-    private void buildNotification(@NonNull RemoteMessage.Notification message) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    private void buildNotification(@NonNull RemoteMessage.Notification message, @Nullable PendingIntent pendingIntent) {
+        if (pendingIntent == null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NORMAL_CHANNEL)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -92,10 +108,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String channelDesc = "desc";
-            NotificationChannel channel = new NotificationChannel(NORMAL_CHANNEL, NORMAL_CHANNEL,
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(channelDesc);
-            notificationManager.createNotificationChannel(channel);
+            NotificationChannel channel = notificationManager.getNotificationChannel(NORMAL_CHANNEL);
+            if (channel == null) {
+                channel = new NotificationChannel(NORMAL_CHANNEL, NORMAL_CHANNEL,
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                channel.setDescription(channelDesc);
+                notificationManager.createNotificationChannel(channel);
+            }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&

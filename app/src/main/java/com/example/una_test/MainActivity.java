@@ -2,6 +2,8 @@ package com.example.una_test;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -76,11 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.test_11).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
-                    TestRotateScreenActivity.class);
+                    TestRotateAndNotificationActivity.class);
             startActivity(intent);
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        checkNotificationPermission();
+
+        String notificationData = getIntent().getStringExtra("web");
+        if (notificationData != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationData));
+            startActivity(intent);
+        }
+    }
+
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+                        != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
     }
