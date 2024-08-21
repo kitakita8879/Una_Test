@@ -1,10 +1,11 @@
 [versions]
-agp = "8.3.1"
+agp = "8.3.2"
 coreKtx = "2.2.0"
 firebaseBom = "33.1.2"
-firebaseMessagingDirectboot = "20.2.0"
+firebaseCore = "21.1.1"
+firebaseMessagingDirectboot = "24.0.0"
 junit = "4.13.2"
-junitVersion = "1.1.5"
+junitVersion = "1.2.1"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
 material = "1.11.0"
@@ -12,10 +13,12 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 googleGmsGoogleServices = "4.4.2"
 firebaseMessaging = "24.0.0"
+firebaseAnalytics = "22.0.2"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
 firebase-messaging-directboot = { module = "com.google.firebase:firebase-messaging-directboot", version.ref = "firebaseMessagingDirectboot" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -25,6 +28,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

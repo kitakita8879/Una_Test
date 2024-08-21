@@ -46,6 +46,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.core)
     implementation(libs.firebase.messaging)
     implementation (libs.firebase.messaging.directboot)
+    implementation(libs.firebase.analytics)
 }

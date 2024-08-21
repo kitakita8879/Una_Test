@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashSet;
@@ -41,6 +42,7 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
     private View mViewConnectSimulation;
     private TextView mTxtAnswer;
     private SharedPreferences mSharedPref;
+    private FirebaseAnalytics mAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
         mIsConnect = false;
         initView();
         mSharedPref = getSharedPreferences(MyFirebaseMessagingService.SHARED_PREF_FCM, MODE_PRIVATE);
+        mAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override
@@ -177,6 +180,7 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                             Log.e("UNA", "registerTopic: fail");
                         }
                     });
+            mAnalytics.setUserProperty(topic, "true");
         }).start();
     }
 
@@ -198,6 +202,7 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                             Log.e("UNA", "unregisterTopic: fail");
                         }
                     });
+            mAnalytics.setUserProperty(topic, "false");
         }).start();
     }
 
