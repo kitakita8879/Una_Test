@@ -30,10 +30,11 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    public static final String SHARED_PREF_FCM = "SHARED_PREF_FCM";
+    public static final String FCM_TOKEN = "FCM_TOKEN";
+    public static final String FCM_TOPICS = "FCM_TOPICS";
     public static final String TOPIC_ANDROID = "Android";
     private static final String TAG = "MyFirebaseMessagingService";
-    private static final String SHARED_PREF_FCM = "SHARED_PREF_FCM";
-    private static final String FCM_TOKEN = "FCM_TOKEN";
     private static final String NORMAL_CHANNEL = "NORMAL_CHANNEL";
 
     @Override
@@ -78,7 +79,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NORMAL_CHANNEL)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.drawable.ic_chargermode)
                 .setContentTitle(message.getTitle())
                 .setContentText(message.getBody())
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -128,4 +128,6 @@
     <string name="label_topic_android">topic\nAndroid</string>
     <string name="label_unregister">unregister</string>
     <string name="label_go_to_setting">go to setting</string>
+    <string name="label_enable_notify">enable\nnotify</string>
+    <string name="label_disable_notify">disable\nnotify</string>
 </resources>

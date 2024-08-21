@@ -110,6 +110,34 @@
         tools:ignore="SpUsage" />
 
     <TextView
+        android:id="@+id/txt_enable_notify"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_enable_notify"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@id/txt_3"
+        app:layout_constraintTop_toBottomOf="@id/txt_3"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_disable_notify"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@color/blue1"
+        android:gravity="center"
+        android:text="@string/label_disable_notify"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@id/txt_3"
+        app:layout_constraintTop_toTopOf="@id/txt_enable_notify"
+        tools:ignore="SpUsage" />
+
+    <TextView
         android:id="@+id/txt_notification_setting"
         android:layout_width="50dp"
         android:layout_height="0dp"
