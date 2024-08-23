@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(notificationData));
             startActivity(intent);
         }
+        getCountry();
     }
 
     private void checkNotificationPermission() {
@@ -97,5 +100,10 @@ public class MainActivity extends AppCompatActivity {
                         != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
+    }
+
+    private void getCountry() {
+        String country = Locale.getDefault().getCountry();
+        FcmService.saveCountry(country, this);
     }
 }

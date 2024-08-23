@@ -20,19 +20,23 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class FcmService extends FirebaseMessagingService {
     public static final String SHARED_PREF_FCM = "SHARED_PREF_FCM";
     public static final String FCM_TOKEN = "FCM_TOKEN";
     public static final String FCM_TOPICS = "FCM_TOPICS";
+    private static final String FCM_COUNTRY = "FCM_COUNTRY";
     public static final String TOPIC_ANDROID = "Android";
     private static final String TAG = "MyFirebaseMessagingService";
     private static final String NORMAL_CHANNEL = "NORMAL_CHANNEL";
@@ -68,6 +72,57 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 buildNotification(message.getNotification(), null);
             }
         }
+    }
+
+    public enum FcmTopic {
+        TOPIC_A("TopicA");
+
+        private final String mTopicName;
+
+        FcmTopic(@NonNull String topicName) {
+            this.mTopicName = topicName;
+        }
+
+        public String getTopic(String country) {
+            String topic;
+            if (country.equalsIgnoreCase("TW")) {
+                topic = "Tw" + mTopicName;
+            } else {
+                topic = mTopicName;
+            }
+            return topic;
+        }
+    }
+
+    public static void registerTopic(FcmTopic fcmTopic, Context context) {
+        new Thread(() -> {
+            SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF_FCM, MODE_PRIVATE);
+            String topic = fcmTopic.getTopic(getCountry(context));
+            Set<String> topics = sharedPref.getStringSet(FCM_TOPICS, new HashSet<>());
+            if (topics.contains(fcmTopic.toString())) return;
+            HashSet<String> finalTopics = new HashSet<>(topics);
+            finalTopics.add(topic);
+            FirebaseMessaging.getInstance().subscribeToTopic(topic)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            sharedPref.edit().putStringSet(FCM_TOPICS, finalTopics).apply();
+                        }
+                        Log.d(TAG, "registerTopic: " + topic +
+                                (task.isSuccessful() ? " success" : " fail"));
+                    });
+        }).start();
+    }
+
+    public static void saveCountry(String country, Context context) {
+        new Thread(() -> {
+            SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF_FCM, MODE_PRIVATE);
+            sharedPref.edit().putString(FCM_COUNTRY, country).apply();
+        }).start();
+    }
+
+    private static String getCountry(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences(SHARED_PREF_FCM, MODE_PRIVATE);
+        return sharedPref.getString(FCM_COUNTRY, "US");
     }
 
     private void buildNotification(@NonNull RemoteMessage.Notification message, @Nullable PendingIntent pendingIntent) {

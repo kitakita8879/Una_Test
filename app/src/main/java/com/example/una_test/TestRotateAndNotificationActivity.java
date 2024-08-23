@@ -40,7 +40,7 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
     private int mAnswer;
     private boolean mIsConnect;
     private View mViewConnectSimulation;
-    private TextView mTxtAnswer;
+    private TextView mTxtAnswer, mTxtDb;
     private SharedPreferences mSharedPref;
     private FirebaseAnalytics mAnalytics;
 
@@ -51,9 +51,11 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
 
         mAnswer = 0;
         mIsConnect = false;
-        initView();
-        mSharedPref = getSharedPreferences(MyFirebaseMessagingService.SHARED_PREF_FCM, MODE_PRIVATE);
+        mSharedPref = getSharedPreferences(FcmService.SHARED_PREF_FCM, MODE_PRIVATE);
         mAnalytics = FirebaseAnalytics.getInstance(this);
+        mAnalytics.setAnalyticsCollectionEnabled(true);
+        FcmService.registerTopic(FcmService.FcmTopic.TOPIC_A, this);
+        initView();
     }
 
     @Override
@@ -108,10 +110,10 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                 callNotify(CHANNEL_MIN, R.string.label_notification_min));
 
         findViewById(R.id.txt_2).setOnClickListener(v ->
-                registerTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
+                registerAndroidTopic());
 
         findViewById(R.id.txt_3).setOnClickListener(v ->
-                unregisterTopic(MyFirebaseMessagingService.TOPIC_ANDROID));
+                unregisterTopic(FcmService.TOPIC_ANDROID));
 
         findViewById(R.id.txt_notification_setting).setOnClickListener(v -> {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -122,13 +124,18 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.txt_enable_notify).setOnClickListener(v -> enableFMC());
-        findViewById(R.id.txt_disable_notify).setOnClickListener(v -> disableFMC());
+        findViewById(R.id.txt_enable_notify).setOnClickListener(v -> enableFcm());
+        findViewById(R.id.txt_disable_notify).setOnClickListener(v -> disableFcm());
+
+        mTxtDb = findViewById(R.id.txt_db);
+        String topic = "Topics :" + mSharedPref.getStringSet(FcmService.FCM_TOPICS,
+                new HashSet<>());
+        mTxtDb.setText(topic);
     }
 
-    private void enableFMC() {
+    private void enableFcm() {
         new Thread(() -> {
-            String token = mSharedPref.getString(MyFirebaseMessagingService.FCM_TOKEN, "");
+            String token = mSharedPref.getString(FcmService.FCM_TOKEN, "");
             if (token.isEmpty()) {
                 FirebaseMessaging.getInstance().setAutoInitEnabled(true);
                 FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
@@ -136,15 +143,15 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         result = "success";
                     }
-                    Log.e("UNA", "enableFMC: " + result);
+                    Log.e("UNA", "enableFcm: " + result);
                 });
             }
         }).start();
     }
 
-    private void disableFMC() {
+    private void disableFcm() {
         new Thread(() -> {
-            Set<String> topics = mSharedPref.getStringSet(MyFirebaseMessagingService.FCM_TOPICS,
+            Set<String> topics = mSharedPref.getStringSet(FcmService.FCM_TOPICS,
                     new HashSet<>());
             if (!topics.isEmpty()) {
                 for (String topic : topics) {
@@ -155,38 +162,39 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                 String result = "fail";
                 if (task.isSuccessful()) {
                     FirebaseMessaging.getInstance().setAutoInitEnabled(false);
-                    mSharedPref.edit().putString(MyFirebaseMessagingService.FCM_TOKEN, "").apply();
+                    mSharedPref.edit().putString(FcmService.FCM_TOKEN, "").apply();
                     result = "success";
                 }
-                Log.e("UNA", "disableFMC: " + result);
+                Log.e("UNA", "disableFcm: " + result);
             });
         }).start();
     }
 
-    private void registerTopic(String topic) {
+    private void registerAndroidTopic() {
         new Thread(() -> {
-            Set<String> topics = mSharedPref.getStringSet(MyFirebaseMessagingService.FCM_TOPICS,
+            Set<String> topics = mSharedPref.getStringSet(FcmService.FCM_TOPICS,
                     new HashSet<>());
-            if (topics.contains(topic)) return;
+            if (topics.contains(FcmService.TOPIC_ANDROID)) return;
             HashSet<String> finalTopics = new HashSet<>(topics);
-            finalTopics.add(topic);
-            FirebaseMessaging.getInstance().subscribeToTopic(topic)
+            finalTopics.add(FcmService.TOPIC_ANDROID);
+            FirebaseMessaging.getInstance().subscribeToTopic(FcmService.TOPIC_ANDROID)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             mSharedPref.edit().putStringSet(
-                                    MyFirebaseMessagingService.FCM_TOPICS, finalTopics).apply();
-                            Log.e("UNA", "registerTopic: " + finalTopics);
+                                    FcmService.FCM_TOPICS, finalTopics).apply();
+                            String txt = "Topic : " + finalTopics;
+                            mTxtDb.setText(txt);
                         } else {
                             Log.e("UNA", "registerTopic: fail");
                         }
                     });
-            mAnalytics.setUserProperty(topic, "true");
+            mAnalytics.setUserProperty(FcmService.TOPIC_ANDROID, "true");
         }).start();
     }
 
     private void unregisterTopic(String topic) {
         new Thread(() -> {
-            Set<String> topics = mSharedPref.getStringSet(MyFirebaseMessagingService.FCM_TOPICS,
+            Set<String> topics = mSharedPref.getStringSet(FcmService.FCM_TOPICS,
                     new HashSet<>());
             if (!topics.contains(topic)) return;
             HashSet<String> finalTopics = new HashSet<>(topics);
@@ -195,9 +203,9 @@ public class TestRotateAndNotificationActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             mSharedPref.edit().putStringSet(
-                                    MyFirebaseMessagingService.FCM_TOPICS, finalTopics).apply();
-                            Log.e("UNA", "unregisterTopic: " + topics +
-                                    "\nnow register topics " + finalTopics);
+                                    FcmService.FCM_TOPICS, finalTopics).apply();
+                            String txt = "Topic : " + finalTopics;
+                            mTxtDb.setText(txt);
                         } else {
                             Log.e("UNA", "unregisterTopic: fail");
                         }
