@@ -130,4 +130,11 @@
     <string name="label_go_to_setting">go to setting</string>
     <string name="label_enable_notify">enable\nnotify</string>
     <string name="label_disable_notify">disable\nnotify</string>
+    <string name="label_hb_camera_test">HBCamera Test</string>
+    <string name="label_fn_connect">FN Connect</string>
+    <string name="label_fn_disconnect">FN Disconnect</string>
+    <string name="label_sig_connect">Sig Connect</string>
+    <string name="label_sig_disconnect">Sig Disconnect</string>
+    <string name="label_hb_connect">HB Connect</string>
+    <string name="label_hb_disconnect">HB Disconnect</string>
 </resources>

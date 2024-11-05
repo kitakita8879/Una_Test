@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.una_test.HBCameraTest.HBCameraTestActivity;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.test_11).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
                     TestRotateAndNotificationActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.test_12).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    HBCameraTestActivity.class);
             startActivity(intent);
         });
 

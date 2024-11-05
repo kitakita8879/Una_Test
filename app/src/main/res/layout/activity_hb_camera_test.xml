@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/label_hb_camera_test"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_fn_connect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_fn_connect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_fn_disconnect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_fn_disconnect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_fn_connect"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_sig_connect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_sig_connect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_fn_disconnect"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_sig_disconnect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_sig_disconnect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_sig_connect"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_hb_connect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_hb_connect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_sig_disconnect"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/txt_hb_disconnect"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/stroke_corner4"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/label_hb_disconnect"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_hb_connect"
+        tools:ignore="SpUsage" />
+</androidx.constraintlayout.widget.ConstraintLayout>
