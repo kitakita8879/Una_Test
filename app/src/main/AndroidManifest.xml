@@ -74,9 +74,12 @@
         <activity
             android:name=".TestRotateAndNotificationActivity"
             android:configChanges="orientation|screenSize" />
-
         <activity
             android:name=".HBCameraTest.HBCameraTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".xm_camera.XmCameraActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

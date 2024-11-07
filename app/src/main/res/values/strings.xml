@@ -137,4 +137,5 @@
     <string name="label_sig_disconnect">Sig Disconnect</string>
     <string name="label_hb_connect">HB Connect</string>
     <string name="label_hb_disconnect">HB Disconnect</string>
+    <string name="label_xm_camera">XM Camera</string>
 </resources>
