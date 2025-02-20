@@ -1,20 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txt_title"
+    <data>
+
+        <variable
+            name="activity"
+            type="com.example.una_test.xmCamera.XmCameraActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/label_xm_camera"
-        android:textColor="@color/white"
-        android:textSize="26dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpUsage" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_xm_camera"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <EditText
+            android:id="@+id/edt_ip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:hint="@string/label_please_input_ip"
+            android:text="@{activity.xmCameraIp}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white2"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_title"
+            tools:ignore="Autofill,SpUsage,TextFields" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_ip">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_basic_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue1"
+                    android:gravity="center"
+                    android:text="基本訊息"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpUsage" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_middle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_product_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.getMediaInfo()}"
+                    android:padding="5dp"
+                    android:text="media info"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_basic_info"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_device_attr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.setSystemTime()}"
+                    android:padding="5dp"
+                    android:text="set time"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gl_middle"
+                    app:layout_constraintTop_toTopOf="@id/txt_product_info"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_set_time_zone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.setTimeZone()}"
+                    android:padding="5dp"
+                    android:text="set time zone"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_product_info"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_device_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue1"
+                    android:gravity="center"
+                    android:text="設備管理"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/txt_set_time_zone"
+                    tools:ignore="SpUsage" />
+
+                <EditText
+                    android:id="@+id/edt_ssid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="please input ssid"
+                    android:text="@={activity.xmCameraWifiSsid}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white2"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_device_manager"
+                    tools:ignore="Autofill,SpUsage,TextFields" />
+
+                <TextView
+                    android:id="@+id/txt_set_ssid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.setWifiSsid()}"
+                    android:padding="5dp"
+                    android:text="set wifi ssid"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/edt_ssid"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gl_middle"
+                    app:layout_constraintTop_toTopOf="@id/edt_ssid"
+                    tools:ignore="SpUsage" />
+
+                <Spinner
+                    android:id="@+id/sp_cam_id"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:adapter="@{activity.camIdAdapter}"
+                    android:background="@color/black2"
+                    android:selectedItemPosition="@={activity.onlineIndex}"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_switch_cam"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txt_switch_cam" />
+
+                <TextView
+                    android:id="@+id/txt_switch_cam"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.switchCamera()}"
+                    android:padding="5dp"
+                    android:text="switch cam"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gl_middle"
+                    app:layout_constraintTop_toBottomOf="@id/edt_ssid"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_file_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue1"
+                    android:gravity="center"
+                    android:text="設備文件管理"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/txt_switch_cam"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_get_all_file_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.getFileList()}"
+                    android:padding="5dp"
+                    android:text="get all file list"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_file_manager"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_setting_param"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue1"
+                    android:gravity="center"
+                    android:text="設置項"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/txt_get_all_file_list"
+                    tools:ignore="SpUsage" />
+
+                <Spinner
+                    android:id="@+id/sp_param"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:adapter="@{activity.paramAdapter}"
+                    android:background="@color/black2"
+                    android:onItemSelected="@{(parent, view, position, id) -> activity.updateValueSpinnerItem(position)}"
+                    android:selectedItemPosition="@={activity.paramIndex}"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_get_param"
+                    app:layout_constraintEnd_toStartOf="@id/sp_value"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_setting_param" />
+
+                <Spinner
+                    android:id="@+id/sp_value"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:adapter="@{activity.valueAdapter}"
+                    android:background="@color/black2"
+                    android:selectedItemPosition="@={activity.valueIndex}"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_get_param"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toEndOf="@id/sp_param"
+                    app:layout_constraintTop_toTopOf="@id/sp_param" />
+
+                <TextView
+                    android:id="@+id/txt_get_param"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.setParamValue()}"
+                    android:padding="5dp"
+                    android:text="set param"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gl_middle"
+                    app:layout_constraintTop_toTopOf="@id/sp_param"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_push_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue1"
+                    android:gravity="center"
+                    android:text="推送消息"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/txt_get_param"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_connect"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.connectSocket(true)}"
+                    android:padding="5dp"
+                    android:text="connect socket"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@id/gl_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_push_notification"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/txt_disconnect"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/stroke_blue4_corner4"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.connectSocket(false)}"
+                    android:padding="5dp"
+                    android:text="disconnect socket"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gl_middle"
+                    app:layout_constraintTop_toTopOf="@id/txt_connect"
+                    tools:ignore="SpUsage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

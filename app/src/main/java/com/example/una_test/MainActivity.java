@@ -10,7 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.una_test.HBCameraTest.HBCameraTestActivity;
-import com.example.una_test.xm_camera.XmCameraActivity;
+import com.example.una_test.xmCamera.XmCameraActivity;
 
 import java.util.Locale;
 

@@ -79,7 +79,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".xm_camera.XmCameraActivity"
+            android:name=".xmCamera.XmCameraActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

@@ -191,7 +191,7 @@
             <TextView
                 android:id="@+id/test_13"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/label_xm_camera"
