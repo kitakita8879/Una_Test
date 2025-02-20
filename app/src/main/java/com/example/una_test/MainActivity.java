@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.una_test.HBCameraTest.HBCameraTestActivity;
+import com.example.una_test.ssCamera.SsCameraActivity;
 import com.example.una_test.xmCamera.XmCameraActivity;
 
 import java.util.Locale;
@@ -96,6 +97,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.test_13).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
                     XmCameraActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.test_14).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    SsCameraActivity.class);
             startActivity(intent);
         });
 
